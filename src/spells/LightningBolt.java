@@ -1,6 +1,6 @@
 package spells;
 
-public class LightningBolt extends Spells {
+public class LightningBolt extends BaseSpells {
 
     public LightningBolt(String name, int damage) {
         super(name, damage);

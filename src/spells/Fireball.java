@@ -1,6 +1,6 @@
 package spells;
 
-public class Fireball extends Spells {
+public class Fireball extends BaseSpells {
 
     public Fireball(String name, int damage) {
         super(name, damage);

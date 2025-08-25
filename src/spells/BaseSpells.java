@@ -1,10 +1,10 @@
 package spells;
 
-public class Spells {
+public class BaseSpells {
     private String name;
     private int bonusDamage;
 
-    public Spells(String name, int bonusDamage) {
+    public BaseSpells(String name, int bonusDamage) {
         this.name = name;
         this.bonusDamage = bonusDamage;
     }

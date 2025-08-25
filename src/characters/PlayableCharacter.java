@@ -1,11 +1,15 @@
 package characters;
 
+import items.LargeLifePotion;
+import items.MinorLifePotion;
+import items.Sword;
 import items.Weapon;
-import spells.Spells;
+import spells.BaseSpells;
 
 public class PlayableCharacter extends Character {
     private int potions;
     private Weapon weapon;
+    private BaseSpells spells;
 
     public PlayableCharacter(String name, int life, int attack) {
         super(name, life, attack);
@@ -14,7 +18,6 @@ public class PlayableCharacter extends Character {
     }
 
     public void getWeapon() {
-        // pour l'instant, on donne toujours la même arme
         this.weapon = new Weapon("Basic Items.Sword", 5);
         this.attack += weapon.getBonusDamage();
         System.out.println(name + " picks up a " + weapon.getName() +
@@ -22,7 +25,7 @@ public class PlayableCharacter extends Character {
     }
 
     public void getSpell() {
-        this.spells = new Spells("Fireball", 7);
+        this.spells = new BaseSpells("Fireball", 7);
         this.attack += spells.getBonusDamage();
         System.out.println(name + " casts a fireball!" + spells.getName() +
                 " (+" + spells.getBonusDamage() + " attack)!");
@@ -38,4 +41,13 @@ public class PlayableCharacter extends Character {
         }
     }
 
+    public void setWeapon(Sword sword) {
+        
+    }
+
+    public void setPotion(LargeLifePotion largeLifePotion) {
+    }
+
+    public void setPotion(MinorLifePotion minorLifePotion) {
+    }
 }
