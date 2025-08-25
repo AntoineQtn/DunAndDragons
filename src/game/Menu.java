@@ -9,9 +9,7 @@ public class Menu {
         this.scanner = new Scanner(System.in);
     }
 
-    /**
-     * Affiche le message de bienvenue
-     */
+
     public void displayWelcome() {
         System.out.println("=".repeat(60));
         System.out.println(" Welcome in Dungeons and Dragons !");
@@ -20,9 +18,7 @@ public class Menu {
         System.out.println("=".repeat(60));
     }
 
-    /**
-     * Affiche un message à l'utilisateur
-     */
+
     public void displayMessage(String message) {
         System.out.println(message);
     }
@@ -111,33 +107,6 @@ public class Menu {
         }
 
         return askForInt("Your choice", 1, options.length);
-    }
-
-    /**
-     * Affiche une barre de progression
-     */
-    public void displayProgressBar(String label, int current, int max) {
-        int barLength = 20;
-        int progress = (int) ((double) current / max * barLength);
-
-        System.out.print(label + " [");
-        for (int i = 0; i < barLength; i++) {
-            if (i < progress) {
-                System.out.print("█");
-            } else {
-                System.out.print("░");
-            }
-        }
-        System.out.println("] " + current + "/" + max);
-    }
-
-    /**
-     * Efface l'écran (simulation)
-     */
-    public void clearScreen() {
-        for (int i = 0; i < 50; i++) {
-            System.out.println();
-        }
     }
 
     /**

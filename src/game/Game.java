@@ -18,7 +18,7 @@ public class Game {
     public Game() {
         this.gameDice = new Dice();
         this.gameMenu = new Menu();
-        this.surpriseChest = new SurpriseChest(); // Initialisation de SurpriseChest
+        this.surpriseChest = new SurpriseChest();
         this.UnplayableCharacters = new ArrayList<>();
         this.gameRunning = false;
         this.gameWon = false;
@@ -29,21 +29,11 @@ public class Game {
      */
     public void startGame() {
         gameMenu.displayWelcome();
-
-        // Création du personnage
         player = createCharacter();
-
-        // Création du plateau
         gameBoard = createBoard();
-
-        // Placement des éléments sur le plateau
         populateBoard();
-
-        // Boucle principale du jeu
         gameRunning = true;
         gameLoop();
-
-        // Fin de partie
         displayGameEnd();
     }
 
@@ -90,7 +80,7 @@ public class Game {
         };
         String dungeonName = dungeonNames[(int)(Math.random() * dungeonNames.length)];
 
-        Board board = new Board(dungeonName); // plus besoin de passer la taille
+        Board board = new Board(dungeonName);
         gameMenu.displayMessage("Donjon créé : " + dungeonName + " (64 cases)");
         return board;
     }
@@ -170,9 +160,6 @@ public class Game {
         }
     }
 
-    /**
-     * Gère le déplacement du joueur
-     */
     private void playerMove() {
         gameMenu.displayMessage("\n The dice is thrown...");
         int diceRoll = rollDice();
@@ -188,9 +175,6 @@ public class Game {
         handleCaseEvent();
     }
 
-    /**
-     * Gère les événements selon le type de case
-     */
     private void handleCaseEvent() {
         char caseType = gameBoard.checkPlayerPosition();
         int playerPos = gameBoard.getPlayerPosition();
@@ -208,25 +192,20 @@ public class Game {
         }
     }
 
-    /**
-     * Gère l'événement coffre
-     */
+
     private void handleChestEvent(int position) {
         gameMenu.displayMessage("\n You've found a chest !");
         SurpriseChest.openChest(player);
         gameBoard.removeChest(position);
     }
 
-    /**
-     * Gère l'événement combat
-     */
+
     private void handleEnemyEvent(int position) {
         if (UnplayableCharacters.isEmpty()) return;
 
         UnplayableCharacter enemy = UnplayableCharacters.get((int)(Math.random() * UnplayableCharacters.size()));
         gameMenu.displayMessage("\n⚔Un " + enemy.getName() + " attacks !");
 
-        // Combat simple
         boolean playerWins = handleCombat(enemy);
 
         if (playerWins) {
@@ -239,9 +218,7 @@ public class Game {
         }
     }
 
-    /**
-     * Système de combat simple
-     */
+
     private boolean handleCombat(UnplayableCharacter enemy) {
         gameMenu.displayMessage("\n=== COMBAT ===");
         enemy.displayStats();
@@ -271,9 +248,6 @@ public class Game {
         return !enemy.isAlive();
     }
 
-    /**
-     * Vérifie les conditions de victoire
-     */
     private void checkWinCondition() {
         if (gameBoard.hasPlayerWon()) {
             gameWon = true;
@@ -281,9 +255,6 @@ public class Game {
         }
     }
 
-    /**
-     * Affiche l'écran de fin de partie
-     */
     private void displayGameEnd() {
         gameMenu.displayMessage("\n" + "=".repeat(50));
         if (gameWon) {
@@ -301,9 +272,6 @@ public class Game {
         gameMenu.displayMessage("=".repeat(50));
     }
 
-    /**
-     * Méthode héritée pour le dé
-     */
     public int rollDice() {
         return gameDice.rollDice();
     }

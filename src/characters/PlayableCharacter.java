@@ -49,5 +49,6 @@ public class PlayableCharacter extends Character {
     }
 
     public void setPotion(MinorLifePotion minorLifePotion) {
+
     }
 }

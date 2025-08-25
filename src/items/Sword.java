@@ -6,10 +6,6 @@ public class Sword extends Weapon {
         super(name, damage);
     }
 
-//    public void setBonusDamage(){
-//        setBonusDamage(5);
-//    }
-
     public void slashAttack() {
         System.out.println(getName() + " slashes for +" + getBonusDamage() + " damage!");
     }

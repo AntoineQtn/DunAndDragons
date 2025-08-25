@@ -3,7 +3,7 @@ package game;
 import java.util.*;
 
 public class Board {
-    private static final int length = 64; // Taille fixe du plateau
+    private static final int length = 64;
     private final String name;
     private Set<Integer> chestPositions;
     private Set<Integer> enemyPositions;
@@ -17,7 +17,7 @@ public class Board {
         this.name = name;
         this.chestPositions = new HashSet<>();
         this.enemyPositions = new HashSet<>();
-        this.playerPosition = 0; // Le joueur commence à la position 0
+        this.playerPosition = 0;
     }
 
     /**
@@ -97,14 +97,9 @@ public class Board {
         enemyPositions.remove(position);
     }
 
-    // Getters
     public String getName() {
         return name;
     }
-//
-//    public int getSize() {
-//        return SIZE;
-//    }
 
     public int getPlayerPosition() {
         return playerPosition;
