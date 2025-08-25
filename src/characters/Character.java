@@ -1,4 +1,4 @@
-package Characters;
+package characters;
 
 public class Character {
     protected String name;
@@ -26,7 +26,6 @@ public class Character {
         System.out.println(name + " has died!");
     }
 
-    // ➕ Ajout de méthodes utiles
     public boolean isAlive() {
         return life > 0;
     }

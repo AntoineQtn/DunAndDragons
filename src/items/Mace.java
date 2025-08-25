@@ -1,4 +1,4 @@
-package Items;
+package items;
 
 public class Mace extends Weapon {
 
@@ -6,14 +6,14 @@ public class Mace extends Weapon {
         super(name, damage);
     }
 
-    public void slashAttack() {
+    public void maceAttack() {
         System.out.println(getName() + " slashes for +" + getBonusDamage() + " damage!");
     }
 
     public static void main(String[] args) {
-        Sword sword = new Sword("Steel Sword", 5);
+        Mace mace = new Mace("Steel Mace", 3);
 
-        sword.displayStats();
-        sword.slashAttack();
+        mace.displayStats();
+        mace.maceAttack();
     }
 }

@@ -1,14 +1,15 @@
-package Characters;
+package characters;
 
-import Items.Weapon;
+import items.Weapon;
+import spells.Spells;
 
 public class PlayableCharacter extends Character {
     private int potions;
-    private Weapon weapon; // ➕ ajout d'une arme
+    private Weapon weapon;
 
     public PlayableCharacter(String name, int life, int attack) {
         super(name, life, attack);
-        this.potions = 1; // le joueur commence avec 1 potion
+        this.potions = 1;
         this.weapon = null;
     }
 
@@ -17,7 +18,14 @@ public class PlayableCharacter extends Character {
         this.weapon = new Weapon("Basic Items.Sword", 5);
         this.attack += weapon.getBonusDamage();
         System.out.println(name + " picks up a " + weapon.getName() +
-                " (+" + weapon.getBonusDamage() + " ATK)!");
+                " (+" + weapon.getBonusDamage() + " attack )!");
+    }
+
+    public void getSpell() {
+        this.spells = new Spells("Fireball", 7);
+        this.attack += spells.getBonusDamage();
+        System.out.println(name + " casts a fireball!" + spells.getName() +
+                " (+" + spells.getBonusDamage() + " attack)!");
     }
 
     public void getPotion() {
@@ -30,16 +38,4 @@ public class PlayableCharacter extends Character {
         }
     }
 
-    public void move() {
-        System.out.println(name + " moves!");
-    }
-
-    public void addPotion() {
-        potions++;
-        System.out.println(name + " found a potion! (" + potions + " total)");
-    }
-
-    public int getPotions() {
-        return potions;
-    }
 }

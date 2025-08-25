@@ -1,4 +1,4 @@
-package Items;
+package items;
 
 public class Weapon {
     private String name;
@@ -11,6 +11,14 @@ public class Weapon {
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setBonusDamage(int bonusDamage) {
+        this.bonusDamage = bonusDamage;
     }
 
     public int getBonusDamage() {

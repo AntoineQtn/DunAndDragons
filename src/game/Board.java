@@ -1,13 +1,17 @@
-package Game;
+package game;
 
 import java.util.*;
 
 public class Board {
-    private static final int SIZE = 64; // Taille fixe du plateau
+    private static final int length = 64; // Taille fixe du plateau
     private final String name;
     private Set<Integer> chestPositions;
     private Set<Integer> enemyPositions;
     private int playerPosition;
+
+    public int getLength (){
+        return length;
+    }
 
     public Board(String name) {
         this.name = name;
@@ -44,12 +48,13 @@ public class Board {
         return position;
     }
 
+
     /**
      * Retourne la liste des positions libres sur le plateau
      */
     private List<Integer> getFreePositions() {
         List<Integer> freePositions = new ArrayList<>();
-        for (int i = 1; i < SIZE; i++) {
+        for (int i = 1; i < length; i++) {
             if (!chestPositions.contains(i) && !enemyPositions.contains(i) && i != playerPosition) {
                 freePositions.add(i);
             }
@@ -63,7 +68,7 @@ public class Board {
      * @return true si le mouvement est valide, false sinon
      */
     public boolean movePlayer(int newPosition) {
-        if (newPosition < 0 || newPosition >= SIZE) {
+        if (newPosition < 0 || newPosition >= length) {
             return false;
         }
         this.playerPosition = newPosition;
@@ -96,10 +101,10 @@ public class Board {
     public String getName() {
         return name;
     }
-
-    public int getSize() {
-        return SIZE;
-    }
+//
+//    public int getSize() {
+//        return SIZE;
+//    }
 
     public int getPlayerPosition() {
         return playerPosition;
@@ -114,6 +119,6 @@ public class Board {
     }
 
     public boolean hasPlayerWon() {
-        return playerPosition == SIZE - 1;
+        return playerPosition == length - 1;
     }
 }

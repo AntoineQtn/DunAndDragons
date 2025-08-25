@@ -1,6 +1,6 @@
-package Game;
+package game;
 
-import Characters.*;
+import characters.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +10,7 @@ public class Game {
     private PlayableCharacter player;
     private Dice gameDice;
     private Menu gameMenu;
+    private SurpriseChest surpriseChest;
     private List<UnplayableCharacter> UnplayableCharacters;
     private boolean gameRunning;
     private boolean gameWon;
@@ -17,6 +18,7 @@ public class Game {
     public Game() {
         this.gameDice = new Dice();
         this.gameMenu = new Menu();
+        this.surpriseChest = new SurpriseChest(); // Initialisation de SurpriseChest
         this.UnplayableCharacters = new ArrayList<>();
         this.gameRunning = false;
         this.gameWon = false;
@@ -99,29 +101,22 @@ public class Game {
     private void populateBoard() {
         int boardSize = gameBoard.getLength();
 
-        // Placement des coffres (environ 20% du plateau)
+
         int numChests = Math.max(2, boardSize / 5);
         for (int i = 0; i < numChests; i++) {
             gameBoard.placeChestCase();
         }
 
-        // Placement des ennemis (environ 25% du plateau)
+
         int numEnemies = Math.max(2, boardSize / 4);
         for (int i = 0; i < numEnemies; i++) {
-            int enemyPos = gameBoard.placeEnnemy();
+            int enemyPos = gameBoard.placeEnemy();
             if (enemyPos != -1) {
                 UnplayableCharacter enemy = createRandomEnemy();
                 UnplayableCharacters.add(enemy);
             }
         }
 
-//        // Placement de quelques PNJ (environ 10% du plateau)
-//        int numNPCs = Math.max(1, boardSize / 10);
-//        for (int i = 0; i < numNPCs; i++) {
-//            // Pour cet exemple, on ne place pas visuellement les PNJ sur le board
-//            // mais on pourrait l'ajouter plus tard
-//            npcs.add(createRandomNPC());
-//        }
 
         gameMenu.displayMessage("Plateau peuplé : " + numChests + " coffres, " +
                 numEnemies + " ennemis, ");
@@ -146,12 +141,10 @@ public class Game {
      */
     private void gameLoop() {
         while (gameRunning && player.isAlive()) {
-            // Affichage de l'état actuel
+
             gameMenu.displayMessage("\n" + "=".repeat(50));
-            gameBoard.displayBoard();
             player.displayStats();
 
-            // Menu des actions
             gameMenu.displayMessage("\nWhat do you want to do ?");
             gameMenu.displayMessage("1. Throw the dice and move");
             gameMenu.displayMessage("2. See my stats");
@@ -172,7 +165,7 @@ public class Game {
                     break;
             }
 
-            // Vérification des conditions de fin
+
             checkWinCondition();
         }
     }
@@ -192,7 +185,6 @@ public class Game {
         gameMenu.displayMessage(player.getName() + " move from case " +
                 currentPos + " to case " + newPos);
 
-        // Vérification de ce qui se trouve sur la case
         handleCaseEvent();
     }
 
@@ -221,17 +213,7 @@ public class Game {
      */
     private void handleChestEvent(int position) {
         gameMenu.displayMessage("\n You've found a chest !");
-
-        int eventType = (int)(Math.random() * 2);
-        switch (eventType) {
-            case 0:
-                player.getWeapon();
-                break;
-            case 1:
-                player.getPotion();
-                break;
-        }
-
+        SurpriseChest.openChest(player);
         gameBoard.removeChest(position);
     }
 
@@ -314,7 +296,7 @@ public class Game {
             gameMenu.displayMessage("See you next time !");
         }
 
-        gameMenu.displayMessage("\nStatistiques finales :");
+        gameMenu.displayMessage("\nFinal stats :");
         player.displayStats();
         gameMenu.displayMessage("=".repeat(50));
     }

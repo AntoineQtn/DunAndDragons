@@ -1,10 +1,14 @@
-package Items;
+package items;
 
 public class Sword extends Weapon {
 
     public Sword(String name, int damage) {
         super(name, damage);
     }
+
+//    public void setBonusDamage(){
+//        setBonusDamage(5);
+//    }
 
     public void slashAttack() {
         System.out.println(getName() + " slashes for +" + getBonusDamage() + " damage!");
