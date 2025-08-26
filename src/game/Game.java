@@ -1,7 +1,6 @@
 package game;
 
 import characters.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,7 +85,7 @@ public class Game {
     }
 
     /**
-     * Peuple le plateau avec des ennemis, coffres et PNJ
+     * Peuple le plateau avec des ennemis et des coffres
      */
     private void populateBoard() {
         int boardSize = gameBoard.getLength();
