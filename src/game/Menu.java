@@ -11,11 +11,8 @@ public class Menu {
 
 
     public void displayWelcome() {
-        System.out.println("=".repeat(60));
         System.out.println(" Welcome in Dungeons and Dragons !");
-        System.out.println("=".repeat(60));
         System.out.println("Get ready for a new adventure !");
-        System.out.println("=".repeat(60));
     }
 
 
