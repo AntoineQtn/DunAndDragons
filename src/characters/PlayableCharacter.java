@@ -45,7 +45,11 @@ public class PlayableCharacter extends Character {
         
     }
 
+
+
     public void setPotion(LargeLifePotion largeLifePotion) {
+        this.life += largeLifePotion.getBonusLife();
+        System.out.println(name + " drinks a large potion! +20 HP");
     }
 
     public void setPotion(MinorLifePotion minorLifePotion) {

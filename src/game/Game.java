@@ -9,7 +9,7 @@ public class Game {
     private PlayableCharacter player;
     private Dice gameDice;
     private Menu gameMenu;
-//    private SurpriseChest surpriseChest;
+    private SurpriseChest surpriseChest;
     private List<UnplayableCharacter> UnplayableCharacters;
     private boolean gameRunning;
     private boolean gameWon;
@@ -17,7 +17,7 @@ public class Game {
     public Game() {
         this.gameDice = new Dice();
         this.gameMenu = new Menu();
-//        this.surpriseChest = new SurpriseChest();
+        this.surpriseChest = new SurpriseChest();
         this.UnplayableCharacters = new ArrayList<>();
         this.gameRunning = false;
         this.gameWon = false;
@@ -194,7 +194,7 @@ public class Game {
 
     private void handleChestEvent(int position) {
         gameMenu.displayMessage("\n You've found a chest !");
-//        SurpriseChest.openChest(player);
+        SurpriseChest.openChest(player);
         gameBoard.removeChest(position);
     }
 

@@ -6,8 +6,9 @@ public class MinorLifePotion extends Potion {
         super(name, life);
     }
 
-    public void minorBonus() {
+    public int minorBonus() {
         System.out.println(getName() + " Gives +" + getBonusLife() + " life point!");
+        return getBonusLife();
     }
 
     public static void main(String[] args) {

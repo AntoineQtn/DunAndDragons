@@ -17,6 +17,15 @@ public class Potion {
         return bonusLife;
     }
 
+    public void setBonusLife(int bonusLife) {
+        this.bonusLife = bonusLife;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
     public void displayStats() {
         System.out.println("=== Potion ===");
         System.out.println("Name   : " + name);

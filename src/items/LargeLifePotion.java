@@ -6,9 +6,11 @@ public class LargeLifePotion extends Potion {
         super(name, life);
     }
 
-    public void largeBonus() {
+    public int largeBonus() {
         System.out.println(getName() + " Gives +" + getBonusLife() + " life point!");
+        return getBonusLife();
     }
+
 
     public static void main(String[] args) {
         LargeLifePotion largelifepotion = new LargeLifePotion("Large Life Potion", 5);

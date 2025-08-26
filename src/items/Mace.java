@@ -6,8 +6,9 @@ public class Mace extends Weapon {
         super(name, damage);
     }
 
-    public void maceAttack() {
+    public int maceAttack() {
         System.out.println(getName() + " slashes for +" + getBonusDamage() + " damage!");
+        return getBonusDamage();
     }
 
     public static void main(String[] args) {
