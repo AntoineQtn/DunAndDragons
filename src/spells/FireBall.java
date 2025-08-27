@@ -16,4 +16,8 @@ public class FireBall extends Spell {
 
     }
 
+    @Override
+    public int getWeight() {
+        return 0;
+    }
 }

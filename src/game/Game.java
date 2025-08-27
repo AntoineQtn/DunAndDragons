@@ -217,7 +217,7 @@ public class Game {
         if (enemies.isEmpty()) return;
 
         Enemy enemy = enemies.get((int) (Math.random() * enemies.size()));
-        menu.displayMessage("\n⚔Un " + enemy.getName() + " attacks !");
+        menu.displayMessage("\n " + enemy.getName() + " attacks !");
 
         boolean playerWins = handleCombat(enemy);
 

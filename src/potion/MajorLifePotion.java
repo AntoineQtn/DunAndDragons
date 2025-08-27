@@ -10,4 +10,9 @@ public class MajorLifePotion extends Potion {
         System.out.println(getName() + " Gives +" + getLife() + " life point!");
         return getLife();
     }
+
+    @Override
+    public int getWeight() {
+        return 0;
+    }
 }

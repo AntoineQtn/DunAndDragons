@@ -9,14 +9,16 @@ public class Player extends Character {
     private Spell spell;
     private Potion equippedPotion;
     private int basicPotions;
+    private int basicbag;
 
     public Player(String name, int life, int damage) {
         super(name, life, damage);
         this.weapon = null;
         this.spell = null;
         this.equippedPotion = null;
-        this.basicPotions = 3;
+        this.basicbag = 1;
     }
+
 
 
 

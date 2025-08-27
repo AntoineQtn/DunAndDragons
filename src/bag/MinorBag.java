@@ -1,6 +1,7 @@
 package bag;
 
 import item.Bag;
+import item.Collectible;
 
 public class MinorBag extends Bag {
    protected int capacity;
@@ -24,7 +25,27 @@ public class MinorBag extends Bag {
     }
 
     @Override
+    public void addToBag(Collectible item) {
+
+    }
+
+    @Override
     public void displayStats() {
+
+    }
+
+    @Override
+    public void addToBag() {
+
+    }
+
+    @Override
+    public void setName(String name) {
+
+    }
+
+    @Override
+    public void setWeight(int weight) {
 
     }
 

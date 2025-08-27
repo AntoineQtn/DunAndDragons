@@ -19,4 +19,8 @@ public class Sword extends Weapon {
 
     }
 
+    @Override
+    public int getWeight() {
+        return 0;
+    }
 }

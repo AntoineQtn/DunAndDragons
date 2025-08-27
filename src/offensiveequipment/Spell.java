@@ -1,6 +1,8 @@
 package offensiveequipment;
 
-public class Spell {
+import item.Collectible;
+
+public abstract class Spell extends OffensiveEquipment implements Collectible {
     private String name;
     private int damage;
 
