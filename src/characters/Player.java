@@ -1,4 +1,3 @@
-// ===== Player.java CORRIGÉ =====
 package characters;
 
 import items.*;
@@ -9,17 +8,16 @@ public class Player extends Character {
     private Weapon weapon;
     private Spell spell;
     private Potion equippedPotion;
-    private int basicPotions; // Compteur de potions de base
+    private int basicPotions;
 
     public Player(String name, int life, int damage) {
         super(name, life, damage);
         this.weapon = null;
         this.spell = null;
         this.equippedPotion = null;
-        this.basicPotions = 3; // Commence avec 3 potions de base
+        this.basicPotions = 3;
     }
 
-    // Équiper une arme
     public void equipWeapon(Weapon weapon) {
         if (this.weapon != null) {
             this.damage -= this.weapon.getDamage();
@@ -30,7 +28,6 @@ public class Player extends Character {
                 " (+" + weapon.getDamage() + " damage)!");
     }
 
-    // Apprendre un sort
     public void learnSpell(Spell spell) {
         if (this.spell != null) {
             this.damage -= this.spell.getDamage();
@@ -41,7 +38,6 @@ public class Player extends Character {
                 " (+" + spell.getDamage() + " damage)!");
     }
 
-    // Équiper une potion spéciale (effet permanent)
     public void equipPotion(Potion potion) {
         if (this.equippedPotion != null) {
             this.life -= this.equippedPotion.getLife();
@@ -52,7 +48,6 @@ public class Player extends Character {
                 " (+" + potion.getLife() + " permanent life)!");
     }
 
-    // Utiliser une potion de base (pour le combat)
     public void useBasicPotion() {
         if (basicPotions > 0) {
             int healAmount = 20;
@@ -65,21 +60,18 @@ public class Player extends Character {
         }
     }
 
-    // Utiliser une potion spécifique (consommable)
     public void usePotion(Potion potion) {
         this.life += potion.getLife();
         System.out.println(name + " drinks " + potion.getName() +
                 " and regains " + potion.getLife() + " life points!");
     }
 
-    // Ajouter des potions de base
     public void addBasicPotions(int amount) {
         basicPotions += amount;
         System.out.println(name + " gains " + amount + " basic potions! (" +
                 basicPotions + " total)");
     }
 
-    // MÉTHODES POUR COMPATIBILITÉ avec votre code existant
     public int getWeapon(Weapon weapon) {
         equipWeapon(weapon);
         return damage;
@@ -95,7 +87,6 @@ public class Player extends Character {
         return life;
     }
 
-    // MÉTHODE MANQUANTE pour handleCombat
     public void getPotion() {
         useBasicPotion();
     }
@@ -109,7 +100,6 @@ public class Player extends Character {
         System.out.println("Basic Potions: " + basicPotions);
     }
 
-    // Getters
     public int getBasicPotionCount() { return basicPotions; }
     public Weapon getCurrentWeapon() { return weapon; }
     public Spell getCurrentSpell() { return spell; }

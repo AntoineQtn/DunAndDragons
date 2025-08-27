@@ -14,16 +14,16 @@ public class Game {
     private Dice dice;
     private Menu menu;
     private SurpriseChest surprisechest;
-    private List<Enemy> enemies; // ← Renommé
-    private boolean isGameRunning; // ← Corrigé
+    private List<Enemy> enemies;
+    private boolean isGameRunning;
     private boolean isGameWon;
 
     public Game() {
         this.dice = new Dice();
         this.menu = new Menu();
         this.surprisechest = new SurpriseChest();
-        this.enemies = new ArrayList<>(); // ← Renommé
-        this.isGameRunning = false; // ← Corrigé
+        this.enemies = new ArrayList<>();
+        this.isGameRunning = false;
         this.isGameWon = false;
     }
 
@@ -32,7 +32,7 @@ public class Game {
         player = createCharacter();
         board = createBoard();
         populateBoard();
-        isGameRunning = true; // ← Corrigé
+        isGameRunning = true;
         gameLoop();
         displayGameEnd();
     }
@@ -81,12 +81,12 @@ public class Game {
             int enemyPos = board.placeEnemy();
             if (enemyPos != -1) {
                 Enemy enemy = createRandomEnemy();
-                enemies.add(enemy); // ← Corrigé
+                enemies.add(enemy);
             }
         }
-    } // ← Fermeture correcte de populateBoard
+    }
 
-    // ← Toutes ces méthodes sont maintenant au bon niveau
+
     public Enemy createRandomEnemy() {
         int index = (int) (Math.random() * 3);
 
@@ -103,7 +103,7 @@ public class Game {
     }
 
     public void gameLoop() {
-        while (isGameRunning && player.isAlive()) { // ← Corrigé
+        while (isGameRunning && player.isAlive()) {
 
             menu.displayMessage("\n" + "=".repeat(50));
             player.displayStats();
@@ -123,7 +123,7 @@ public class Game {
                     player.displayStats();
                     break;
                 case 3:
-                    isGameRunning = false; // ← Corrigé
+                    isGameRunning = false;
                     menu.displayMessage("Thanks for playing !");
                     break;
             }
@@ -153,10 +153,10 @@ public class Game {
 
         switch (caseType) {
             case 'C':
-                handleChestEvent(playerPos); // ← Paramètre ajouté
+                handleChestEvent(playerPos);
                 break;
             case 'E':
-                handleEnemyEvent(playerPos); // ← Paramètre ajouté
+                handleEnemyEvent(playerPos);
                 break;
             case '.':
                 menu.displayMessage("The case is empty, you can go");
@@ -164,16 +164,16 @@ public class Game {
         }
     }
 
-    private void handleChestEvent(int position) { // ← Paramètre ajouté
+    private void handleChestEvent(int position) {
         menu.displayMessage("\n You've found a chest !");
         SurpriseChest.openChest(player);
         board.removeChest(position);
     }
 
-    private void handleEnemyEvent(int position) { // ← Paramètre ajouté et nom corrigé
-        if (enemies.isEmpty()) return; // ← Nom corrigé
+    private void handleEnemyEvent(int position) {
+        if (enemies.isEmpty()) return;
 
-        Enemy enemy = enemies.get((int) (Math.random() * enemies.size())); // ← Nom corrigé
+        Enemy enemy = enemies.get((int) (Math.random() * enemies.size()));
         menu.displayMessage("\n⚔Un " + enemy.getName() + " attacks !");
 
         boolean playerWins = handleCombat(enemy);
@@ -181,10 +181,10 @@ public class Game {
         if (playerWins) {
             menu.displayMessage("Victory ! You've defeated a " + enemy.getName());
             board.removeEnemy(position);
-            enemies.remove(enemy); // ← Nom corrigé
+            enemies.remove(enemy);
         } else if (!player.isAlive()) {
             menu.displayMessage(" You've been defeated, you lost the game...");
-            isGameRunning = false; // ← Corrigé
+            isGameRunning = false;
         }
     }
 
@@ -201,26 +201,22 @@ public class Game {
 
             int choice = menu.askForInt("Your choice", 1, 2);
 
-            // Tour du joueur
             if (choice == 1) {
                 menu.displayMessage("\n" + player.getName() + " attacks!");
                 enemy.takeDamage(player.getAttack());
             } else {
                 menu.displayMessage("\n" + player.getName() + " uses a potion!");
-                player.getPotion(); // ← Maintenant cette méthode existe !
+                player.getPotion();
             }
 
-            // Vérifier si l'ennemi est mort
             if (!enemy.isAlive()) {
                 break;
             }
 
-            // Tour de l'ennemi
             menu.displayMessage("\n--- Enemy turn ---");
             menu.displayMessage(enemy.getName() + " attacks!");
             player.takeDamage(enemy.getAttack());
 
-            // Afficher les stats actuelles
             menu.displayMessage("\n--- Current Status ---");
             menu.displayMessage(player.getName() + ": " + player.getLife() + " HP");
             menu.displayMessage(enemy.getName() + ": " + enemy.getLife() + " HP");
@@ -234,7 +230,7 @@ public class Game {
     private void checkWinCondition() {
         if (board.hasPlayerWon()) {
             isGameWon = true;
-            isGameRunning = false; // ← Corrigé
+            isGameRunning = false;
         }
     }
 
@@ -260,7 +256,7 @@ public class Game {
 
     public Board getGameBoard() { return board; }
     public Player getPlayer() { return player; }
-    public boolean isGameRunning() { return isGameRunning; } // ← Corrigé
+    public boolean isGameRunning() { return isGameRunning; }
     public boolean isGameWon() { return isGameWon; }
 
     public static void main(String[] args) {
