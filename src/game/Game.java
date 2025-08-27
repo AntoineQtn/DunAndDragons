@@ -108,8 +108,7 @@ public class Game {
         while (isGameRunning && player.isAlive()) {
 
             menu.displayMessage("\n" + "=".repeat(50));
-            player.displayStats();
-
+            System.out.println(player.toString());
             menu.displayMessage("\nWhat do you want to do ?");
             menu.displayMessage("1. Throw the dice and move");
             menu.displayMessage("2. See my stats");

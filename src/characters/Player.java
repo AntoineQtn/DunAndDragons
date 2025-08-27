@@ -18,6 +18,8 @@ public class Player extends Character {
         this.basicPotions = 3;
     }
 
+
+
     public void equipWeapon(Weapon weapon) {
         if (this.weapon != null) {
             this.damage -= this.weapon.getDamage();
@@ -100,6 +102,15 @@ public class Player extends Character {
         System.out.println("Basic Potions: " + basicPotions);
     }
 
+    @Override
+    public String toString() {
+        return "Player{" +
+                "weapon=" + weapon +
+                ", spell=" + spell +
+                ", equippedPotion=" + equippedPotion +
+                ", basicPotions=" + basicPotions +
+                '}';
+    }
     public int getBasicPotionCount() { return basicPotions; }
     public Weapon getCurrentWeapon() { return weapon; }
     public Spell getCurrentSpell() { return spell; }
