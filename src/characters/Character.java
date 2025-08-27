@@ -1,48 +1,47 @@
 package characters;
 
 public class Character {
+
     protected String name;
     protected int life;
-    protected int attack;
+    protected int damage;
 
-    public Character(String name, int life, int attack) {
+    public Character (String name, int life, int damage){
         this.name = name;
         this.life = life;
-        this.attack = attack;
+        this.damage = damage;
     }
 
     public void displayStats() {
         System.out.println("=== " + name + " ===");
         System.out.println("Life : " + life);
-        System.out.println("Attack : " + attack);
+        System.out.println("Attack : " + damage);
     }
 
-    public void strike() {
-        System.out.println(name + " strikes for " + attack + " damage!");
+    public int getAttack(){
+        System.out.println(name + " causes " + damage + " damage ! ");
+        return damage;
     }
-
-    public void die() {
-        life = 0;
-        System.out.println(name + " has died!");
-    }
-
-    public boolean isAlive() {
-        return life > 0;
-    }
-
-    public void takeDamage(int damage) {
+    public void takeDamage(int damage){
         life -= damage;
-        if (life <= 0) {
+        if ( life <= 0 ) {
             die();
         }
     }
 
-    // Getters
+    public void die(){
+        life = 0;
+        System.out.println(name + " has died !");
+    }
+    public boolean isAlive(){
+        return life > 0;
+    }
+
     public String getName() { return name; }
     public int getLife() { return life; }
-    public int getAttack() { return attack; }
+    public int getDamage() { return damage; }
 
-    // Setters
-    public void setLife(int life) { this.life = life; }
-    public void setAttack(int attack) { this.attack = attack; }
+    public void setName( String name ) { this.name = name; }
+    public void setLife( int life ) { this.life = life; }
+    public void setDamage( int damage ) { this.damage = damage; }
 }

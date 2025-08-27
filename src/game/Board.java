@@ -3,27 +3,18 @@ package game;
 import java.util.*;
 
 public class Board {
+
     private static final int length = 64;
-    private final String name;
     private Set<Integer> chestPositions;
     private Set<Integer> enemyPositions;
     private int playerPosition;
 
-    public int getLength (){
-        return length;
-    }
-
-    public Board(String name) {
-        this.name = name;
+    public Board() {
         this.chestPositions = new HashSet<>();
         this.enemyPositions = new HashSet<>();
         this.playerPosition = 0;
     }
 
-    /**
-     * Place un coffre à une position aléatoire libre
-     * @return la position du coffre placé, -1 si aucune position libre
-     */
     public int placeChestCase() {
         List<Integer> freePositions = getFreePositions();
         if (freePositions.isEmpty()) {
@@ -34,11 +25,7 @@ public class Board {
         return position;
     }
 
-    /**
-     * Place un ennemi à une position aléatoire libre
-     * @return la position de l'ennemi placé, -1 si aucune position libre
-     */
-    public int placeEnemy() {
+    public int placeEnemy(){
         List<Integer> freePositions = getFreePositions();
         if (freePositions.isEmpty()) {
             return -1;
@@ -48,11 +35,7 @@ public class Board {
         return position;
     }
 
-
-    /**
-     * Retourne la liste des positions libres sur le plateau
-     */
-    private List<Integer> getFreePositions() {
+    private List<Integer> getFreePositions(){
         List<Integer> freePositions = new ArrayList<>();
         for (int i = 1; i < length; i++) {
             if (!chestPositions.contains(i) && !enemyPositions.contains(i) && i != playerPosition) {
@@ -62,12 +45,7 @@ public class Board {
         return freePositions;
     }
 
-    /**
-     * Déplace le joueur à une nouvelle position
-     * @param newPosition la nouvelle position du joueur
-     * @return true si le mouvement est valide, false sinon
-     */
-    public boolean movePlayer(int newPosition) {
+    public boolean movePlayer(int newPosition){
         if (newPosition < 0 || newPosition >= length) {
             return false;
         }
@@ -75,10 +53,6 @@ public class Board {
         return true;
     }
 
-    /**
-     * Vérifie ce qui se trouve à la position du joueur
-     * @return 'C' pour coffre, 'E' pour ennemi, '.' pour vide
-     */
     public char checkPlayerPosition() {
         if (chestPositions.contains(playerPosition)) {
             return 'C';
@@ -89,16 +63,14 @@ public class Board {
         return '.';
     }
 
+    public int getLength(){return length;}
+
     public void removeChest(int position) {
         chestPositions.remove(position);
     }
 
     public void removeEnemy(int position) {
         enemyPositions.remove(position);
-    }
-
-    public String getName() {
-        return name;
     }
 
     public int getPlayerPosition() {
@@ -116,4 +88,5 @@ public class Board {
     public boolean hasPlayerWon() {
         return playerPosition == length - 1;
     }
+
 }

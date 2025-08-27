@@ -3,34 +3,27 @@ package game;
 import java.util.Scanner;
 
 public class Menu {
+
     private Scanner scanner;
 
-    public Menu() {
+    public Menu(){
         this.scanner = new Scanner(System.in);
     }
 
 
-    public void displayWelcome() {
-        System.out.println(" Welcome in Dungeons and Dragons !");
-        System.out.println("Get ready for a new adventure !");
-    }
-
-
-    public void displayMessage(String message) {
+    public void displayMessage(String message){
         System.out.println(message);
     }
-
-    /**
-     * Demande une chaîne de caractères à l'utilisateur
-     */
+    public void displayWelcome(){
+        System.out.println("Welcome to Dungeons and Dragons !");
+        System.out.println("Get ready for a new adventure !");
+    }
     public String askForString(String prompt) {
         System.out.print(prompt + " : ");
         return scanner.nextLine().trim();
     }
 
-    /**
-     * Demande un entier à l'utilisateur avec validation
-     */
+
     public int askForInt(String prompt, int min, int max) {
         int value;
         do {
@@ -42,42 +35,16 @@ public class Menu {
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Please enter a number !");
-                value = -1; // Valeur invalide pour continuer la boucle
+                value = -1;
             }
         } while (value < min || value > max);
 
         return value;
     }
-
-    /**
-     * Demande un entier sans contrainte
-     */
-    public int askForInt(String prompt) {
-        int value;
-        do {
-            System.out.print(prompt + " : ");
-            try {
-                value = Integer.parseInt(scanner.nextLine().trim());
-                break;
-            } catch (NumberFormatException e) {
-                System.out.println("Please enter a number !");
-            }
-        } while (true);
-
-        return value;
-    }
-
-    /**
-     * Demande à l'utilisateur d'appuyer sur Entrée
-     */
     public void askForEnter(String prompt) {
         System.out.print(prompt);
         scanner.nextLine();
     }
-
-    /**
-     * Demande une confirmation (oui/non)
-     */
     public boolean askForConfirmation(String prompt) {
         String response;
         do {
@@ -94,9 +61,6 @@ public class Menu {
         } while (true);
     }
 
-    /**
-     * Affiche un menu avec options et retourne le choix
-     */
     public int displayMenu(String title, String[] options) {
         System.out.println("\n=== " + title + " ===");
         for (int i = 0; i < options.length; i++) {
@@ -105,13 +69,10 @@ public class Menu {
 
         return askForInt("Your choice", 1, options.length);
     }
-
-    /**
-     * Ferme le scanner
-     */
     public void close() {
         if (scanner != null) {
             scanner.close();
         }
     }
+
 }

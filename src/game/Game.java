@@ -1,56 +1,53 @@
 package game;
 
+import java.util.*;
+
 import characters.*;
-import java.util.ArrayList;
-import java.util.List;
+import items.*;
+import spells.*;
+import weapons.*;
 
 public class Game {
-    private Board gameBoard;
-    private PlayableCharacter player;
-    private Dice gameDice;
-    private Menu gameMenu;
-    private SurpriseChest surpriseChest;
-    private List<UnplayableCharacter> UnplayableCharacters;
-    private boolean gameRunning;
-    private boolean gameWon;
+
+    private Board board;
+    private Player player;
+    private Dice dice;
+    private Menu menu;
+    private SurpriseChest surprisechest;
+    private List<Enemy> enemies; // ← Renommé
+    private boolean isGameRunning; // ← Corrigé
+    private boolean isGameWon;
 
     public Game() {
-        this.gameDice = new Dice();
-        this.gameMenu = new Menu();
-        this.surpriseChest = new SurpriseChest();
-        this.UnplayableCharacters = new ArrayList<>();
-        this.gameRunning = false;
-        this.gameWon = false;
+        this.dice = new Dice();
+        this.menu = new Menu();
+        this.surprisechest = new SurpriseChest();
+        this.enemies = new ArrayList<>(); // ← Renommé
+        this.isGameRunning = false; // ← Corrigé
+        this.isGameWon = false;
     }
 
-    /**
-     * Lance le jeu principal
-     */
     public void startGame() {
-        gameMenu.displayWelcome();
+        menu.displayWelcome();
         player = createCharacter();
-        gameBoard = createBoard();
+        board = createBoard();
         populateBoard();
-        gameRunning = true;
+        isGameRunning = true; // ← Corrigé
         gameLoop();
         displayGameEnd();
     }
 
-    /**
-     * Création du personnage joueur
-     */
-    private PlayableCharacter createCharacter() {
-        gameMenu.displayMessage("\n=== CHARACTER CREATION ===");
+    private Player createCharacter() {
+        menu.displayMessage("\n=== CHARACTER CREATION ===");
+        String name = menu.askForString(" Enter your name ");
+        menu.displayMessage("\nChoose your class :");
+        menu.displayMessage("1. Warrior (Life: 10, Attack: 5)");
+        menu.displayMessage("2. Wizard (Life: 6, Attack: 8)");
 
-        String name = gameMenu.askForString("Enter your name  ");
+        int classChoice = menu.askForInt("Your choice (1-2)", 1, 2);
 
-        gameMenu.displayMessage("\nChoose your class :");
-        gameMenu.displayMessage("1. Warrior (Life: 10, Attack: 5)");
-        gameMenu.displayMessage("2. Wizard (Life: 6, Attack: 8)");
+        Player character;
 
-        int classChoice = gameMenu.askForInt("Your choice (1-2)", 1, 2);
-
-        PlayableCharacter character;
         switch (classChoice) {
             case 1:
                 character = new Warrior(name);
@@ -61,85 +58,62 @@ public class Game {
             default:
                 character = new Warrior(name);
         }
-
-        gameMenu.displayMessage("\nCharacter created successfully !");
+        menu.displayMessage("\nCharacter created successfully ! ");
         character.displayStats();
         return character;
     }
 
-    /**
-     * Création du plateau de jeu
-     */
     private Board createBoard() {
-        gameMenu.displayMessage("\n=== CRÉATION DU DONJON ===");
-
-        String[] dungeonNames = {
-                "Donjon des Ombres", "Crypte Maudite", "Labyrinthe Perdu",
-                "Forteresse Abandonnée", "Temple Oublié", "Caverne du Dragon"
-        };
-        String dungeonName = dungeonNames[(int)(Math.random() * dungeonNames.length)];
-
-        Board board = new Board(dungeonName);
-        gameMenu.displayMessage("Donjon créé : " + dungeonName + " (64 cases)");
+        Board board = new Board();
         return board;
     }
 
-    /**
-     * Peuple le plateau avec des ennemis et des coffres
-     */
     private void populateBoard() {
-        int boardSize = gameBoard.getLength();
-
+        int boardSize = board.getLength();
 
         int numChests = Math.max(2, boardSize / 5);
         for (int i = 0; i < numChests; i++) {
-            gameBoard.placeChestCase();
+            board.placeChestCase();
         }
-
 
         int numEnemies = Math.max(2, boardSize / 4);
         for (int i = 0; i < numEnemies; i++) {
-            int enemyPos = gameBoard.placeEnemy();
+            int enemyPos = board.placeEnemy();
             if (enemyPos != -1) {
-                UnplayableCharacter enemy = createRandomEnemy();
-                UnplayableCharacters.add(enemy);
+                Enemy enemy = createRandomEnemy();
+                enemies.add(enemy); // ← Corrigé
             }
         }
+    } // ← Fermeture correcte de populateBoard
 
-
-        gameMenu.displayMessage("Plateau peuplé : " + numChests + " coffres, " +
-                numEnemies + " ennemis, ");
-    }
-
-    /**
-     * Crée un ennemi aléatoire
-     */
-    private UnplayableCharacter createRandomEnemy() {
-        int index = (int)(Math.random() * 3);
+    // ← Toutes ces méthodes sont maintenant au bon niveau
+    public Enemy createRandomEnemy() {
+        int index = (int) (Math.random() * 3);
 
         switch (index) {
-            case 0: return new Goblin();
-            case 1: return new Dragon();
-            case 2: return new Sorcerer();
-            default: return new Goblin();
+            case 0:
+                return new Goblin();
+            case 1:
+                return new Dragon();
+            case 2:
+                return new Sorcerer();
+            default:
+                return new Goblin();
         }
     }
 
-    /**
-     * Boucle principale du jeu
-     */
-    private void gameLoop() {
-        while (gameRunning && player.isAlive()) {
+    public void gameLoop() {
+        while (isGameRunning && player.isAlive()) { // ← Corrigé
 
-            gameMenu.displayMessage("\n" + "=".repeat(50));
+            menu.displayMessage("\n" + "=".repeat(50));
             player.displayStats();
 
-            gameMenu.displayMessage("\nWhat do you want to do ?");
-            gameMenu.displayMessage("1. Throw the dice and move");
-            gameMenu.displayMessage("2. See my stats");
-            gameMenu.displayMessage("3. Quit the game");
+            menu.displayMessage("\nWhat do you want to do ?");
+            menu.displayMessage("1. Throw the dice and move");
+            menu.displayMessage("2. See my stats");
+            menu.displayMessage("3. Quit the game");
 
-            int choice = gameMenu.askForInt("Your choice", 1, 3);
+            int choice = menu.askForInt("Your choice", 1, 3);
 
             switch (choice) {
                 case 1:
@@ -149,137 +123,145 @@ public class Game {
                     player.displayStats();
                     break;
                 case 3:
-                    gameRunning = false;
-                    gameMenu.displayMessage("Thanks for playing !");
+                    isGameRunning = false; // ← Corrigé
+                    menu.displayMessage("Thanks for playing !");
                     break;
             }
-
 
             checkWinCondition();
         }
     }
 
     private void playerMove() {
-        gameMenu.displayMessage("\n The dice is thrown...");
+        menu.displayMessage("\n The dice is thrown...");
         int diceRoll = rollDice();
-        gameMenu.displayMessage("Result : " + diceRoll);
+        menu.displayMessage("Result : " + diceRoll);
 
-        int currentPos = gameBoard.getPlayerPosition();
-        int newPos = Math.min(currentPos + diceRoll, gameBoard.getLength() - 1);
+        int currentPos = board.getPlayerPosition();
+        int newPos = Math.min(currentPos + diceRoll, board.getLength() - 1);
 
-        gameBoard.movePlayer(newPos);
-        gameMenu.displayMessage(player.getName() + " move from case " +
+        board.movePlayer(newPos);
+        menu.displayMessage(player.getName() + " move from case " +
                 currentPos + " to case " + newPos);
 
         handleCaseEvent();
     }
 
     private void handleCaseEvent() {
-        char caseType = gameBoard.checkPlayerPosition();
-        int playerPos = gameBoard.getPlayerPosition();
+        char caseType = board.checkPlayerPosition();
+        int playerPos = board.getPlayerPosition();
 
         switch (caseType) {
             case 'C':
-                handleChestEvent(playerPos);
+                handleChestEvent(playerPos); // ← Paramètre ajouté
                 break;
             case 'E':
-                handleEnemyEvent(playerPos);
+                handleEnemyEvent(playerPos); // ← Paramètre ajouté
                 break;
             case '.':
-                gameMenu.displayMessage("La case is empty, you can go");
+                menu.displayMessage("The case is empty, you can go");
                 break;
         }
     }
 
-
-    private void handleChestEvent(int position) {
-        gameMenu.displayMessage("\n You've found a chest !");
+    private void handleChestEvent(int position) { // ← Paramètre ajouté
+        menu.displayMessage("\n You've found a chest !");
         SurpriseChest.openChest(player);
-        gameBoard.removeChest(position);
+        board.removeChest(position);
     }
 
+    private void handleEnemyEvent(int position) { // ← Paramètre ajouté et nom corrigé
+        if (enemies.isEmpty()) return; // ← Nom corrigé
 
-    private void handleEnemyEvent(int position) {
-        if (UnplayableCharacters.isEmpty()) return;
-
-        UnplayableCharacter enemy = UnplayableCharacters.get((int)(Math.random() * UnplayableCharacters.size()));
-        gameMenu.displayMessage("\n⚔Un " + enemy.getName() + " attacks !");
+        Enemy enemy = enemies.get((int) (Math.random() * enemies.size())); // ← Nom corrigé
+        menu.displayMessage("\n⚔Un " + enemy.getName() + " attacks !");
 
         boolean playerWins = handleCombat(enemy);
 
         if (playerWins) {
-            gameMenu.displayMessage("Victory ! You've defeated a " + enemy.getName());
-            gameBoard.removeEnemy(position);
-            UnplayableCharacters.remove(enemy);
+            menu.displayMessage("Victory ! You've defeated a " + enemy.getName());
+            board.removeEnemy(position);
+            enemies.remove(enemy); // ← Nom corrigé
         } else if (!player.isAlive()) {
-            gameMenu.displayMessage(" You've been defeated, you lost the game...");
-            gameRunning = false;
+            menu.displayMessage(" You've been defeated, you lost the game...");
+            isGameRunning = false; // ← Corrigé
         }
     }
 
-
-    private boolean handleCombat(UnplayableCharacter enemy) {
-        gameMenu.displayMessage("\n=== COMBAT ===");
+    private boolean handleCombat(Enemy enemy) {
+        menu.displayMessage("\n=== COMBAT ===");
+        player.displayStats();
         enemy.displayStats();
 
         while (player.isAlive() && enemy.isAlive()) {
-            gameMenu.displayMessage("\n What do you want to do ?");
-            gameMenu.displayMessage("1. Attack");
-            gameMenu.displayMessage("2. Use a potion");
+            menu.displayMessage("\n--- Your turn ---");
+            menu.displayMessage("What do you want to do?");
+            menu.displayMessage("1. Attack");
+            menu.displayMessage("2. Use a basic potion");
 
-            int choice = gameMenu.askForInt("Your choice", 1, 2);
+            int choice = menu.askForInt("Your choice", 1, 2);
 
+            // Tour du joueur
             if (choice == 1) {
+                menu.displayMessage("\n" + player.getName() + " attacks!");
                 enemy.takeDamage(player.getAttack());
-                if (enemy.isAlive()) {
-                    player.takeDamage(enemy.getAttack());
-                }
             } else {
-                player.getPotion();
-                if (enemy.isAlive()) {
-                    player.takeDamage(enemy.getAttack());
-                }
+                menu.displayMessage("\n" + player.getName() + " uses a potion!");
+                player.getPotion(); // ← Maintenant cette méthode existe !
             }
 
-            gameMenu.askForEnter("Press enter to continue...");
+            // Vérifier si l'ennemi est mort
+            if (!enemy.isAlive()) {
+                break;
+            }
+
+            // Tour de l'ennemi
+            menu.displayMessage("\n--- Enemy turn ---");
+            menu.displayMessage(enemy.getName() + " attacks!");
+            player.takeDamage(enemy.getAttack());
+
+            // Afficher les stats actuelles
+            menu.displayMessage("\n--- Current Status ---");
+            menu.displayMessage(player.getName() + ": " + player.getLife() + " HP");
+            menu.displayMessage(enemy.getName() + ": " + enemy.getLife() + " HP");
+
+            menu.askForEnter("Press enter to continue...");
         }
 
-        return !enemy.isAlive();
+        return player.isAlive() && !enemy.isAlive();
     }
 
     private void checkWinCondition() {
-        if (gameBoard.hasPlayerWon()) {
-            gameWon = true;
-            gameRunning = false;
+        if (board.hasPlayerWon()) {
+            isGameWon = true;
+            isGameRunning = false; // ← Corrigé
         }
     }
 
     private void displayGameEnd() {
-
-        if (gameWon) {
-            gameMenu.displayMessage(" Congratulations !");
-            gameMenu.displayMessage(" You've won the game !");
+        if (isGameWon) {
+            menu.displayMessage(" Congratulations !");
+            menu.displayMessage(" You've won the game !");
         } else if (!player.isAlive()) {
-            gameMenu.displayMessage(" GAME OVER ");
-            gameMenu.displayMessage("Your journey has come to an end...");
+            menu.displayMessage(" GAME OVER ");
+            menu.displayMessage("Your journey has come to an end...");
         } else {
-            gameMenu.displayMessage("See you next time !");
+            menu.displayMessage("See you next time !");
         }
 
-        gameMenu.displayMessage("\nFinal stats :");
+        menu.displayMessage("\nFinal stats :");
         player.displayStats();
-        gameMenu.displayMessage("=".repeat(50));
+        menu.displayMessage("=".repeat(50));
     }
 
     public int rollDice() {
-        return gameDice.rollDice();
+        return dice.rollDice();
     }
 
-    // Getters
-    public Board getGameBoard() { return gameBoard; }
-    public PlayableCharacter getPlayer() { return player; }
-    public boolean isGameRunning() { return gameRunning; }
-    public boolean isGameWon() { return gameWon; }
+    public Board getGameBoard() { return board; }
+    public Player getPlayer() { return player; }
+    public boolean isGameRunning() { return isGameRunning; } // ← Corrigé
+    public boolean isGameWon() { return isGameWon; }
 
     public static void main(String[] args) {
         Game game = new Game();

@@ -1,16 +1,11 @@
 package characters;
 
-public class Warrior extends PlayableCharacter {
+public class Warrior extends Player{
 
-    public Warrior(String name) {
-        super(name, 10, 5);
+    public Warrior( String name ) {
+        super( name, 10, 5 );
+
     }
 
-    public void swordAttack(){
-        System.out.println(getName() + " swings a sword mightily!");
-    }
 
-    public void maceAttack(){
-        System.out.println(getName() + " smashes with a mace!");
-    }
 }

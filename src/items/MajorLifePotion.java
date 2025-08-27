@@ -1,10 +1,10 @@
 package items;
 
-public class MinorLifePotion extends Potion {
-    public MinorLifePotion(String name, int life) {
+public class MajorLifePotion extends Potion {
+    public MajorLifePotion(String name, int life) {
         super(name, life);
     }
-    public int minorBonus() {
+    public int majorBonus() {
         System.out.println(getName() + " Gives +" + getLife() + " life point!");
         return getLife();
     }

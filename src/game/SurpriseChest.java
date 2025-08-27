@@ -2,70 +2,58 @@ package game;
 
 import characters.*;
 import items.*;
-import spells.Fireball;
-import spells.LightningBolt;
-import items.LargeLifePotion;
+import spells.*;
+import weapons.*;
 
-import java.util.Random;
+import java.util.*;
 
 public class SurpriseChest {
 
-    private static Random random;
+    private static Random random = new Random();
 
-    public SurpriseChest() {
-        this.random = new Random();
+    public SurpriseChest(){
+
     }
 
-    public static void openChest(PlayableCharacter playableCharacter) {
-        int choice = random.nextInt(6);
+    public static void openChest(Player player){
+        int surprise = random.nextInt(6);
 
-        switch (choice) {
+        switch (surprise) {
             case 0:
-                Sword sword = new Sword("Épée des Morts", 5);
-                playableCharacter.setWeapon(sword);
-                System.out.println("Vous trouvez une arme : " + sword.getName() +
-                        " (+" + sword.getBonusDamage() + " dégâts)");
+                Sword sword = new Sword("Sword", 5);
+                player.getWeapon(sword);
+                System.out.println("You find a " + sword.getName() + " , now you can inflict " + sword.getDamage() + " damages ! ");
                 break;
 
             case 1:
-                LargeLifePotion largeLifePotion = new LargeLifePotion("Grande Potion de Soin", 5);
-                playableCharacter.setPotion(largeLifePotion);
-                System.out.println("Vous trouvez une " + largeLifePotion.getName() +
-                        " (+" + largeLifePotion.largeBonus() + " PV)");
+                Mace mace = new Mace("Mace", 3);
+                player.getWeapon(mace);
+                System.out.println("You find a " + mace.getName() + " , now you can inflict " + mace.getDamage() + " damages ! ");
                 break;
 
             case 2:
-                MinorLifePotion minorLifePotion = new MinorLifePotion("Petite Potion de Soin", 2);
-                playableCharacter.setPotion(minorLifePotion);
-                System.out.println("Vous trouvez une " + minorLifePotion.getName() +
-                        " (+" + minorLifePotion.minorBonus() + " PV)");
+                MajorLifePotion majorlifepotion = new MajorLifePotion("Major life potion", 5); // Valeur de vie plus réaliste
+                player.getPotion(majorlifepotion); // ← CORRECTION : passer l'objet potion
+                System.out.println("You find a " + majorlifepotion.getName() + ", now you can retrieve " + majorlifepotion.getLife() + " life points !");
                 break;
 
             case 3:
-                Mace mace = new Mace("Masse d'Acier", 3);
-                playableCharacter.getWeapon();
-                System.out.println("Vous trouvez une " + mace.getName() +
-                        " (+" + mace.maceAttack() + " dégâts)");
+                MinorLifePotion minorlifepotion = new MinorLifePotion("Minor life potion", 2); // Valeur de vie plus réaliste
+                player.getPotion(minorlifepotion); // ← CORRECTION : passer l'objet potion
+                System.out.println("You find a " + minorlifepotion.getName() + ", now you can retrieve " + minorlifepotion.getLife() + " life points !");
                 break;
 
             case 4:
-                Fireball fireball = new Fireball("Boule de Feu", 7);
-                playableCharacter.getSpell();
-                System.out.println("Vous trouvez un sort : " + fireball.getName() +
-                        " (+" + fireball.getBonusDamage() + " dégâts)");
+                FireBall fireball = new FireBall("Fire Ball", 7);
+                player.getSpell(fireball); // ← CORRECTION : passer l'objet fireball
+                System.out.println("You find a spell of " + fireball.getName() + ", now you can inflict " + fireball.getDamage() + " damages ! ");
                 break;
 
             case 5:
-                LightningBolt lightningBolt = new LightningBolt("Éclair Foudroyant", 4);
-                playableCharacter.getSpell();
-                System.out.println("Vous trouvez un sort : " + lightningBolt.getName() +
-                        " (+" + lightningBolt.getBonusDamage() + " dégâts)");
+                LightninBolt lightninbolt = new LightninBolt("Lightnin Bolt", 2);
+                player.getSpell(lightninbolt); // ← CORRECTION : passer l'objet lightninbolt
+                System.out.println("You find a spell of " + lightninbolt.getName() + ", now you can inflict " + lightninbolt.getDamage() + " damages ! ");
                 break;
         }
-    }
-    public static void main(String[] args) {
-
-        System.out.println("=== Test de SurpriseChest ===");
-        SurpriseChest chest = new SurpriseChest();
     }
 }

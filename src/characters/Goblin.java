@@ -1,8 +1,8 @@
 package characters;
 
-public class Goblin extends UnplayableCharacter {
+public class Goblin extends Enemy {
 
     public Goblin() {
-        super("Goblin", 20, 5);
+        super("Goblin", 6, 1);
     }
 }

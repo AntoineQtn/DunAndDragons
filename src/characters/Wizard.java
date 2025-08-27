@@ -1,12 +1,10 @@
 package characters;
 
-public class Wizard extends PlayableCharacter {
+public class Wizard extends Player {
 
-    public Wizard(String name) {
-        super(name, 6, 8); // moins de vie, plus d'attaque
-    }
+    public Wizard( String name ) {
 
-    public void castSpell(){
-        System.out.println(getName() + " casts a fireball!");
+        super( name, 6, 8 );
+
     }
 }
