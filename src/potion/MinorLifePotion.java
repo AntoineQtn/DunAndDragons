@@ -1,4 +1,6 @@
-package items;
+package potion;
+
+import defensiveequipment.Potion;
 
 public class MinorLifePotion extends Potion {
     public MinorLifePotion(String name, int life) {

@@ -3,9 +3,11 @@ package game;
 import java.util.*;
 
 import characters.*;
-import items.*;
-import spells.*;
-import weapons.*;
+import enemy.Dragon;
+import enemy.Goblin;
+import enemy.Sorcerer;
+import player.Warrior;
+import player.Wizard;
 
 public class Game {
 

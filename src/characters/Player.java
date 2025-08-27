@@ -1,8 +1,8 @@
 package characters;
 
-import items.*;
-import spells.*;
-import weapons.*;
+import defensiveequipment.Potion;
+import offensiveequipment.Spell;
+import offensiveequipment.Weapon;
 
 public class Player extends Character {
     private Weapon weapon;

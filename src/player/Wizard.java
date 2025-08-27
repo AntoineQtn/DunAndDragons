@@ -1,4 +1,6 @@
-package characters;
+package player;
+
+import characters.Player;
 
 public class Wizard extends Player {
 

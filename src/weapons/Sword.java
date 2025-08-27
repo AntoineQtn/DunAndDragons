@@ -1,5 +1,7 @@
 package weapons;
 
+import offensiveequipment.Weapon;
+
 public class Sword extends Weapon {
 
     public Sword(String name, int damage){

@@ -1,4 +1,6 @@
-package characters;
+package enemy;
+
+import characters.Enemy;
 
 public class Goblin extends Enemy {
 

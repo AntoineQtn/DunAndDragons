@@ -1,7 +1,7 @@
 package game;
 
 import characters.*;
-import items.*;
+import potion.*;
 import spells.*;
 import weapons.*;
 

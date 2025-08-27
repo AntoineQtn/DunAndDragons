@@ -1,6 +1,6 @@
 package characters;
 
-public class Character {
+abstract class Character {
 
     protected String name;
     protected int life;

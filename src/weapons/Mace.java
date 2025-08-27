@@ -1,5 +1,7 @@
 package weapons;
 
+import offensiveequipment.Weapon;
+
 public class Mace extends Weapon {
 
     public Mace(String name, int damage){
