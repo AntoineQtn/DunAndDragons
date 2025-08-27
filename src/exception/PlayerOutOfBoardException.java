@@ -1,10 +1,20 @@
 package exception;
 
+/**
+ * Exception thrown when a player attempts to move outside the board.
+ * This exception is used to handle invalid player positioning.
+ * The suggested position is set to the maximum valid position.
+ */
 public class PlayerOutOfBoardException extends Exception {
     private int attemptedPosition;
     private int boardSize;
     private String playerName;
 
+    /**
+     * Constructor for PlayerOutOfBoardException.
+     * Sets the attempted position and board size.
+     * @param message
+     */
     public PlayerOutOfBoardException(String message) {
         super(message);
     }

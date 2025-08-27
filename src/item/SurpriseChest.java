@@ -7,10 +7,22 @@ import weapons.*;
 
 import java.util.*;
 
+/**
+ * Represents a chest in the game that provides random rewards
+ * upon being opened, including weapons, potions, or spells.
+ */
 public class SurpriseChest {
 
     private static Random random = new Random();
 
+    /**
+     * Initializes a new instance of the SurpriseChest class.
+     *
+     * The SurpriseChest class represents a chest in the game
+     * that grants players random rewards, such as weapons,
+     * potions, or spells, upon being opened. This constructor
+     * sets up the SurpriseChest for use in the game.
+     */
     public SurpriseChest(){
 
     }
