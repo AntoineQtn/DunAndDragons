@@ -5,8 +5,8 @@ import offensiveequipment.Spell;
 import offensiveequipment.Weapon;
 
 public class Player extends Character {
-    private Weapon weapon;
-    private Spell spell;
+    protected Weapon weapon;
+    protected Spell spell;
     private Potion equippedPotion;
     private int basicPotions;
     private int basicbag;
@@ -17,29 +17,6 @@ public class Player extends Character {
         this.spell = null;
         this.equippedPotion = null;
         this.basicbag = 1;
-    }
-
-
-
-
-    public void equipWeapon(Weapon weapon) {
-        if (this.weapon != null) {
-            this.damage -= this.weapon.getDamage();
-        }
-        this.weapon = weapon;
-        this.damage += weapon.getDamage();
-        System.out.println(name + " equips " + weapon.getName() +
-                " (+" + weapon.getDamage() + " damage)!");
-    }
-
-    public void learnSpell(Spell spell) {
-        if (this.spell != null) {
-            this.damage -= this.spell.getDamage();
-        }
-        this.spell = spell;
-        this.damage += spell.getDamage();
-        System.out.println(name + " learns " + spell.getName() +
-                " (+" + spell.getDamage() + " damage)!");
     }
 
     public void equipPotion(Potion potion) {
@@ -76,16 +53,6 @@ public class Player extends Character {
                 basicPotions + " total)");
     }
 
-    public int getWeapon(Weapon weapon) {
-        equipWeapon(weapon);
-        return damage;
-    }
-
-    public int getSpell(Spell spell) {
-        learnSpell(spell);
-        return damage;
-    }
-
     public int getPotion(Potion potion) {
         usePotion(potion);
         return life;
@@ -114,7 +81,5 @@ public class Player extends Character {
                 '}';
     }
     public int getBasicPotionCount() { return basicPotions; }
-    public Weapon getCurrentWeapon() { return weapon; }
-    public Spell getCurrentSpell() { return spell; }
     public Potion getEquippedPotion() { return equippedPotion; }
 }

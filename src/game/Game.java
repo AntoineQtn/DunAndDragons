@@ -6,6 +6,7 @@ import characters.*;
 import enemy.Dragon;
 import enemy.Goblin;
 import enemy.Sorcerer;
+import exception.InvalidChestContentException;
 import exception.PlayerOutOfBoardException;
 import item.SurpriseChest;
 import warrior.HeavyWarrior;
@@ -349,6 +350,12 @@ public class Game {
      */
     private void handleChestEvent(int position) {
         menu.displayMessage("\n You've found a chest !");
+        try {
+            Object loot = SurpriseChest.openChest(player);
+            menu.displayMessage("You get a " + loot);
+        } catch (InvalidChestContentException e) {
+            menu.displayMessage("Invalid chest content !");
+        }
         SurpriseChest.openChest(player);
         board.removeChest(position);
     }
