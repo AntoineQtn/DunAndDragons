@@ -45,12 +45,16 @@ public class Board {
         return freePositions;
     }
 
-    public boolean movePlayer(int newPosition){
-        if (newPosition < 0 || newPosition >= length) {
-            return false;
-        }
+    public void movePlayer(int newPosition) throws PlayerOutOfBoardException {
+        validatePosition(newPosition);
         this.playerPosition = newPosition;
-        return true;
+    }
+    private void validatePosition(int position) throws PlayerOutOfBoardException {
+        if (position < 0 || position >= length) {
+            throw new PlayerOutOfBoardException(
+                    String.format("Position %d is out of bounds (board size: %d)", position, length)
+            );
+        }
     }
 
     public char checkPlayerPosition() {

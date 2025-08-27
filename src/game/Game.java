@@ -142,9 +142,22 @@ public class Game {
         int currentPos = board.getPlayerPosition();
         int newPos = Math.min(currentPos + diceRoll, board.getLength() - 1);
 
-        board.movePlayer(newPos);
-        menu.displayMessage(player.getName() + " move from case " +
-                currentPos + " to case " + newPos);
+        try {
+            board.movePlayer(newPos);
+            menu.displayMessage(player.getName() + " moves from case " +
+                    currentPos + " to case " + newPos);
+        } catch (PlayerOutOfBoardException e) {
+            menu.displayMessage("Movement Error!");
+            menu.displayMessage(e.getDetailedErrorMessage());
+
+            int safePosition = e.getSuggestedPosition();
+            try {
+                board.movePlayer(safePosition);
+                menu.displayMessage("Player moved to the end of the board (position " + safePosition + ")");
+            } catch (PlayerOutOfBoardException ex) {
+                menu.displayMessage("Critical error: " + ex.getMessage());
+            }
+        }
 
         handleCaseEvent();
     }
