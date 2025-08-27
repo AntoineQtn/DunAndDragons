@@ -1,6 +1,6 @@
 package defensiveequipment;
 
-public class Potion {
+public class Potion extends DefensiveEquipment {
     private String name;
     private int life;
 

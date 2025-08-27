@@ -1,5 +1,7 @@
 package game;
 
+import exception.PlayerOutOfBoardException;
+
 import java.util.*;
 
 public class Board {

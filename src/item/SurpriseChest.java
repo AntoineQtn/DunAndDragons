@@ -1,4 +1,4 @@
-package game;
+package item;
 
 import characters.*;
 import potion.*;

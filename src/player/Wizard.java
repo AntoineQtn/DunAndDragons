@@ -2,11 +2,11 @@ package player;
 
 import characters.Player;
 
-public class Wizard extends Player {
+public abstract class Wizard extends Player {
 
-    public Wizard( String name ) {
+    public Wizard( String name, int life, int damage ) {
 
-        super( name, 6, 8 );
+        super( name, life, damage );
 
     }
 }

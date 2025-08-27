@@ -6,8 +6,12 @@ import characters.*;
 import enemy.Dragon;
 import enemy.Goblin;
 import enemy.Sorcerer;
-import player.Warrior;
-import player.Wizard;
+import exception.PlayerOutOfBoardException;
+import item.SurpriseChest;
+import warrior.HeavyWarrior;
+import warrior.LightWarrior;
+import wizard.FireWizard;
+import wizard.IceWizard;
 
 public class Game {
 
@@ -19,6 +23,8 @@ public class Game {
     private List<Enemy> enemies;
     private boolean isGameRunning;
     private boolean isGameWon;
+    private Player Warrior;
+    private Player Wizard;
 
     public Game() {
         this.dice = new Dice();
@@ -43,24 +49,47 @@ public class Game {
         menu.displayMessage("\n=== CHARACTER CREATION ===");
         String name = menu.askForString(" Enter your name ");
         menu.displayMessage("\nChoose your class :");
-        menu.displayMessage("1. Warrior (Life: 10, Attack: 5)");
-        menu.displayMessage("2. Wizard (Life: 6, Attack: 8)");
+        menu.displayMessage("1. Warrior ");
+        menu.displayMessage("2. Wizard ");
 
         int classChoice = menu.askForInt("Your choice (1-2)", 1, 2);
 
-        Player character;
+        Player character = null;
 
-        switch (classChoice) {
-            case 1:
-                character = new Warrior(name);
-                break;
-            case 2:
-                character = new Wizard(name);
-                break;
-            default:
-                character = new Warrior(name);
+        if (classChoice == 1) {
+            menu.displayMessage("\nChoose your subclass :");
+            menu.displayMessage("1. Heavy Warrior (life : 10; damage : 5)");
+            menu.displayMessage("2. Light Warrior (life : 5; damage : 8)");
+
+            int subClassChoice = menu.askForInt("Your choice (1-2)", 1, 2);
+
+            switch (subClassChoice) {
+                case 1:
+                    character = new HeavyWarrior(name);
+                    break;
+                case 2:
+                    character = new LightWarrior(name);
+                    break;
+            }
+
+        } else if (classChoice == 2) { // Wizard
+            menu.displayMessage("\nChoose your subclass :");
+            menu.displayMessage("1. Fire Wizard (life : 10; damage : 5)");
+            menu.displayMessage("2. Ice Wizard (life : 5; damage : 12)");
+
+            int subClassChoice = menu.askForInt("Your choice (1-2)", 1, 2);
+
+            switch (subClassChoice) {
+                case 1:
+                    character = new FireWizard(name);
+                    break;
+                case 2:
+                    character = new IceWizard(name);
+                    break;
+            }
         }
-        menu.displayMessage("\nCharacter created successfully ! ");
+
+        menu.displayMessage("\nCharacter created successfully !");
         character.displayStats();
         return character;
     }

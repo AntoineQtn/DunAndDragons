@@ -1,4 +1,4 @@
-package game;
+package exception;
 
 public class PlayerOutOfBoardException extends Exception {
     private int attemptedPosition;

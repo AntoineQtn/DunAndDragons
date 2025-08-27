@@ -2,10 +2,10 @@ package player;
 
 import characters.Player;
 
-public class Warrior extends Player {
+public abstract class Warrior extends Player {
 
-    public Warrior( String name ) {
-        super( name, 10, 5 );
+    public Warrior( String name, int life, int damage ) {
+        super( name, life, damage );
 
     }
 
