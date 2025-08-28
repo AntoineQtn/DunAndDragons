@@ -83,14 +83,6 @@ public class Board {
         return playerPosition;
     }
 
-    public Set<Integer> getChestPositions() {
-        return new HashSet<>(chestPositions);
-    }
-
-    public Set<Integer> getEnemyPositions() {
-        return new HashSet<>(enemyPositions);
-    }
-
     public boolean hasPlayerWon() {
         return playerPosition == length - 1;
     }

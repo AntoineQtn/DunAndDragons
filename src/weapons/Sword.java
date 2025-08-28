@@ -9,15 +9,6 @@ public class Sword extends Weapon {
 
     }
 
-    public void swordAttack() {
-        System.out.println( getName() + " attack with its sword and inflict " + getDamage() + " damage!");
-    }
-
-    public static void main ( String[] args ) {
-
-        Sword sword = new Sword("Sword", 5);
-
-    }
 
     @Override
     public int getWeight() {

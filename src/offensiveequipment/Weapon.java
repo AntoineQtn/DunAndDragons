@@ -22,13 +22,4 @@ public abstract class Weapon extends OffensiveEquipment implements Collectible {
     public String getName() { return name; }
     public int getDamage() { return damage; }
 
-    public String setName( String name ) {
-        this.name = name;
-        return name;
-    }
-    public int setDamage ( int damage ) {
-        this.damage = damage;
-        return damage;
-    }
-
 }

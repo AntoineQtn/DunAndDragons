@@ -45,34 +45,5 @@ public class Menu {
         System.out.print(prompt);
         scanner.nextLine();
     }
-    public boolean askForConfirmation(String prompt) {
-        String response;
-        do {
-            System.out.print(prompt + " (y/n) : ");
-            response = scanner.nextLine().trim().toLowerCase();
-
-            if (response.equals("y") || response.equals("yes")) {
-                return true;
-            } else if (response.equals("n") || response.equals("no")) {
-                return false;
-            } else {
-                System.out.println("Please answer by 'y' (yes) or 'n' (no)");
-            }
-        } while (true);
-    }
-
-    public int displayMenu(String title, String[] options) {
-        System.out.println("\n=== " + title + " ===");
-        for (int i = 0; i < options.length; i++) {
-            System.out.println((i + 1) + ". " + options[i]);
-        }
-
-        return askForInt("Your choice", 1, options.length);
-    }
-    public void close() {
-        if (scanner != null) {
-            scanner.close();
-        }
-    }
 
 }

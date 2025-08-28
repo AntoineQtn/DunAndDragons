@@ -21,9 +21,6 @@ public class SurpriseChest {
     public SurpriseChest() {
     }
 
-    private static Warrior warrior;
-    private static Wizard wizard;
-
     /**
      * Ouvre le coffre et donne une récompense au joueur
      * @param player le joueur qui ouvre le coffre
@@ -39,7 +36,7 @@ public class SurpriseChest {
                     throw new InvalidChestContentException("You can't equip a sword with a wizard !");
                 }
                 Sword sword = new Sword("Sword", 5);
-                warrior.getWeapon(sword);
+                ((Warrior) player).getWeapon(sword);
                 System.out.println("You find a " + sword.getName() +
                         ", now you can inflict " + sword.getDamage() + " damages!");
                 return sword;
@@ -49,7 +46,7 @@ public class SurpriseChest {
                     throw new InvalidChestContentException("You can't equip a mace with a wizard !");
                 }
                 Mace mace = new Mace("Mace", 3);
-                warrior.getWeapon(mace);
+                ((Warrior) player).getWeapon(mace);
                 System.out.println("You find a " + mace.getName() +
                         ", now you can inflict " + mace.getDamage() + " damages!");
                 return mace;
@@ -73,7 +70,7 @@ public class SurpriseChest {
                     throw new InvalidChestContentException("You can't equip a spell with a warrior !");
                 }
                 FireBall fireball = new FireBall("Fire Ball", 7);
-                wizard.getSpell(fireball);
+                ((Wizard) player).getSpell(fireball);
                 System.out.println("You find a spell: " + fireball.getName() +
                         ", now you can inflict " + fireball.getDamage() + " damages!");
                 return fireball;
@@ -83,7 +80,7 @@ public class SurpriseChest {
                     throw new InvalidChestContentException("You can't equip a spell with a warrior !");
                 }
                 LightninBolt lightning = new LightninBolt("Lightning Bolt", 2);
-                wizard.getSpell(lightning);
+                ((Wizard) player).getSpell(lightning);
                 System.out.println("You find a spell: " + lightning.getName() +
                         ", now you can inflict " + lightning.getDamage() + " damages!");
                 return lightning;

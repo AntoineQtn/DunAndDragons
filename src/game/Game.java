@@ -356,9 +356,9 @@ public class Game {
         } catch (InvalidChestContentException e) {
             menu.displayMessage("Invalid chest content !");
         }
-        SurpriseChest.openChest(player);
         board.removeChest(position);
     }
+
 
     /**
      * Handles the event when the player encounters an enemy on the game board.

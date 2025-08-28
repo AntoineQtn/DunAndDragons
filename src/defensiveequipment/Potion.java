@@ -20,12 +20,4 @@ abstract public class Potion extends DefensiveEquipment implements Collectible {
     public String getName() { return name; }
     public int getLife() { return life; }
 
-    public String setName( String name ) {
-        this.name = name;
-        return name;
-    }
-    public int setLife ( int life ) {
-        this.life = life;
-        return life;
-    }
 }

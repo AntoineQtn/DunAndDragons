@@ -1,7 +1,5 @@
 package characters;
 
-import defensiveequipment.Potion;
-
 /**
  * The Character class serves as an abstract base class for all character-related entities
  * in the game, such as players and enemies. It defines common properties and behaviors
