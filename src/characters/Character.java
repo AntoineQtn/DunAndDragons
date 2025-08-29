@@ -18,7 +18,7 @@ abstract class Character {
         this.name = name;
         this.life = life;
         this.damage = damage;
-        this.basicBag = new BasicBag("Basic Bag", 10, 10);
+        this.basicBag = new BasicBag();
     }
 
     public void displayStats() {

@@ -3,18 +3,17 @@ package item.defensiveequipment.potion;
 import item.defensiveequipment.Potion;
 
 /**
- * Major life potion found in chests (rare)
+ * Basic healing potion that every player starts with
  */
-public class MajorLifePotion extends Potion {
+public class BasicPotion extends Potion {
 
-    public MajorLifePotion(String customName, int customLife) {
-        super(customName, customLife, 2, "A powerful healing potion that restores " + customLife + " life points");
+    public BasicPotion() {
+        super("Basic Healing Potion", 3, 1, "A simple healing potion that restores 3 life points");
     }
 
     @Override
     public void onCollect() {
-        super.onCollect();
-        System.out.println("This is a powerful healing potion - use it wisely!");
+        System.out.println("You start with a " + name + " in your bag!");
     }
 
     @Override
@@ -22,7 +21,6 @@ public class MajorLifePotion extends Potion {
         if (canBeUsed(player)) {
             player.heal(life);
             System.out.println(player.getName() + " drinks a " + name + " and recovers " + life + " life points!");
-            System.out.println("The powerful magic surges through " + player.getName() + "'s body!");
         } else {
             System.out.println(player.getName() + " is already at full health!");
         }

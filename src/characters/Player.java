@@ -1,9 +1,14 @@
 package characters;
 
+import item.bag.Bag;
+import item.bag.BasicBag;
 import item.defensiveequipment.Potion;
 import item.defensiveequipment.Shield;
+import item.defensiveequipment.potion.BasicPotion;
 import item.offensiveequipment.Spell;
 import item.offensiveequipment.Weapon;
+
+import java.util.List;
 
 public class Player extends Character {
     protected Weapon weapon;
@@ -11,64 +16,110 @@ public class Player extends Character {
     protected Shield shield;
     private Potion equippedPotion;
     private int basicPotions;
-    private int basicbag;
+    private Bag basicbag;
+    protected int maxLife;
 
     public Player(String name, int life, int damage) {
         super(name, life, damage);
         this.weapon = null;
         this.spell = null;
         this.equippedPotion = null;
-        this.basicbag = 1;
+        this.basicbag = new BasicBag();
+        this.maxLife = life;
+        BasicPotion startingPotion = new BasicPotion();
+        this.basicbag.addItem(startingPotion);
     }
 
-    public void equipPotion(Potion potion) {
-        if (this.equippedPotion != null) {
-            this.life -= this.equippedPotion.getLife();
-        }
-        this.equippedPotion = potion;
-        this.life += potion.getLife();
-        System.out.println(name + " equips " + potion.getName() +
-                " (+" + potion.getLife() + " permanent life)!");
-    }
+    public void upgradeBag(Bag newBag) {
+        if (newBag.getCapacity() > basicbag.getCapacity()) {
+            List<Object> oldItems = basicbag.getItems();
+            basicbag = newBag;
+            newBag.onCollect();
 
-    public void useBasicPotion() {
-        if (basicPotions > 0) {
-            int healAmount = 20;
-            this.life += healAmount;
-            basicPotions--;
-            System.out.println(name + " drinks a basic item.defensiveequipment.potion and regains " +
-                    healAmount + " life points! (" + basicPotions + " left)");
+            for (Object item : oldItems) {
+                basicbag.addItem(item);
+            }
+            System.out.println("Successfully upgraded to " + newBag.getName() + "!");
         } else {
-            System.out.println(name + " has no basic potions left!");
+            System.out.println("This bag is not better than your current one.");
         }
     }
 
-    public void usePotion(Potion potion) {
-        this.life += potion.getLife();
-        System.out.println(name + " drinks " + potion.getName() +
-                " and regains " + potion.getLife() + " life points!");
+    public Bag getBag() {
+        return basicbag;
     }
 
-    public void addBasicPotions(int amount) {
-        basicPotions += amount;
-        System.out.println(name + " gains " + amount + " basic potions! (" +
-                basicPotions + " total)");
+    public boolean addItemToBag(Object item) {
+        return basicbag.addItem(item);
     }
 
+    public void viewInventory() {
+        basicbag.displayContents();
+    }
 
-
-    public int getPotion(Potion potion) {
+    public int getPotion() {
+        int potion = 0;
         usePotion(potion);
         return life;
     }
 
-    public void getPotion() {
-        useBasicPotion();
+    public void heal(int amount) {
+        int oldLife = this.life;
+        this.life = Math.min(this.life + amount, this.maxLife);
+        int actualHealing = this.life - oldLife;
+        if (actualHealing > 0) {
+            System.out.println(name + " healed for " + actualHealing + " points! (" + life + "/" + maxLife + ")");
+        }
     }
 
-    @Override
+    public int getMaxLife() {
+        return maxLife;
+    }
+
+    public void setMaxLife(int maxLife) {
+        this.maxLife = maxLife;
+    }
+
+    public boolean usePotion(int potionIndex) {
+        List<Object> items = basicbag.getItems();
+        if (potionIndex < 0 || potionIndex >= items.size()) {
+            System.out.println("Invalid potion selection!");
+            return false;
+        }
+
+        Object item = items.get(potionIndex);
+        if (item instanceof Potion) {
+            Potion potion = (Potion) item;
+            potion.usePotion(this);
+            basicbag.removeItem(potion);
+            return true;
+        } else {
+            System.out.println("Selected item is not a potion!");
+            return false;
+        }
+    }
+
+    public void showPotions() {
+        List<Object> items = basicbag.getItems();
+        System.out.println("\n=== Available Potions ===");
+        boolean foundPotion = false;
+        for (int i = 0; i < items.size(); i++) {
+            if (items.get(i) instanceof Potion) {
+                Potion potion = (Potion) items.get(i);
+                System.out.println(i + ". " + potion.getName() + " (+" + potion.getLife() + " HP)");
+                foundPotion = true;
+            }
+        }
+        if (!foundPotion) {
+            System.out.println("No potions available!");
+        }
+        System.out.println("=======================");
+    }
+
+
+
     public void displayStats() {
-        super.displayStats();
+
         System.out.println("Weapon: " + (weapon != null ? weapon.getName() : "None"));
         System.out.println("Spell: " + (spell != null ? spell.getName() : "None"));
         System.out.println("Equipped Potion: " + (equippedPotion != null ? equippedPotion.getName() : "None"));
@@ -88,4 +139,5 @@ public class Player extends Character {
     }
     public int getBasicPotionCount() { return basicPotions; }
     public Potion getEquippedPotion() { return equippedPotion; }
+
 }

@@ -3,11 +3,10 @@ package item;
 import characters.Player;
 import characters.player.Warrior;
 import characters.player.Wizard;
+import item.bag.LargeBag;
 import item.bag.MinorBag;
-import item.defensiveequipment.Shield;
 import item.defensiveequipment.potion.*;
 import item.defensiveequipment.shield.IronShield;
-import item.defensiveequipment.shield.WoodenShield;
 import item.offensiveequipment.spells.*;
 import item.offensiveequipment.weapons.*;
 import game.exception.*;
@@ -58,14 +57,14 @@ public class SurpriseChest {
 
             case 2:
                 MajorLifePotion majorPotion = new MajorLifePotion("Major life item.defensiveequipment.potion", 5);
-                player.getPotion(majorPotion);
+                player.getPotion();
                 System.out.println("You find a " + majorPotion.getName() +
                         ", now you can retrieve " + majorPotion.getLife() + " life points!");
                 return majorPotion;
 
             case 3:
                 MinorLifePotion minorPotion = new MinorLifePotion("Minor life item.defensiveequipment.potion", 2);
-                player.getPotion(minorPotion);
+                player.getPotion();
                 System.out.println("You find a " + minorPotion.getName() +
                         ", now you can retrieve " + minorPotion.getLife() + " life points!");
                 return minorPotion;
@@ -100,19 +99,18 @@ public class SurpriseChest {
                         ", now you gain " + ironShield.getLife() + " LP !");
                 return ironShield;
 
-            case 7:
-                if (player instanceof Wizard) {
-                    throw new InvalidChestContentException("You can't equip a shield with a wizard !");
-                }
-                WoodenShield woodenShield = new WoodenShield("Wooden Shield", 2);
-                ((Warrior) player).getShield(woodenShield);
-                System.out.println("You find a shield: " + woodenShield.getName() +
-                        ", now you gain " + woodenShield.getLife() + " LP !");
-                return woodenShield;
+            case 8:
+                MinorBag minorBag = new MinorBag();
+                player.upgradeBag(minorBag); // Assuming you add this method to Player
+                System.out.println("You find a " + minorBag.getName() + "! " + minorBag.getDescription());
+                return minorBag;
 
-                case 8:
-                    MinorBag minorbag = new MinorBag();
-                    player.addBag();
+            case 9:
+                // LargeBag plus rare - vous pouvez ajuster la probabilité
+                LargeBag largeBag = new LargeBag();
+                player.upgradeBag(largeBag);
+                System.out.println("Wow! You find a rare " + largeBag.getName() + "! " + largeBag.getDescription());
+                return largeBag;
 
 
             default:

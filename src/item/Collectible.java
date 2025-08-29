@@ -5,7 +5,10 @@ package item;
  * This interface defines the minimum requirements for any collectible object,
  * providing methods to retrieve its name and weight.
  */
+
 public interface Collectible {
     String getName();
-    int getWeight();
+    String getDescription();
+    void onCollect(); // Action when the item is collected
 }
+

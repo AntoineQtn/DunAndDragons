@@ -11,4 +11,14 @@ public class IronShield extends Shield {
         System.out.println(getName() + " Gives +" + getLife() + " life point!");
         return getLife();
     }
+
+    @Override
+    public String getDescription() {
+        return "";
+    }
+
+    @Override
+    public void onCollect() {
+
+    }
 }

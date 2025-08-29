@@ -11,4 +11,14 @@ public class FireBall extends Spell {
     public int getWeight() {
         return 0;
     }
+
+    @Override
+    public String getDescription() {
+        return "";
+    }
+
+    @Override
+    public void onCollect() {
+
+    }
 }

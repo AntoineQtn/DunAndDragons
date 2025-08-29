@@ -1,27 +1,93 @@
+// Classe abstraite Bag
 package item.bag;
 
 import item.Collectible;
 
-public abstract class Bag {
+import java.util.ArrayList;
+import java.util.List;
 
+/**
+ * Abstract base class for all types of bags
+ */
+public abstract class Bag implements Collectible {
     protected String name;
+    protected String description;
     protected int capacity;
+    protected List<Object> items;
 
+    public Bag(String name, String description, int capacity) {
+        this.name = name;
+        this.description = description;
+        this.capacity = capacity;
+        this.items = new ArrayList<>();
+    }
 
-    public abstract void addToBag(Collectible item);
+    // Méthodes de l'interface Collectible
+    @Override
+    public String getName() {
+        return name;
+    }
 
-    abstract public void displayStats();
+    @Override
+    public String getDescription() {
+        return description;
+    }
 
-    abstract public void addToBag();
+    @Override
+    public void onCollect() {
+        System.out.println("You collected a " + name + "! " + description);
+    }
 
-    abstract public void setName(String name);
-    abstract public void setCapacity(int capacity);
+    // Méthodes de gestion des objets
+    public boolean addItem(Object item) {
+        if (items.size() < capacity) {
+            items.add(item);
+            System.out.println("Added " + item.toString() + " to your " + name);
+            return true;
+        } else {
+            System.out.println("Your " + name + " is full! Cannot add more items.");
+            return false;
+        }
+    }
 
-    abstract public int getCapacity();
+    public boolean removeItem(Object item) {
+        if (items.remove(item)) {
+            System.out.println("Removed " + item.toString() + " from your " + name);
+            return true;
+        }
+        return false;
+    }
 
-    public abstract void setWeight(int weight);
+    public List<Object> getItems() {
+        return new ArrayList<>(items); // Retourne une copie pour éviter les modifications externes
+    }
 
-    abstract public String getName();
+    public int getCurrentSize() {
+        return items.size();
+    }
 
-    public abstract int getWeight();
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public boolean isFull() {
+        return items.size() >= capacity;
+    }
+
+    public boolean isEmpty() {
+        return items.isEmpty();
+    }
+
+    public void displayContents() {
+        System.out.println("\n=== " + name + " Contents ===");
+        System.out.println("Capacity: " + items.size() + "/" + capacity);
+        if (isEmpty()) {
+            System.out.println("Empty");
+        } else {
+            for (int i = 0; i < items.size(); i++) {
+                System.out.println((i + 1) + ". " + items.get(i).toString());
+            }
+        }
+        System.out.println("========================");
+    }
 }
