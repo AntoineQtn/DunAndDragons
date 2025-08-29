@@ -3,16 +3,16 @@ package game;
 import java.util.*;
 
 import characters.*;
-import enemy.Dragon;
-import enemy.Goblin;
-import enemy.Sorcerer;
-import exception.InvalidChestContentException;
-import exception.PlayerOutOfBoardException;
+import characters.enemy.Dragon;
+import characters.enemy.Goblin;
+import characters.enemy.Sorcerer;
+import game.exception.InvalidChestContentException;
+import game.exception.PlayerOutOfBoardException;
 import item.SurpriseChest;
-import warrior.HeavyWarrior;
-import warrior.LightWarrior;
-import wizard.FireWizard;
-import wizard.IceWizard;
+import characters.player.warrior.HeavyWarrior;
+import characters.player.warrior.LightWarrior;
+import characters.player.wizard.FireWizard;
+import characters.player.wizard.IceWizard;
 
 
 /**
@@ -20,7 +20,7 @@ import wizard.IceWizard;
  * role-playing game. It initializes characters, the game board, enemies,
  * and other elements required to run and play the game.
  * The main gameplay involves navigating a board, encountering enemies,
- * and interacting with chests, all while managing the player's character
+ * and interacting with chests, all while managing the characters.player's character
  * stats and actions.
  */
 public class Game {
@@ -43,7 +43,7 @@ public class Game {
      * - A Dice object for game mechanics involving random rolls.
      * - A Menu object for displaying UI messages and handling user input.
      * - A SurpriseChest object for handling surprise rewards.
-     * - An ArrayList to hold enemy characters encountered in the game.
+     * - An ArrayList to hold characters.enemy characters encountered in the game.
      *
      * Additionally, the constructor sets the game's running and winning
      * states to false, indicating that the game has not yet begun.
@@ -60,11 +60,11 @@ public class Game {
     /**
      * Starts the game by initializing essential components and managing the game flow.
      * This method performs the following sequence of actions:
-     * 1. Displays a welcome message to the player.
-     * 2. Creates the player's character through a selection process.
+     * 1. Displays a welcome message to the characters.player.
+     * 2. Creates the characters.player's character through a selection process.
      * 3. Initializes and sets up the game board.
      * 4. Populates the board with necessary game elements, such as chests and enemies.
-     * 5. Initiates the game loop to manage player moves, events, and progression.
+     * 5. Initiates the game loop to manage characters.player moves, events, and progression.
      * 6. Displays the end of the game message based on the game's outcome.
      */
     public void startGame() {
@@ -134,9 +134,9 @@ public class Game {
 
     /**
      * Creates and initializes a new instance of the game board.
-     * The board is used to manage the positions of the player, chests, and enemies
+     * The board is used to manage the positions of the characters.player, chests, and enemies
      * during the gameplay. Upon creation, the board will have no chests, no enemies,
-     * and the player's position will be set to the starting point.
+     * and the characters.player's position will be set to the starting point.
      *
      * @return a newly created Board instance for the game
      */
@@ -159,8 +159,8 @@ public class Game {
      *
      * For enemies:
      * - Calculates the number of enemies to place as the maximum of 2 or one-fourth of the board size.
-     * - For each enemy position successfully determined, creates a random enemy and adds it to the enemy list.
-     * - Ensures no enemy is placed if no valid positions are available on the board.
+     * - For each characters.enemy position successfully determined, creates a random characters.enemy and adds it to the characters.enemy list.
+     * - Ensures no characters.enemy is placed if no valid positions are available on the board.
      */
     private void populateBoard() {
         int boardSize = board.getLength();
@@ -181,11 +181,11 @@ public class Game {
     }
 
     /**
-     * Creates and returns a randomly generated enemy instance.
-     * The method randomly selects one of three enemy types from the following:
-     * - Goblin: A basic enemy with moderate stats.
-     * - Dragon: A powerful enemy with high stats.
-     * - Sorcerer: A magic-based enemy with balanced stats.
+     * Creates and returns a randomly generated characters.enemy instance.
+     * The method randomly selects one of three characters.enemy types from the following:
+     * - Goblin: A basic characters.enemy with moderate stats.
+     * - Dragon: A powerful characters.enemy with high stats.
+     * - Sorcerer: A magic-based characters.enemy with balanced stats.
      *
      * @return an Enemy instance of either Goblin, Dragon, or Sorcerer, selected randomly
      */
@@ -207,25 +207,25 @@ public class Game {
     /**
      * Executes the main game loop, controlling the flow of gameplay until the game ends.
      *
-     * The game loop repeatedly prompts the player with a menu of actions and processes
-     * the player's choice until either the player exits the game or the game concludes.
+     * The game loop repeatedly prompts the characters.player with a menu of actions and processes
+     * the characters.player's choice until either the characters.player exits the game or the game concludes.
      *
      * During each iteration of the loop:
-     * 1. The current state of the game and player's statistics are displayed on the console.
-     * 2. The player is prompted to choose one of three options:
+     * 1. The current state of the game and characters.player's statistics are displayed on the console.
+     * 2. The characters.player is prompted to choose one of three options:
      *    - Throw the dice and move their position on the board.
      *    - View their detailed statistics.
      *    - Exit the game.
-     * 3. Based on the player's choice:
-     *    - If the player chooses to throw the dice, the `playerMove` method is executed,
-     *      which moves the player and processes the resulting board event.
-     *    - If the player chooses to view stats, the player's statistics are displayed
+     * 3. Based on the characters.player's choice:
+     *    - If the characters.player chooses to throw the dice, the `playerMove` method is executed,
+     *      which moves the characters.player and processes the resulting board event.
+     *    - If the characters.player chooses to view stats, the characters.player's statistics are displayed
      *      using the `displayStats` method.
-     *    - If the player chooses to quit, the game ends with an exit message.
+     *    - If the characters.player chooses to quit, the game ends with an exit message.
      * 4. The game continuously checks for win conditions using the `checkWinCondition` method,
-     *    which terminates the loop if the player wins the game.
+     *    which terminates the loop if the characters.player wins the game.
      *
-     * The loop ends if either the `isGameRunning` flag is set to false or the player's
+     * The loop ends if either the `isGameRunning` flag is set to false or the characters.player's
      * `isAlive` method returns false, indicating the game should no longer continue.
      */
     public void gameLoop() {
@@ -258,23 +258,23 @@ public class Game {
     }
 
     /**
-     * Executes the player's movement on the game board during their turn by rolling a dice
-     * and updating their position accordingly. This method handles cases where the player
+     * Executes the characters.player's movement on the game board during their turn by rolling a dice
+     * and updating their position accordingly. This method handles cases where the characters.player
      * might move beyond the confines of the board or encounter an event at their new position.
      *
      * Detailed steps:
      * 1. Displays a message indicating the dice roll initiation and the result of the roll.
-     * 2. Calculates the new position for the player based on the dice roll.
-     * 3. Moves the player to the calculated position unless it surpasses the board limits.
-     * 4. Catches movement-related exceptions if the player attempts an invalid move, and:
+     * 2. Calculates the new position for the characters.player based on the dice roll.
+     * 3. Moves the characters.player to the calculated position unless it surpasses the board limits.
+     * 4. Catches movement-related exceptions if the characters.player attempts an invalid move, and:
      *    - Displays relevant error messages and suggested recovery actions.
-     *    - Attempts to move the player to the nearest valid position (e.g., the end of the board).
-     * 5. Calls the `handleCaseEvent` method to process any event at the player's new position.
+     *    - Attempts to move the characters.player to the nearest valid position (e.g., the end of the board).
+     * 5. Calls the `handleCaseEvent` method to process any event at the characters.player's new position.
      *
      * Exceptions handled:
-     * - PlayerOutOfBoardException: Triggers when the player's target position is outside the board.
+     * - PlayerOutOfBoardException: Triggers when the characters.player's target position is outside the board.
      *
-     * This method ensures proper error handling and updates the game state after the player's movement.
+     * This method ensures proper error handling and updates the game state after the characters.player's movement.
      */
     private void playerMove() {
         menu.displayMessage("\n The dice is thrown...");
@@ -305,17 +305,17 @@ public class Game {
     }
 
     /**
-     * Processes the event on the player's current position on the game board.
+     * Processes the event on the characters.player's current position on the game board.
      *
-     * This method checks the type of the case on the board at the player's current position
+     * This method checks the type of the case on the board at the characters.player's current position
      * and triggers the corresponding event. The case type is determined using the method
      * `board.checkPlayerPosition`, which returns one of the following values:
-     * - 'C': Indicates the player has encountered a chest. The method `handleChestEvent` is invoked.
-     * - 'E': Indicates the player has encountered an enemy. The method `handleEnemyEvent` is invoked.
-     * - '.': Indicates an empty case. A message is displayed to inform the player that there is no event.
+     * - 'C': Indicates the characters.player has encountered a chest. The method `handleChestEvent` is invoked.
+     * - 'E': Indicates the characters.player has encountered an characters.enemy. The method `handleEnemyEvent` is invoked.
+     * - '.': Indicates an empty case. A message is displayed to inform the characters.player that there is no event.
      *
      * The following operations are performed:
-     * 1. Retrieves the player's current case type and position using the `board` object.
+     * 1. Retrieves the characters.player's current case type and position using the `board` object.
      * 2. Switches on the case type to determine the appropriate action:
      *    - Calls `handleChestEvent` to process chest interaction for case type 'C'.
      *    - Calls `handleEnemyEvent` to manage combat for case type 'E'.
@@ -339,14 +339,14 @@ public class Game {
     }
 
     /**
-     * Handles the event when the player encounters a chest on the game board.
+     * Handles the event when the characters.player encounters a chest on the game board.
      *
      * This method processes the chest event by performing the following steps:
-     * 1. Displays a message informing the player that a chest has been found.
+     * 1. Displays a message informing the characters.player that a chest has been found.
      * 2. Opens the chest via the SurpriseChest class to provide rewards or surprises.
      * 3. Removes the chest from the game board at the specified position.
      *
-     * @param position the position of the chest on the game board that the player has encountered
+     * @param position the position of the chest on the game board that the characters.player has encountered
      */
     private void handleChestEvent(int position) {
         menu.displayMessage("\n You've found a chest !");
@@ -361,15 +361,15 @@ public class Game {
 
 
     /**
-     * Handles the event when the player encounters an enemy on the game board.
+     * Handles the event when the characters.player encounters an characters.enemy on the game board.
      *
-     * This method manages the combat sequence with a randomly selected enemy from the list
+     * This method manages the combat sequence with a randomly selected characters.enemy from the list
      * of remaining enemies. It determines the outcome of the combat and updates the game
-     * state based on whether the player wins or loses the battle. If the player defeats the
-     * enemy, the enemy is removed from the game board and the list of enemies. If the
-     * player is defeated, the game ends.
+     * state based on whether the characters.player wins or loses the battle. If the characters.player defeats the
+     * characters.enemy, the characters.enemy is removed from the game board and the list of enemies. If the
+     * characters.player is defeated, the game ends.
      *
-     * @param position the position of the enemy on the game board that the player encounters
+     * @param position the position of the characters.enemy on the game board that the characters.player encounters
      */
     private void handleEnemyEvent(int position) {
         if (enemies.isEmpty()) return;
@@ -390,13 +390,13 @@ public class Game {
     }
 
     /**
-     * Handles a combat scenario between the player and an enemy.
-     * This method manages turns between the player and the enemy, processing
+     * Handles a combat scenario between the characters.player and an characters.enemy.
+     * This method manages turns between the characters.player and the characters.enemy, processing
      * actions like attacking and healing, while updating their respective stats.
      *
-     * @param enemy the enemy combatant involved in the battle
-     * @return true if the player wins the combat and the enemy is defeated,
-     *         or false if the player is defeated
+     * @param enemy the characters.enemy combatant involved in the battle
+     * @return true if the characters.player wins the combat and the characters.enemy is defeated,
+     *         or false if the characters.player is defeated
      */
     private boolean handleCombat(Enemy enemy) {
         menu.displayMessage("\n=== COMBAT ===");
@@ -407,7 +407,7 @@ public class Game {
             menu.displayMessage("\n--- Your turn ---");
             menu.displayMessage("What do you want to do?");
             menu.displayMessage("1. Attack");
-            menu.displayMessage("2. Use a basic potion");
+            menu.displayMessage("2. Use a basic item.defensiveequipment.potion");
 
             int choice = menu.askForInt("Your choice", 1, 2);
 
@@ -415,7 +415,7 @@ public class Game {
                 menu.displayMessage("\n" + player.getName() + " attacks!");
                 enemy.takeDamage(player.getAttack());
             } else {
-                menu.displayMessage("\n" + player.getName() + " uses a potion!");
+                menu.displayMessage("\n" + player.getName() + " uses a item.defensiveequipment.potion!");
                 player.getPotion();
             }
 
@@ -441,7 +441,7 @@ public class Game {
      * Evaluates the current state of the game to determine if the
      * win condition has been met.
      *
-     * If the player has won, the method updates the game state by
+     * If the characters.player has won, the method updates the game state by
      * setting the game as won and stops the game from running.
      */
     private void checkWinCondition() {
@@ -452,14 +452,14 @@ public class Game {
     }
 
     /**
-     * Displays the end-game message and final statistics to the player.
+     * Displays the end-game message and final statistics to the characters.player.
      *
-     * This method checks the outcome of the game and provides feedback to the player
-     * based on whether they have won the game, lost due to the player's demise, or
+     * This method checks the outcome of the game and provides feedback to the characters.player
+     * based on whether they have won the game, lost due to the characters.player's demise, or
      * finished in another state. After displaying the appropriate message, it outputs
-     * the player's final statistics and a separator line for visual formatting.
+     * the characters.player's final statistics and a separator line for visual formatting.
      *
-     * The method interacts with the menu to display messages and the player object to
+     * The method interacts with the menu to display messages and the characters.player object to
      * retrieve and display statistics.
      *
      * Game end scenarios handled:

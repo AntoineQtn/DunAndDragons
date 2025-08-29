@@ -23,7 +23,16 @@ public class Menu {
         return scanner.nextLine().trim();
     }
 
-
+    /**
+     * Ask for an integer between min and max.
+     * If the input is invalid, the user is asked to enter a new value.
+     * The method returns the value entered by the user.
+     *
+     * @param prompt
+     * @param min
+     * @param max
+     * @return
+     */
     public int askForInt(String prompt, int min, int max) {
         int value;
         do {

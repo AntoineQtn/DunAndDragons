@@ -1,5 +1,7 @@
 package characters;
 
+import item.bag.BasicBag;
+
 /**
  * The Character class serves as an abstract base class for all character-related entities
  * in the game, such as players and enemies. It defines common properties and behaviors
@@ -10,11 +12,13 @@ abstract class Character {
     protected String name;
     protected int life;
     protected int damage;
+    BasicBag basicBag;
 
     public Character (String name, int life, int damage){
         this.name = name;
         this.life = life;
         this.damage = damage;
+        this.basicBag = new BasicBag("Basic Bag", 10, 10);
     }
 
     public void displayStats() {

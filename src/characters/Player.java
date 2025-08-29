@@ -1,12 +1,14 @@
 package characters;
 
-import defensiveequipment.Potion;
-import offensiveequipment.Spell;
-import offensiveequipment.Weapon;
+import item.defensiveequipment.Potion;
+import item.defensiveequipment.Shield;
+import item.offensiveequipment.Spell;
+import item.offensiveequipment.Weapon;
 
 public class Player extends Character {
     protected Weapon weapon;
     protected Spell spell;
+    protected Shield shield;
     private Potion equippedPotion;
     private int basicPotions;
     private int basicbag;
@@ -34,7 +36,7 @@ public class Player extends Character {
             int healAmount = 20;
             this.life += healAmount;
             basicPotions--;
-            System.out.println(name + " drinks a basic potion and regains " +
+            System.out.println(name + " drinks a basic item.defensiveequipment.potion and regains " +
                     healAmount + " life points! (" + basicPotions + " left)");
         } else {
             System.out.println(name + " has no basic potions left!");
@@ -53,6 +55,8 @@ public class Player extends Character {
                 basicPotions + " total)");
     }
 
+
+
     public int getPotion(Potion potion) {
         usePotion(potion);
         return life;
@@ -69,6 +73,8 @@ public class Player extends Character {
         System.out.println("Spell: " + (spell != null ? spell.getName() : "None"));
         System.out.println("Equipped Potion: " + (equippedPotion != null ? equippedPotion.getName() : "None"));
         System.out.println("Basic Potions: " + basicPotions);
+        System.out.println("Bag: " + basicbag + " items to store");
+
     }
 
     @Override
