@@ -50,8 +50,12 @@ public class Menu {
 
         return value;
     }
+
     public void askForEnter(String prompt) {
         System.out.print(prompt);
+        try{
+
+        }
         scanner.nextLine();
     }
 
