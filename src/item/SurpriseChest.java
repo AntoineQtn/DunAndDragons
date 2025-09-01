@@ -101,12 +101,11 @@ public class SurpriseChest {
 
             case 8:
                 MinorBag minorBag = new MinorBag();
-                player.upgradeBag(minorBag); // Assuming you add this method to Player
+                player.upgradeBag(minorBag);
                 System.out.println("You find a " + minorBag.getName() + "! " + minorBag.getDescription());
                 return minorBag;
 
             case 9:
-                // LargeBag plus rare - vous pouvez ajuster la probabilité
                 LargeBag largeBag = new LargeBag();
                 player.upgradeBag(largeBag);
                 System.out.println("Wow! You find a rare " + largeBag.getName() + "! " + largeBag.getDescription());

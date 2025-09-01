@@ -9,6 +9,6 @@ package item;
 public interface Collectible {
     String getName();
     String getDescription();
-    void onCollect(); // Action when the item is collected
+    void onCollect();
 }
 

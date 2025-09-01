@@ -22,7 +22,6 @@ public abstract class Bag implements Collectible {
         this.items = new ArrayList<>();
     }
 
-    // Méthodes de l'interface Collectible
     @Override
     public String getName() {
         return name;
@@ -38,7 +37,6 @@ public abstract class Bag implements Collectible {
         System.out.println("You collected a " + name + "! " + description);
     }
 
-    // Méthodes de gestion des objets
     public boolean addItem(Object item) {
         if (items.size() < capacity) {
             items.add(item);

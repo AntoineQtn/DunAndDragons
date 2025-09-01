@@ -12,7 +12,6 @@ public class BasicBag extends Bag {
 
     @Override
     public void onCollect() {
-        // Le BasicBag n'est pas collecté, il est donné au début
         System.out.println("You start your adventure with a " + name + "!");
     }
 }

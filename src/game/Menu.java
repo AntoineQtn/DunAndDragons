@@ -1,5 +1,7 @@
 package game;
 
+import game.exception.AskForEnterException;
+
 import java.util.Scanner;
 
 public class Menu {
@@ -53,10 +55,10 @@ public class Menu {
 
     public void askForEnter(String prompt) {
         System.out.print(prompt);
-        try{
-
+        String input = scanner.nextLine();
+        if (!input.isEmpty()) {
+            throw new AskForEnterException("You must only press Enter !");
         }
-        scanner.nextLine();
     }
 
 }
