@@ -110,7 +110,7 @@ public class Game {
                 default -> character;
             };
 
-        } else if (classChoice == 2) { // Wizard
+        } else if (classChoice == 2) {
             menu.displayMessage("\nChoose your subclass :");
             menu.displayMessage("1. Fire Wizard (life : 10; damage : 5)");
             menu.displayMessage("2. Ice Wizard (life : 5; damage : 12)");
