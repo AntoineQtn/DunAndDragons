@@ -10,7 +10,6 @@ public class Board extends Cell {
     private int playerPosition;
 
     public Board() {
-        // Initialiser les Sets de la classe parente Cell
         surprisechestcell = new HashSet<>();
         ennemycell = new HashSet<>();
         potioncell = new HashSet<>();
@@ -20,12 +19,10 @@ public class Board extends Cell {
         this.boardDisplay = new ArrayList<>(Collections.nCopies(length, "."));
         this.cellTypes = new ArrayList<>(Collections.nCopies(length, "Empty"));
 
-        // Initialiser toutes les positions comme vides au début
         for (int i = 0; i < length; i++) {
             emptycell.add(new CellPosition(i));
         }
 
-        // Placer automatiquement quelques éléments pour le test
         initializeBoard();
     }
 
@@ -49,11 +46,9 @@ public class Board extends Cell {
         }
         int position = freePositions.get((int) (Math.random() * freePositions.size()));
 
-        // Retirer de emptycell et ajouter à surprisechestcell
         emptycell.removeIf(cell -> ((CellPosition) cell).getPosition() == position);
         surprisechestcell.add(new CellPosition(position));
 
-        // Mettre à jour l'affichage
         boardDisplay.set(position, "C");
         cellTypes.set(position, "Chest");
 
@@ -67,11 +62,9 @@ public class Board extends Cell {
         }
         int position = freePositions.get((int) (Math.random() * freePositions.size()));
 
-        // Retirer de emptycell et ajouter à ennemycell
         emptycell.removeIf(cell -> ((CellPosition) cell).getPosition() == position);
         ennemycell.add(new CellPosition(position));
 
-        // Mettre à jour l'affichage
         boardDisplay.set(position, "E");
         cellTypes.set(position, "Enemy");
 
@@ -85,11 +78,9 @@ public class Board extends Cell {
         }
         int position = freePositions.get((int) (Math.random() * freePositions.size()));
 
-        // Retirer de emptycell et ajouter à potioncell
         emptycell.removeIf(cell -> ((CellPosition) cell).getPosition() == position);
         potioncell.add(new CellPosition(position));
 
-        // Mettre à jour l'affichage
         boardDisplay.set(position, "P");
         cellTypes.set(position, "Potion");
 
@@ -115,7 +106,6 @@ public class Board extends Cell {
     public void movePlayer(int newPosition) throws PlayerOutOfBoardException {
         validatePosition(newPosition);
 
-        // Effacer l'ancienne position du joueur
         if (playerPosition >= 0 && playerPosition < length &&
                 !boardDisplay.get(playerPosition).equals("C") &&
                 !boardDisplay.get(playerPosition).equals("E") &&
@@ -125,14 +115,13 @@ public class Board extends Cell {
 
         this.playerPosition = newPosition;
 
-        // Marquer la nouvelle position (sauf si c'est la case d'arrivée)
         if (newPosition != length - 1) {
             char cellContent = checkPlayerPosition();
             if (cellContent == '.') {
-                boardDisplay.set(newPosition, "X"); // X pour joueur
+                boardDisplay.set(newPosition, "X");
             }
         } else {
-            boardDisplay.set(newPosition, "F"); // F pour finish
+            boardDisplay.set(newPosition, "F");
         }
     }
 
@@ -178,7 +167,6 @@ public class Board extends Cell {
         emptycell.add(new CellPosition(position));
     }
 
-    // Méthodes d'affichage
     public void displayBoard() {
         System.out.println("=== PLATEAU DE JEU (64 cases) ===");
         System.out.println("Légende: X=Joueur, C=Coffre, E=Ennemi, P=Potion, .=Vide, F=Arrivée");
@@ -217,7 +205,6 @@ public class Board extends Cell {
         System.out.println();
     }
 
-    // Getters
     public int getLength() {
         return length;
     }
@@ -237,13 +224,11 @@ public class Board extends Cell {
         return "Invalid";
     }
 
-    // Classe interne pour représenter une position de cellule
     private static class CellPosition extends Cell {
         private int position;
 
         public CellPosition(int position) {
             this.position = position;
-            // Les Sets seront null car on ne les utilise pas dans cette sous-classe
         }
 
         public int getPosition() {
