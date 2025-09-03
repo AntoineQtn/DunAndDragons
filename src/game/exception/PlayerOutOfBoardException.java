@@ -19,6 +19,10 @@ public class PlayerOutOfBoardException extends Exception {
         super(message);
     }
 
+    @Override
+    public String getMessage() {
+        return super.getMessage();
+    }
 
     public int getSuggestedPosition() {
         return Math.max(0, boardSize - 1);

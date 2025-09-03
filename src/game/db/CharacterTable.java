@@ -1,4 +1,4 @@
-package db;
+package game.db;
 
 import java.sql.*;
 import java.util.Scanner;
@@ -137,7 +137,6 @@ public class CharacterTable {
     public static void updateLifePoints() {
         Scanner scanner = new Scanner(System.in);
 
-        // First, show available characters
         listCharacterNames();
 
         System.out.print("Enter the ID of the character to update: ");

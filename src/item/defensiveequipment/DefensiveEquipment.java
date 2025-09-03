@@ -1,13 +1,15 @@
 package item.defensiveequipment;
 
-abstract class DefensiveEquipment {
+import item.Collectible;
+
+abstract class DefensiveEquipment implements Collectible {
 
     protected String name;
     protected int life;
     protected int weight;
 
     protected abstract int getWeight();
-    abstract String getName();
+    public abstract String getName();
     abstract int getLife();
     abstract void displayStats();
 
