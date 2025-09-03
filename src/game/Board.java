@@ -10,9 +10,15 @@ public class Board extends Cell {
     private int playerPosition;
 
     public Board() {
-        surprisechestcell = new HashSet<>();
-        ennemycell = new HashSet<>();
-        potioncell = new HashSet<>();
+        dragoncell = new HashSet<>();
+        goblincell = new HashSet<>();
+        sorcerercell = new HashSet<>();
+        swordcell = new HashSet<>();
+        macecell = new HashSet<>();
+        minorpotioncell = new HashSet<>();
+        majorpotioncell = new HashSet<>();
+        fireballcell = new HashSet<>();
+        lightninboltcell = new HashSet<>();
         emptycell = new HashSet<>();
 
         this.playerPosition = 0;
@@ -27,19 +33,38 @@ public class Board extends Cell {
     }
 
     private void initializeBoard() {
-        // Placer quelques coffres et ennemis aléatoirement
-        for (int i = 0; i < 8; i++) { // 8 coffres
-            placeChestCase();
+
+        for (int i = 0; i < 4; i++) {
+            placeDragon();
         }
-        for (int i = 0; i < 10; i++) { // 10 ennemis
-            placeEnemy();
+        for (int i = 0; i < 10; i++) {
+            placeSorcerer();
         }
-        for (int i = 0; i < 6; i++) { // 6 potions
-            placePotion();
+        for (int i = 0; i < 10; i++) {
+            placeGoblin();
+        }
+        for (int i = 0; i < 5; i++) {
+            placeMace();
+        }
+        for (int i = 0; i < 4; i++) {
+            placeSword();
+        }
+        for (int i = 0; i < 2; i++) {
+            placeFireBall();
+        }
+        for (int i = 0; i < 5; i++) {
+            placeLightninBolt();
+        }
+        for (int i = 0; i < 6; i++) {
+            placeMinorPotion();
+        }
+        for (int i = 0; i < 2; i++) {
+            placeMajorPotion();
         }
     }
+    
 
-    public int placeChestCase() {
+    public int placeMinorPotion() {
         List<Integer> freePositions = getFreePositions();
         if (freePositions.isEmpty()) {
             return -1;
@@ -47,15 +72,14 @@ public class Board extends Cell {
         int position = freePositions.get((int) (Math.random() * freePositions.size()));
 
         emptycell.removeIf(cell -> ((CellPosition) cell).getPosition() == position);
-        surprisechestcell.add(new CellPosition(position));
+        minorpotioncell.add(new CellPosition(position));
 
-        boardDisplay.set(position, "C");
-        cellTypes.set(position, "Chest");
+        boardDisplay.set(position, "mP");
+        cellTypes.set(position, "Minor Potion");
 
         return position;
     }
-
-    public int placeEnemy() {
+    public int placeMajorPotion() {
         List<Integer> freePositions = getFreePositions();
         if (freePositions.isEmpty()) {
             return -1;
@@ -63,15 +87,14 @@ public class Board extends Cell {
         int position = freePositions.get((int) (Math.random() * freePositions.size()));
 
         emptycell.removeIf(cell -> ((CellPosition) cell).getPosition() == position);
-        ennemycell.add(new CellPosition(position));
+        majorpotioncell.add(new CellPosition(position));
 
-        boardDisplay.set(position, "E");
-        cellTypes.set(position, "Enemy");
+        boardDisplay.set(position, "MP");
+        cellTypes.set(position, "Major Potion");
 
         return position;
     }
-
-    public int placePotion() {
+    public int placeSword() {
         List<Integer> freePositions = getFreePositions();
         if (freePositions.isEmpty()) {
             return -1;
@@ -79,17 +102,108 @@ public class Board extends Cell {
         int position = freePositions.get((int) (Math.random() * freePositions.size()));
 
         emptycell.removeIf(cell -> ((CellPosition) cell).getPosition() == position);
-        potioncell.add(new CellPosition(position));
+        swordcell.add(new CellPosition(position));
 
-        boardDisplay.set(position, "P");
-        cellTypes.set(position, "Potion");
+        boardDisplay.set(position, "S");
+        cellTypes.set(position, "Sword");
 
         return position;
     }
+    public int placeMace() {
+        List<Integer> freePositions = getFreePositions();
+        if (freePositions.isEmpty()) {
+            return -1;
+        }
+        int position = freePositions.get((int) (Math.random() * freePositions.size()));
+
+        emptycell.removeIf(cell -> ((CellPosition) cell).getPosition() == position);
+       macecell.add(new CellPosition(position));
+
+        boardDisplay.set(position, "m");
+        cellTypes.set(position, "Mace");
+
+        return position;
+    }
+    public int placeFireBall() {
+        List<Integer> freePositions = getFreePositions();
+        if (freePositions.isEmpty()) {
+            return -1;
+        }
+        int position = freePositions.get((int) (Math.random() * freePositions.size()));
+
+        emptycell.removeIf(cell -> ((CellPosition) cell).getPosition() == position);
+        fireballcell.add(new CellPosition(position));
+
+        boardDisplay.set(position, "f");
+        cellTypes.set(position, "FireBall Spell");
+
+        return position;
+    }
+    public int placeLightninBolt() {
+        List<Integer> freePositions = getFreePositions();
+        if (freePositions.isEmpty()) {
+            return -1;
+        }
+        int position = freePositions.get((int) (Math.random() * freePositions.size()));
+
+        emptycell.removeIf(cell -> ((CellPosition) cell).getPosition() == position);
+        lightninboltcell.add(new CellPosition(position));
+
+        boardDisplay.set(position, "lb");
+        cellTypes.set(position, "LightninBolt Spell");
+
+        return position;
+    }
+    public int placeGoblin() {
+        List<Integer> freePositions = getFreePositions();
+        if (freePositions.isEmpty()) {
+            return -1;
+        }
+        int position = freePositions.get((int) (Math.random() * freePositions.size()));
+
+        emptycell.removeIf(cell -> ((CellPosition) cell).getPosition() == position);
+        goblincell.add(new CellPosition(position));
+
+        boardDisplay.set(position, "g");
+        cellTypes.set(position, "Goblin");
+
+        return position;
+    }
+    public int placeDragon() {
+        List<Integer> freePositions = getFreePositions();
+        if (freePositions.isEmpty()) {
+            return -1;
+        }
+        int position = freePositions.get((int) (Math.random() * freePositions.size()));
+
+        emptycell.removeIf(cell -> ((CellPosition) cell).getPosition() == position);
+        dragoncell.add(new CellPosition(position));
+
+        boardDisplay.set(position, "d");
+        cellTypes.set(position, "Dragon");
+
+        return position;
+    }
+    public int placeSorcerer() {
+        List<Integer> freePositions = getFreePositions();
+        if (freePositions.isEmpty()) {
+            return -1;
+        }
+        int position = freePositions.get((int) (Math.random() * freePositions.size()));
+
+        emptycell.removeIf(cell -> ((CellPosition) cell).getPosition() == position);
+        sorcerercell.add(new CellPosition(position));
+
+        boardDisplay.set(position, "s");
+        cellTypes.set(position, "Sorcerer");
+
+        return position;
+    }
+    
 
     private List<Integer> getFreePositions() {
         List<Integer> freePositions = new ArrayList<>();
-        for (int i = 1; i < length - 1; i++) { // Éviter position 0 (départ) et 63 (arrivée)
+        for (int i = 1; i < length - 1; i++) {
             if (isPositionFree(i) && i != playerPosition) {
                 freePositions.add(i);
             }
@@ -98,12 +212,18 @@ public class Board extends Cell {
     }
 
     private boolean isPositionFree(int position) {
-        return surprisechestcell.stream().noneMatch(cell -> ((CellPosition) cell).getPosition() == position) &&
-                ennemycell.stream().noneMatch(cell -> ((CellPosition) cell).getPosition() == position) &&
-                potioncell.stream().noneMatch(cell -> ((CellPosition) cell).getPosition() == position);
+        return dragoncell.stream().noneMatch(cell -> ((CellPosition) cell).getPosition() == position) &&
+                sorcerercell.stream().noneMatch(cell -> ((CellPosition) cell).getPosition() == position) &&
+                goblincell.stream().noneMatch(cell -> ((CellPosition) cell).getPosition() == position) &&
+                swordcell.stream().noneMatch(cell -> ((CellPosition) cell).getPosition() == position) &&
+                macecell.stream().noneMatch(cell -> ((CellPosition) cell).getPosition() == position) &&
+                fireballcell.stream().noneMatch(cell -> ((CellPosition) cell).getPosition() == position) &&
+                lightninboltcell.stream().noneMatch(cell -> ((CellPosition) cell).getPosition() == position) &&
+                minorpotioncell.stream().noneMatch(cell -> ((CellPosition) cell).getPosition() == position) &&
+                majorpotioncell.stream().noneMatch(cell -> ((CellPosition) cell).getPosition() == position);
     }
 
-    public void movePlayer(int newPosition) throws PlayerOutOfBoardException {
+    public static void movePlayer(int newPosition) throws PlayerOutOfBoardException {
         validatePosition(newPosition);
 
         if (playerPosition >= 0 && playerPosition < length &&
@@ -116,8 +236,8 @@ public class Board extends Cell {
         this.playerPosition = newPosition;
 
         if (newPosition != length - 1) {
-            char cellContent = checkPlayerPosition();
-            if (cellContent == '.') {
+            String cellContent = checkPlayerPosition();
+            if (cellContent == ".") {
                 boardDisplay.set(newPosition, "X");
             }
         } else {
@@ -133,35 +253,49 @@ public class Board extends Cell {
         }
     }
 
-    public char checkPlayerPosition() {
-        if (surprisechestcell.stream().anyMatch(cell -> ((CellPosition) cell).getPosition() == playerPosition)) {
-            return 'C';
-        }
-        if (ennemycell.stream().anyMatch(cell -> ((CellPosition) cell).getPosition() == playerPosition)) {
-            return 'E';
-        }
-        if (potioncell.stream().anyMatch(cell -> ((CellPosition) cell).getPosition() == playerPosition)) {
-            return 'P';
-        }
-        return '.';
-    }
+    public String checkPlayerPosition() {
 
-    public void removeChest(int position) {
-        surprisechestcell.removeIf(cell -> ((CellPosition) cell).getPosition() == position);
-        boardDisplay.set(position, ".");
-        cellTypes.set(position, "Empty");
-        emptycell.add(new CellPosition(position));
+        if (dragoncell.stream().anyMatch(cell -> ((CellPosition) cell).getPosition() == playerPosition)) {
+            return "d";
+        }
+        if (sorcerercell.stream().anyMatch(cell -> ((CellPosition) cell).getPosition() == playerPosition)) {
+            return "s";
+        }
+        if (goblincell.stream().anyMatch(cell -> ((CellPosition) cell).getPosition() == playerPosition)) {
+            return "g";
+        }
+        if (swordcell.stream().anyMatch(cell -> ((CellPosition) cell).getPosition() == playerPosition)) {
+            return "S";
+        }
+        if (macecell.stream().anyMatch(cell -> ((CellPosition) cell).getPosition() == playerPosition)) {
+            return "m";
+        }
+        if (lightninboltcell.stream().anyMatch(cell -> ((CellPosition) cell).getPosition() == playerPosition)) {
+            return "lb";
+        }
+        if (fireballcell.stream().anyMatch(cell -> ((CellPosition) cell).getPosition() == playerPosition)) {
+            return "f";
+        }
+        if (minorpotioncell.stream().anyMatch(cell -> ((CellPosition) cell).getPosition() == playerPosition)) {
+            return "mP";
+        }
+        if (majorpotioncell.stream().anyMatch(cell -> ((CellPosition) cell).getPosition() == playerPosition)) {
+            return "MP";
+        }
+        return ".";
     }
+    
+    public void removeCell(int position){
+        dragoncell.removeIf(cell -> ((CellPosition) cell).getPosition() == position);
+        goblincell.removeIf(cell -> ((CellPosition) cell).getPosition() == position);
+        sorcerercell.removeIf(cell -> ((CellPosition) cell).getPosition() == position);
+        swordcell.removeIf(cell -> ((CellPosition) cell).getPosition() == position);
+        macecell.removeIf(cell -> ((CellPosition) cell).getPosition() == position);
+        fireballcell.removeIf(cell -> ((CellPosition) cell).getPosition() == position);
+        lightninboltcell.removeIf(cell -> ((CellPosition) cell).getPosition() == position);
+        minorpotioncell.removeIf(cell -> ((CellPosition) cell).getPosition() == position);
+        majorpotioncell.removeIf(cell -> ((CellPosition) cell).getPosition() == position);
 
-    public void removeEnemy(int position) {
-        ennemycell.removeIf(cell -> ((CellPosition) cell).getPosition() == position);
-        boardDisplay.set(position, ".");
-        cellTypes.set(position, "Empty");
-        emptycell.add(new CellPosition(position));
-    }
-
-    public void removePotion(int position) {
-        potioncell.removeIf(cell -> ((CellPosition) cell).getPosition() == position);
         boardDisplay.set(position, ".");
         cellTypes.set(position, "Empty");
         emptycell.add(new CellPosition(position));
@@ -196,9 +330,15 @@ public class Board extends Cell {
 
     public void displayStats() {
         System.out.println("=== STATISTIQUES DU PLATEAU ===");
-        System.out.println("Coffres: " + surprisechestcell.size());
-        System.out.println("Ennemis: " + ennemycell.size());
-        System.out.println("Potions: " + potioncell.size());
+        System.out.println("Dragons: " + dragoncell.size());
+        System.out.println("Goblins: " + goblincell.size());
+        System.out.println("Sorcerer: " + sorcerercell.size());
+        System.out.println("Sword: " + swordcell.size());
+        System.out.println("Mace: " + macecell.size());
+        System.out.println("FireBall spell: " + fireballcell.size());
+        System.out.println("LightninBolt spell: " + lightninboltcell.size());
+        System.out.println("Major Life Potion: " + majorpotioncell.size());
+        System.out.println("Minor Life Potion: " + minorpotioncell.size());
         System.out.println("Cases vides: " + emptycell.size());
         System.out.println("Position joueur: " + playerPosition);
         System.out.println("Victoire: " + (hasPlayerWon() ? "OUI" : "NON"));
@@ -209,7 +349,7 @@ public class Board extends Cell {
         return length;
     }
 
-    public int getPlayerPosition() {
+    public static int getPlayerPosition() {
         return playerPosition;
     }
 

@@ -1,5 +1,6 @@
 package characters;
 
+import game.Board;
 import item.bag.Bag;
 import item.bag.BasicBag;
 import item.defensiveequipment.Potion;
@@ -125,6 +126,18 @@ public class Player extends Character {
         System.out.println("Equipped Potion: " + (equippedPotion != null ? equippedPotion.getName() : "None"));
         System.out.println("Basic Potions: " + basicPotions);
         System.out.println("Bag: " + basicbag + " items to store");
+
+    }
+
+    public void runAway(){
+        int runAway = (int)(Math.random() * 6) + 1;
+        int currentPosition = Board.getPlayerPosition();
+        int newPosition = currentPosition - runAway;
+        if (newPosition < 0) {
+            newPosition = 0;
+        }
+        Board.movePlayer();
+        System.out.println("You run away from" + currentPosition + " to" + newPosition);
 
     }
 

@@ -9,6 +9,18 @@ public class CharacterTable {
     static final String USER = "toinou";
     static final String PASS = "azerty123!!!";
 
+    public static void createTableCharacter(){
+        String query = "CREATE TABLE `character` (character_id INT AUTO_INCREMENT PRIMARY KEY, character_name VARCHAR(100) NOT NULL, character_type VARCHAR(100), damage INT NOT NULL, life INT NOT NULL);";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+        Statement stmt = conn.createStatement();) {
+            System.out.println("Character saved successfully");
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
     /**
      * Method to display all characters in console
      */
@@ -94,7 +106,6 @@ public class CharacterTable {
             pstmt.setInt(4, max_health);
             pstmt.setInt(5, attack_power);
             pstmt.setInt(6, defense_power);
-
             pstmt.setString(7, offensiveEquipment);
             pstmt.setString(8, defensiveEquipment);
 

@@ -6,7 +6,7 @@ import characters.*;
 import characters.enemy.Dragon;
 import characters.enemy.Goblin;
 import characters.enemy.Sorcerer;
-import game.exception.InvalidChestContentException;
+import game.db.CharacterTable;
 import game.exception.PlayerOutOfBoardException;
 import item.SurpriseChest;
 import characters.player.warrior.HeavyWarrior;
@@ -33,8 +33,6 @@ public class Game {
     private final List<Enemy> enemies;
     private boolean isGameRunning;
     private boolean isGameWon;
-    private Player Warrior;
-    private Player Wizard;
 
     /**
      * Constructs a new instance of the Game class.
@@ -88,6 +86,7 @@ public class Game {
      */
     private Player createCharacter() {
         menu.displayMessage("\n=== CHARACTER CREATION ===");
+        CharacterTable.createTableCharacter();
         String name = menu.askForString(" Enter your name ");
         menu.displayMessage("\nChoose your class :");
         menu.displayMessage("1. Warrior ");
@@ -165,42 +164,16 @@ public class Game {
     private void populateBoard() {
         int boardSize = board.getLength();
 
-        int numChests = Math.max(2, boardSize / 5);
-        for (int i = 0; i < numChests; i++) {
-            board.placeChestCase();
-        }
-
-        int numEnemies = Math.max(2, boardSize / 4);
-        for (int i = 0; i < numEnemies; i++) {
-            int enemyPos = board.placeEnemy();
-            if (enemyPos != -1) {
-                Enemy enemy = createRandomEnemy();
-                enemies.add(enemy);
-            }
-        }
-    }
-
-    /**
-     * Creates and returns a randomly generated characters.enemy instance.
-     * The method randomly selects one of three characters.enemy types from the following:
-     * - Goblin: A basic characters.enemy with moderate stats.
-     * - Dragon: A powerful characters.enemy with high stats.
-     * - Sorcerer: A magic-based characters.enemy with balanced stats.
-     *
-     * @return an Enemy instance of either Goblin, Dragon, or Sorcerer, selected randomly
-     */
-    public Enemy createRandomEnemy() {
-        int index = (int) (Math.random() * 3);
-
-        switch (index) {
-            case 0:
-                return new Goblin();
-            case 1:
-                return new Dragon();
-            case 2:
-                return new Sorcerer();
-            default:
-                return new Goblin();
+        for (int i = 0; i < boardSize; i++) {
+            board.placeSword();
+            board.placeMace();
+            board.placeLightninBolt();
+            board.placeFireBall();
+            board.placeDragon();
+            board.placeSorcerer();
+            board.placeGoblin();
+            board.placeMinorPotion();
+            board.placeMajorPotion();
         }
     }
 
@@ -252,7 +225,6 @@ public class Game {
                     menu.displayMessage("Thanks for playing !");
                     break;
             }
-
             checkWinCondition();
         }
     }
@@ -322,67 +294,103 @@ public class Game {
      *    - Displays a message for case type '.' indicating no event.
      */
     private void handleCaseEvent() {
-        char caseType = board.checkPlayerPosition();
+        String caseType = board.checkPlayerPosition();
         int playerPos = board.getPlayerPosition();
 
         switch (caseType) {
-            case 'C':
-                handleChestEvent(playerPos);
+            case "S":
+                handleSwordEvent(playerPos);
                 break;
-            case 'E':
-                handleEnemyEvent(playerPos);
+            case "mP":
+                handleMinorPotionEvent(playerPos);
                 break;
-            case '.':
+            case "MP":
+                handleMajorPotionEvent(playerPos);
+                break;
+            case "m":
+                handleMaceEvent(playerPos);
+                break;
+            case "d":
+                handleDragonEvent(playerPos);
+                break;
+            case "g":
+                handleGoblinEvent(playerPos);
+                break;
+            case "s":
+                handleSorcererEvent(playerPos);
+                break;
+            case "f":
+                handleFireBallEvent(playerPos);
+                break;
+            case "lb":
+                handleLightninBoltEvent(playerPos);
+                break;
+            case ".":
                 menu.displayMessage("The case is empty, you can go");
                 break;
         }
     }
 
-    /**
-     * Handles the event when the characters.player encounters a chest on the game board.
-     *
-     * This method processes the chest event by performing the following steps:
-     * 1. Displays a message informing the characters.player that a chest has been found.
-     * 2. Opens the chest via the SurpriseChest class to provide rewards or surprises.
-     * 3. Removes the chest from the game board at the specified position.
-     *
-     * @param position the position of the chest on the game board that the characters.player has encountered
-     */
-    private void handleChestEvent(int position) {
-        menu.displayMessage("\n You've found a chest !");
-        try {
-            Object loot = SurpriseChest.openChest(player);
-            menu.displayMessage("You get a " + loot);
-        } catch (InvalidChestContentException e) {
-            menu.displayMessage("Invalid chest content !");
-        }
-        board.removeChest(position);
+    private void handleLightninBoltEvent(int playerPos) {
+        menu.displayMessage("\n You've found a Lightnin Bolt Spell !");
     }
 
+    private void handleFireBallEvent(int playerPos) {
+        menu.displayMessage("\n You've found a Fire Ball Spell !");
+    }
 
-    /**
-     * Handles the event when the characters.player encounters an characters.enemy on the game board.
-     *
-     * This method manages the combat sequence with a randomly selected characters.enemy from the list
-     * of remaining enemies. It determines the outcome of the combat and updates the game
-     * state based on whether the characters.player wins or loses the battle. If the characters.player defeats the
-     * characters.enemy, the characters.enemy is removed from the game board and the list of enemies. If the
-     * characters.player is defeated, the game ends.
-     *
-     * @param position the position of the characters.enemy on the game board that the characters.player encounters
-     */
-    private void handleEnemyEvent(int position) {
-        if (enemies.isEmpty()) return;
+    private void handleMaceEvent(int playerPos) {
+        menu.displayMessage("\n You've found a Mace !");
+    }
 
-        Enemy enemy = enemies.get((int) (Math.random() * enemies.size()));
-        menu.displayMessage("\n " + enemy.getName() + " attacks !");
+    private void handleSwordEvent(int playerPos) {
+        menu.displayMessage("\n You've found a Sword !");
+    }
 
-        boolean playerWins = handleCombat(enemy);
+    private void handleMinorPotionEvent(int playerPos) {
+        menu.displayMessage("\n You've found a Minor life Potion !");
+    }
 
+    private void handleMajorPotionEvent(int playerPos) {
+        menu.displayMessage("\n You've found a Major Life Potion !");
+    }
+
+    private void handleGoblinEvent(int playerpos) {
+        Goblin goblin = new Goblin();
+        menu.displayMessage("\n " + goblin.getName() + " attacks !");
+        boolean playerWins = handleCombat(goblin);
         if (playerWins) {
-            menu.displayMessage("Victory ! You've defeated a " + enemy.getName());
-            board.removeEnemy(position);
-            enemies.remove(enemy);
+            menu.displayMessage("Victory ! You've defeated a " + goblin.getName());
+            board.removeCell(playerpos);
+            enemies.remove(goblin);
+        } else if (!player.isAlive()) {
+            menu.displayMessage(" You've been defeated, you lost the game...");
+            isGameRunning = false;
+        }
+    }
+
+    private void handleDragonEvent( int playerpos) {
+        Dragon dragon = new Dragon();
+        menu.displayMessage("\n " + dragon.getName() + " attacks !");
+        boolean playerWins = handleCombat(dragon);
+        if (playerWins) {
+            menu.displayMessage("Victory ! You've defeated a " + dragon.getName());
+            board.removeCell(playerpos);
+            enemies.remove(dragon);
+        } else if (!player.isAlive()) {
+            menu.displayMessage(" You've been defeated, you lost the game...");
+            isGameRunning = false;
+        }
+    }
+
+    private void handleSorcererEvent(int playerpos) {
+        Sorcerer sorcerer = new Sorcerer();
+        menu.displayMessage("\n " + sorcerer.getName() + " attacks !");
+        boolean playerWins = handleCombat(sorcerer);
+        if (playerWins) {
+            menu.displayMessage("Victory ! You've defeated a " + sorcerer.getName());
+            board.removeCell(playerpos);
+            enemies.remove(sorcerer);
         } else if (!player.isAlive()) {
             menu.displayMessage(" You've been defeated, you lost the game...");
             isGameRunning = false;
@@ -407,7 +415,9 @@ public class Game {
             menu.displayMessage("\n--- Your turn ---");
             menu.displayMessage("What do you want to do?");
             menu.displayMessage("1. Attack");
-            menu.displayMessage("2. Use a basic item.defensiveequipment.potion");
+            menu.displayMessage("2. Use a basic potion");
+            menu.displayMessage("3. Run away");
+
 
             int choice = menu.askForInt("Your choice", 1, 2);
 
@@ -415,7 +425,7 @@ public class Game {
                 menu.displayMessage("\n" + player.getName() + " attacks!");
                 enemy.takeDamage(player.getAttack());
             } else {
-                menu.displayMessage("\n" + player.getName() + " uses a item.defensiveequipment.potion!");
+                menu.displayMessage("\n" + player.getName() + " uses a potion!");
                 player.getPotion();
             }
 
@@ -495,10 +505,7 @@ public class Game {
         return dice.rollDice();
     }
 
-    public Board getGameBoard() { return board; }
     public Player getPlayer() { return player; }
-    public boolean isGameRunning() { return isGameRunning; }
-    public boolean isGameWon() { return isGameWon; }
 
     public static void main(String[] args) {
         Game game = new Game();
