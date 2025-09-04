@@ -60,32 +60,9 @@ public abstract class Bag implements Collectible {
         return new ArrayList<>(items); // Retourne une copie pour éviter les modifications externes
     }
 
-    public int getCurrentSize() {
-        return items.size();
-    }
 
     public int getCapacity() {
         return capacity;
     }
 
-    public boolean isFull() {
-        return items.size() >= capacity;
-    }
-
-    public boolean isEmpty() {
-        return items.isEmpty();
-    }
-
-    public void displayContents() {
-        System.out.println("\n=== " + name + " Contents ===");
-        System.out.println("Capacity: " + items.size() + "/" + capacity);
-        if (isEmpty()) {
-            System.out.println("Empty");
-        } else {
-            for (int i = 0; i < items.size(); i++) {
-                System.out.println((i + 1) + ". " + items.get(i).toString());
-            }
-        }
-        System.out.println("========================");
-    }
 }

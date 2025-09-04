@@ -46,18 +46,6 @@ public class Player extends Character {
         }
     }
 
-    public Bag getBag() {
-        return basicbag;
-    }
-
-    public boolean addItemToBag(Object item) {
-        return basicbag.addItem(item);
-    }
-
-    public void viewInventory() {
-        basicbag.displayContents();
-    }
-
     public int getPotion() {
         int potion = 0;
         usePotion(potion);
@@ -100,25 +88,6 @@ public class Player extends Character {
         }
     }
 
-    public void showPotions() {
-        List<Object> items = basicbag.getItems();
-        System.out.println("\n=== Available Potions ===");
-        boolean foundPotion = false;
-        for (int i = 0; i < items.size(); i++) {
-            if (items.get(i) instanceof Potion) {
-                Potion potion = (Potion) items.get(i);
-                System.out.println(i + ". " + potion.getName() + " (+" + potion.getLife() + " HP)");
-                foundPotion = true;
-            }
-        }
-        if (!foundPotion) {
-            System.out.println("No potions available!");
-        }
-        System.out.println("=======================");
-    }
-
-
-
     public void displayStats() {
 
         System.out.println("Weapon: " + (weapon != null ? weapon.getName() : "None"));
@@ -136,7 +105,6 @@ public class Player extends Character {
         if (newPosition < 0) {
             newPosition = 0;
         }
-        Board.movePlayer();
         System.out.println("You run away from" + currentPosition + " to" + newPosition);
 
     }
@@ -150,7 +118,5 @@ public class Player extends Character {
                 ", basicPotions=" + basicPotions +
                 '}';
     }
-    public int getBasicPotionCount() { return basicPotions; }
-    public Potion getEquippedPotion() { return equippedPotion; }
 
 }

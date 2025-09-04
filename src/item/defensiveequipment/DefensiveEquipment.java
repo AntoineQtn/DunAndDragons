@@ -6,7 +6,6 @@ abstract class DefensiveEquipment implements Collectible {
 
     protected String name;
     protected int life;
-    protected int weight;
 
     protected abstract int getWeight();
     public abstract String getName();

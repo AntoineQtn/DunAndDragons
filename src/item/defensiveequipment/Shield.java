@@ -10,7 +10,6 @@ public abstract class Shield extends DefensiveEquipment implements Collectible {
     public Shield( String name, int life) {
         this.name = name;
         this.life = life;
-        this.weight = weight;
     }
 
     public void displayStats() {

@@ -77,11 +77,11 @@ public class CharacterTable {
 
         System.out.print("Enter strength: ");
         int attack_power = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
+        scanner.nextLine();
 
         System.out.print("Enter defense: ");
         int defense_power = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
+        scanner.nextLine();
 
         System.out.print("Enter offensive equipment (or 'null' for none): ");
         String offensiveEquipment = scanner.nextLine();
@@ -263,11 +263,11 @@ public class CharacterTable {
 
     public static void main(String[] args) {
         try {
-            // Load MySQL JDBC driver
+
             Class.forName("com.mysql.cj.jdbc.Driver");
             System.out.println("Database driver loaded successfully.");
 
-            // Test connection
+
             try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS)) {
                 System.out.println("Database connection successful!");
             }

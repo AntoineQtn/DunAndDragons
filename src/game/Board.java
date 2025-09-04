@@ -5,9 +5,9 @@ import java.util.*;
 
 public class Board extends Cell {
     private static final int length = 64;
-    private ArrayList<String> boardDisplay;
+    private static ArrayList<String> boardDisplay;
     private ArrayList<String> cellTypes;
-    private int playerPosition;
+    private static int playerPosition;
 
     public Board() {
         dragoncell = new HashSet<>();
@@ -223,7 +223,7 @@ public class Board extends Cell {
                 majorpotioncell.stream().noneMatch(cell -> ((CellPosition) cell).getPosition() == position);
     }
 
-    public static void movePlayer(int newPosition) throws PlayerOutOfBoardException {
+    public void movePlayer(int newPosition) throws PlayerOutOfBoardException {
         validatePosition(newPosition);
 
         if (playerPosition >= 0 && playerPosition < length &&
@@ -245,7 +245,7 @@ public class Board extends Cell {
         }
     }
 
-    private void validatePosition(int position) throws PlayerOutOfBoardException {
+    private static void validatePosition(int position) throws PlayerOutOfBoardException {
         if (position < 0 || position >= length) {
             throw new PlayerOutOfBoardException(
                     String.format("Position %d is out of bounds (board size: %d)", position, length)
@@ -357,12 +357,12 @@ public class Board extends Cell {
         return playerPosition == length - 1;
     }
 
-    public String getCellType(int position) {
-        if (position >= 0 && position < length) {
-            return cellTypes.get(position);
-        }
-        return "Invalid";
-    }
+//    public String getCellType(int position) {
+//        if (position >= 0 && position < length) {
+//            return cellTypes.get(position);
+//        }
+//        return "Invalid";
+//    }
 
     private static class CellPosition extends Cell {
         private int position;

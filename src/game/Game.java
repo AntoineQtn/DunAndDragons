@@ -6,7 +6,9 @@ import characters.*;
 import characters.enemy.Dragon;
 import characters.enemy.Goblin;
 import characters.enemy.Sorcerer;
+import game.dice.MoveDice;
 import game.db.CharacterTable;
+import game.dice.TwentyDice;
 import game.exception.PlayerOutOfBoardException;
 import item.SurpriseChest;
 import characters.player.warrior.HeavyWarrior;
@@ -27,7 +29,7 @@ public class Game {
 
     private Board board;
     private Player player;
-    private final Dice dice;
+    private final MoveDice dice;
     private final Menu menu;
     private final SurpriseChest surprisechest;
     private final List<Enemy> enemies;
@@ -47,7 +49,7 @@ public class Game {
      * states to false, indicating that the game has not yet begun.
      */
     public Game() {
-        this.dice = new Dice();
+        this.dice = new MoveDice();
         this.menu = new Menu();
         this.surprisechest = new SurpriseChest();
         this.enemies = new ArrayList<>();
@@ -186,11 +188,11 @@ public class Game {
      * During each iteration of the loop:
      * 1. The current state of the game and characters.player's statistics are displayed on the console.
      * 2. The characters.player is prompted to choose one of three options:
-     *    - Throw the dice and move their position on the board.
+     *    - Throw the game.dice and move their position on the board.
      *    - View their detailed statistics.
      *    - Exit the game.
      * 3. Based on the characters.player's choice:
-     *    - If the characters.player chooses to throw the dice, the `playerMove` method is executed,
+     *    - If the characters.player chooses to throw the game.dice, the `playerMove` method is executed,
      *      which moves the characters.player and processes the resulting board event.
      *    - If the characters.player chooses to view stats, the characters.player's statistics are displayed
      *      using the `displayStats` method.
@@ -207,7 +209,7 @@ public class Game {
             menu.displayMessage("\n" + "=".repeat(50));
             System.out.println(player.toString());
             menu.displayMessage("\nWhat do you want to do ?");
-            menu.displayMessage("1. Throw the dice and move");
+            menu.displayMessage("1. Throw the game.dice and move");
             menu.displayMessage("2. See my stats");
             menu.displayMessage("3. Quit the game");
 
@@ -215,7 +217,7 @@ public class Game {
 
             switch (choice) {
                 case 1:
-                    playerMove();
+                    playerMove(dice);
                     break;
                 case 2:
                     player.displayStats();
@@ -230,13 +232,13 @@ public class Game {
     }
 
     /**
-     * Executes the characters.player's movement on the game board during their turn by rolling a dice
+     * Executes the characters.player's movement on the game board during their turn by rolling a game.dice
      * and updating their position accordingly. This method handles cases where the characters.player
      * might move beyond the confines of the board or encounter an event at their new position.
      *
      * Detailed steps:
-     * 1. Displays a message indicating the dice roll initiation and the result of the roll.
-     * 2. Calculates the new position for the characters.player based on the dice roll.
+     * 1. Displays a message indicating the game.dice roll initiation and the result of the roll.
+     * 2. Calculates the new position for the characters.player based on the game.dice roll.
      * 3. Moves the characters.player to the calculated position unless it surpasses the board limits.
      * 4. Catches movement-related exceptions if the characters.player attempts an invalid move, and:
      *    - Displays relevant error messages and suggested recovery actions.
@@ -248,9 +250,9 @@ public class Game {
      *
      * This method ensures proper error handling and updates the game state after the characters.player's movement.
      */
-    private void playerMove() {
-        menu.displayMessage("\n The dice is thrown...");
-        int diceRoll = rollDice();
+    private void playerMove(MoveDice dice) {
+        menu.displayMessage("\n The game.dice is thrown...");
+        int diceRoll = dice.roll(player);
         menu.displayMessage("Result : " + diceRoll);
 
         int currentPos = board.getPlayerPosition();
@@ -266,7 +268,7 @@ public class Game {
 
             int safePosition = e.getSuggestedPosition();
             try {
-                board.movePlayer(safePosition);
+                board.movePlayer( newPos );
                 menu.displayMessage("Player moved to the end of the board (position " + safePosition + ")");
             } catch (PlayerOutOfBoardException ex) {
                 menu.displayMessage("Critical error: " + ex.getMessage());
@@ -422,7 +424,9 @@ public class Game {
             int choice = menu.askForInt("Your choice", 1, 2);
 
             if (choice == 1) {
+                TwentyDice twentyDice = new TwentyDice();
                 menu.displayMessage("\n" + player.getName() + " attacks!");
+                twentyDice.roll( player);
                 enemy.takeDamage(player.getAttack());
             } else {
                 menu.displayMessage("\n" + player.getName() + " uses a potion!");
@@ -494,16 +498,17 @@ public class Game {
     }
 
     /**
-     * Rolls a dice and returns the result.
-     * This method delegates the dice rolling operation to the Dice object
+     * Rolls a game.dice and returns the result.
+     * This method delegates the game.dice rolling operation to the Dice object
      * associated with the game. The Dice object generates a random number
-     * between 1 and 6, inclusive, to simulate the outcome of a dice roll.
+     * between 1 and 6, inclusive, to simulate the outcome of a game.dice roll.
      *
-     * @return the result of the dice roll as an integer between 1 and 6
+     * @return the result of the game.dice roll as an integer between 1 and 6
      */
-    public int rollDice() {
-        return dice.rollDice();
-    }
+//    public int roll() {
+//        return dice.roll();
+//    }
+
 
     public Player getPlayer() { return player; }
 

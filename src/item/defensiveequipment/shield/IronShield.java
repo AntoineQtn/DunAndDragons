@@ -7,10 +7,6 @@ public class IronShield extends Shield {
         super(name, life);
     }
 
-    public int ironShieldBonus() {
-        System.out.println(getName() + " Gives +" + getLife() + " life point!");
-        return getLife();
-    }
 
     @Override
     public String getDescription() {
