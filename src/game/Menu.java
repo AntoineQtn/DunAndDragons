@@ -17,7 +17,6 @@ public class Menu {
         System.out.println(message);
     }
     public void displayWelcome(){
-        System.out.println("Welcome to Dungeons and Dragons !");
         System.out.println("Get ready for a new adventure !");
     }
     public String askForString(String prompt) {

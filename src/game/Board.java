@@ -284,6 +284,7 @@ public class Board extends Cell {
         }
         return ".";
     }
+
     
     public void removeCell(int position){
         dragoncell.removeIf(cell -> ((CellPosition) cell).getPosition() == position);
@@ -356,13 +357,6 @@ public class Board extends Cell {
     public boolean hasPlayerWon() {
         return playerPosition == length - 1;
     }
-
-//    public String getCellType(int position) {
-//        if (position >= 0 && position < length) {
-//            return cellTypes.get(position);
-//        }
-//        return "Invalid";
-//    }
 
     private static class CellPosition extends Cell {
         private int position;

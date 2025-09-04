@@ -1,4 +1,3 @@
-// Classe abstraite Bag
 package item.bag;
 
 import item.Collectible;

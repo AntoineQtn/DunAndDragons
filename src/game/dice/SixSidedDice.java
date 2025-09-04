@@ -2,10 +2,10 @@ package game.dice;
 
 import characters.Player;
 
-public class MoveDice implements Dice {
+public class SixSidedDice implements Dice {
     private int diceValue;
 
-    public MoveDice(){
+    public SixSidedDice(){
         this.diceValue = 1;
     }
 
@@ -24,15 +24,5 @@ public class MoveDice implements Dice {
         diceValue = (int)(Math.random() * 6) +1;
         return diceValue;
     }
-
-//    public void displayDice(){
-//        int result = roll();
-//        System.out.println("You have make " + result);
-//    }
-
-//    public static void main(String[] args){
-//        MoveDice dice = new MoveDice();
-//        dice.displayDice();
-//    }
 
 }

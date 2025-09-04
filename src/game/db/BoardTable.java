@@ -217,11 +217,10 @@ public class BoardTable {
 
     public static void main(String[] args){
         try {
-            // Load MySQL JDBC driver
+
             Class.forName("com.mysql.cj.jdbc.Driver");
             System.out.println("Database driver loaded successfully.");
 
-            // Test connection
             try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS)) {
                 System.out.println("Database connection successful!");
             }

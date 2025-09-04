@@ -6,15 +6,23 @@ import characters.*;
 import characters.enemy.Dragon;
 import characters.enemy.Goblin;
 import characters.enemy.Sorcerer;
-import game.dice.MoveDice;
+import characters.player.Warrior;
+import characters.player.Wizard;
+import game.dice.SixSidedDice;
 import game.db.CharacterTable;
-import game.dice.TwentyDice;
+import game.dice.TwentySidedDice;
 import game.exception.PlayerOutOfBoardException;
 import item.SurpriseChest;
 import characters.player.warrior.HeavyWarrior;
 import characters.player.warrior.LightWarrior;
 import characters.player.wizard.FireWizard;
 import characters.player.wizard.IceWizard;
+import item.defensiveequipment.potion.MajorLifePotion;
+import item.defensiveequipment.potion.MinorLifePotion;
+import item.offensiveequipment.spells.FireBall;
+import item.offensiveequipment.spells.LightninBolt;
+import item.offensiveequipment.weapons.Mace;
+import item.offensiveequipment.weapons.Sword;
 
 
 /**
@@ -29,7 +37,7 @@ public class Game {
 
     private Board board;
     private Player player;
-    private final MoveDice dice;
+    private final SixSidedDice dice;
     private final Menu menu;
     private final SurpriseChest surprisechest;
     private final List<Enemy> enemies;
@@ -49,7 +57,7 @@ public class Game {
      * states to false, indicating that the game has not yet begun.
      */
     public Game() {
-        this.dice = new MoveDice();
+        this.dice = new SixSidedDice();
         this.menu = new Menu();
         this.surprisechest = new SurpriseChest();
         this.enemies = new ArrayList<>();
@@ -94,7 +102,7 @@ public class Game {
         menu.displayMessage("1. Warrior ");
         menu.displayMessage("2. Wizard ");
 
-        int classChoice = menu.askForInt("Your choice (1-2)", 1, 2);
+        int classChoice = menu.askForInt("Choose ", 1, 2);
 
         Player character = null;
 
@@ -103,7 +111,7 @@ public class Game {
             menu.displayMessage("1. Heavy Warrior (life : 10; damage : 5)");
             menu.displayMessage("2. Light Warrior (life : 5; damage : 8)");
 
-            int subClassChoice = menu.askForInt("Your choice (1-2)", 1, 2);
+            int subClassChoice = menu.askForInt("Choose ", 1, 2);
 
             character = switch (subClassChoice) {
                 case 1 -> new HeavyWarrior(name);
@@ -113,10 +121,10 @@ public class Game {
 
         } else if (classChoice == 2) {
             menu.displayMessage("\nChoose your subclass :");
-            menu.displayMessage("1. Fire Wizard (life : 10; damage : 5)");
+            menu.displayMessage("1. Fire Wizard (life : ; damage : 5)");
             menu.displayMessage("2. Ice Wizard (life : 5; damage : 12)");
 
-            int subClassChoice = menu.askForInt("Your choice (1-2)", 1, 2);
+            int subClassChoice = menu.askForInt("Choose ", 1, 2);
 
             switch (subClassChoice) {
                 case 1:
@@ -250,7 +258,7 @@ public class Game {
      *
      * This method ensures proper error handling and updates the game state after the characters.player's movement.
      */
-    private void playerMove(MoveDice dice) {
+    private void playerMove(SixSidedDice dice) {
         menu.displayMessage("\n The game.dice is thrown...");
         int diceRoll = dice.roll(player);
         menu.displayMessage("Result : " + diceRoll);
@@ -301,7 +309,11 @@ public class Game {
 
         switch (caseType) {
             case "S":
-                handleSwordEvent(playerPos);
+                if (player instanceof Wizard ) {
+//                    throw new InvalidChestContentException("A wizard can't equip a weapon!");
+                }else {
+                    handleSwordEvent(playerPos);
+                }
                 break;
             case "mP":
                 handleMinorPotionEvent(playerPos);
@@ -310,7 +322,11 @@ public class Game {
                 handleMajorPotionEvent(playerPos);
                 break;
             case "m":
-                handleMaceEvent(playerPos);
+                if (player instanceof Wizard) {
+//                    throw new InvalidChestContentException("A wizard can't equip a weapon!");
+                }else{
+                    handleMaceEvent(playerPos);
+                }
                 break;
             case "d":
                 handleDragonEvent(playerPos);
@@ -322,10 +338,18 @@ public class Game {
                 handleSorcererEvent(playerPos);
                 break;
             case "f":
-                handleFireBallEvent(playerPos);
+                if (player instanceof Warrior) {
+//                    throw new InvalidChestContentException("A warrior can't equip a spell!");
+                }else{
+                    handleFireBallEvent(playerPos);
+                }
                 break;
             case "lb":
-                handleLightninBoltEvent(playerPos);
+                if (player instanceof Warrior) {
+//                    throw new InvalidChestContentException("A warrior can't equip a spell!");
+                }else{
+                    handleLightninBoltEvent(playerPos);
+                }
                 break;
             case ".":
                 menu.displayMessage("The case is empty, you can go");
@@ -334,27 +358,57 @@ public class Game {
     }
 
     private void handleLightninBoltEvent(int playerPos) {
-        menu.displayMessage("\n You've found a Lightnin Bolt Spell !");
+        LightninBolt lightninBolt = new LightninBolt("Lightning Bolt", 2);
+        ((Wizard) player).getSpell(lightninBolt);
+        player.setDamage(player.getAttack() + lightninBolt.getDamage());
+        System.out.println("You find a " + lightninBolt.getName() +
+                ", now you can inflict " + player.getAttack() + " damages!");
+        board.removeCell(playerPos);
     }
 
     private void handleFireBallEvent(int playerPos) {
-        menu.displayMessage("\n You've found a Fire Ball Spell !");
+        FireBall fireBall = new FireBall("Fire Ball", 7);
+        ((Wizard) player).getSpell(fireBall);
+        player.setDamage(player.getAttack() + fireBall.getDamage());
+        System.out.println("You find a " + fireBall.getName() +
+                ", now you can inflict " + player.getAttack() + " damages!");
+        board.removeCell(playerPos);
     }
 
     private void handleMaceEvent(int playerPos) {
-        menu.displayMessage("\n You've found a Mace !");
+        Mace mace = new Mace("Mace", 3);
+        ((Warrior) player).getWeapon(mace);
+        player.setDamage(player.getAttack() + mace.getDamage());
+        System.out.println("You find a " + mace.getName() +
+                ", now you can inflict " + player.getAttack() + " damages!");
+        board.removeCell(playerPos);
     }
 
     private void handleSwordEvent(int playerPos) {
-        menu.displayMessage("\n You've found a Sword !");
+        Sword sword = new Sword("Sword", 5);
+        ((Warrior) player).getWeapon(sword);
+        player.setDamage(player.getAttack() + sword.getDamage()); // Utilisez getAttack() au lieu de getDamage()
+        System.out.println("You find a " + sword.getName() +
+                ", now you can inflict " + player.getAttack() + " damages!");
+        board.removeCell(playerPos);
     }
 
     private void handleMinorPotionEvent(int playerPos) {
         menu.displayMessage("\n You've found a Minor life Potion !");
+        MinorLifePotion minorLifePotion = new MinorLifePotion("Minor Life Potion", 2);
+        player.setLife(player.getLife() + 2);
+        System.out.println("You used a " + minorLifePotion.getName() +
+                ", now you have " + player.getLife() + " HP!");
+        board.removeCell(playerPos);
     }
 
     private void handleMajorPotionEvent(int playerPos) {
         menu.displayMessage("\n You've found a Major Life Potion !");
+        MajorLifePotion majorLifePotion = new MajorLifePotion("Major Life Potion", 5);
+        player.setLife(player.getLife() + 5);
+        System.out.println("You used a " + majorLifePotion.getName() +
+                ", now you have " + player.getLife() + " HP!");
+        board.removeCell(playerPos);
     }
 
     private void handleGoblinEvent(int playerpos) {
@@ -420,17 +474,21 @@ public class Game {
             menu.displayMessage("2. Use a basic potion");
             menu.displayMessage("3. Run away");
 
-
-            int choice = menu.askForInt("Your choice", 1, 2);
+            int choice = menu.askForInt("Your choice", 1, 3);
 
             if (choice == 1) {
-                TwentyDice twentyDice = new TwentyDice();
+                TwentySidedDice twentySidedDice = new TwentySidedDice();
                 menu.displayMessage("\n" + player.getName() + " attacks!");
-                twentyDice.roll( player);
-                enemy.takeDamage(player.getAttack());
-            } else {
+                int damageDealt = twentySidedDice.roll(player);   // ⚡ récupérer le vrai résultat du dé
+                enemy.takeDamage(damageDealt);               // ⚡ appliquer au bon moment
+            }
+            else if (choice == 2) {
                 menu.displayMessage("\n" + player.getName() + " uses a potion!");
                 player.getPotion();
+            }
+            else if (choice == 3) {
+                player.runAway();
+                break;
             }
 
             if (!enemy.isAlive()) {
@@ -497,23 +555,6 @@ public class Game {
         menu.displayMessage("=".repeat(50));
     }
 
-    /**
-     * Rolls a game.dice and returns the result.
-     * This method delegates the game.dice rolling operation to the Dice object
-     * associated with the game. The Dice object generates a random number
-     * between 1 and 6, inclusive, to simulate the outcome of a game.dice roll.
-     *
-     * @return the result of the game.dice roll as an integer between 1 and 6
-     */
-//    public int roll() {
-//        return dice.roll();
-//    }
-
-
     public Player getPlayer() { return player; }
 
-    public static void main(String[] args) {
-        Game game = new Game();
-        game.startGame();
-    }
 }

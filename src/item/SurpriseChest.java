@@ -37,7 +37,7 @@ public class SurpriseChest {
         switch (surprise) {
             case 0:
                 if (player instanceof Wizard) {
-                    throw new InvalidChestContentException("You can't equip a sword with a characters.player.wizard !");
+//                    throw new InvalidChestContentException("You can't equip a sword with a wizard !");
                 }
                 Sword sword = new Sword("Sword", 5);
                 ((Warrior) player).getWeapon(sword);
@@ -47,7 +47,7 @@ public class SurpriseChest {
 
             case 1:
                 if (player instanceof Wizard) {
-                    throw new InvalidChestContentException("You can't equip a mace with a characters.player.wizard !");
+//                    throw new InvalidChestContentException("You can't equip a mace with a wizard !");
                 }
                 Mace mace = new Mace("Mace", 3);
                 ((Warrior) player).getWeapon(mace);
@@ -71,7 +71,7 @@ public class SurpriseChest {
 
             case 4:
                 if (player instanceof Warrior) {
-                    throw new InvalidChestContentException("You can't equip a spell with a characters.player.warrior !");
+//                    throw new InvalidChestContentException("You can't equip a spell with a characters.player.warrior !");
                 }
                 FireBall fireball = new FireBall("Fire Ball", 7);
                 ((Wizard) player).getSpell(fireball);
@@ -81,7 +81,7 @@ public class SurpriseChest {
 
             case 5:
                 if (player instanceof Warrior) {
-                    throw new InvalidChestContentException("You can't equip a spell with a characters.player.warrior !");
+//                    throw new InvalidChestContentException("You can't equip a spell with a characters.player.warrior !");
                 }
                 LightninBolt lightning = new LightninBolt("Lightning Bolt", 2);
                 ((Wizard) player).getSpell(lightning);
@@ -91,7 +91,7 @@ public class SurpriseChest {
 
             case 6:
                 if (player instanceof Wizard) {
-                    throw new InvalidChestContentException("You can't equip a shield with a wizard !");
+//                    throw new InvalidChestContentException("You can't equip a shield with a wizard !");
                 }
                 IronShield ironShield = new IronShield("Iron Shield", 5);
                 ((Warrior) player).getShield(ironShield);

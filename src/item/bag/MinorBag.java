@@ -1,7 +1,5 @@
 package item.bag;
 
-import item.Collectible;
-
 public class MinorBag extends Bag {
 
     public MinorBag() {

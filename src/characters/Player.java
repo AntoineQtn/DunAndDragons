@@ -16,7 +16,6 @@ public class Player extends Character {
     protected Spell spell;
     protected Shield shield;
     private Potion equippedPotion;
-    private int basicPotions;
     private Bag basicbag;
     protected int maxLife;
 
@@ -24,12 +23,14 @@ public class Player extends Character {
         super(name, life, damage);
         this.weapon = null;
         this.spell = null;
+        this.shield = null;
         this.equippedPotion = null;
         this.basicbag = new BasicBag();
         this.maxLife = life;
         BasicPotion startingPotion = new BasicPotion();
         this.basicbag.addItem(startingPotion);
     }
+
 
     public void upgradeBag(Bag newBag) {
         if (newBag.getCapacity() > basicbag.getCapacity()) {
@@ -46,28 +47,6 @@ public class Player extends Character {
         }
     }
 
-    public int getPotion() {
-        int potion = 0;
-        usePotion(potion);
-        return life;
-    }
-
-    public void heal(int amount) {
-        int oldLife = this.life;
-        this.life = Math.min(this.life + amount, this.maxLife);
-        int actualHealing = this.life - oldLife;
-        if (actualHealing > 0) {
-            System.out.println(name + " healed for " + actualHealing + " points! (" + life + "/" + maxLife + ")");
-        }
-    }
-
-    public int getMaxLife() {
-        return maxLife;
-    }
-
-    public void setMaxLife(int maxLife) {
-        this.maxLife = maxLife;
-    }
 
     public boolean usePotion(int potionIndex) {
         List<Object> items = basicbag.getItems();
@@ -88,35 +67,57 @@ public class Player extends Character {
         }
     }
 
-    public void displayStats() {
-
-        System.out.println("Weapon: " + (weapon != null ? weapon.getName() : "None"));
-        System.out.println("Spell: " + (spell != null ? spell.getName() : "None"));
-        System.out.println("Equipped Potion: " + (equippedPotion != null ? equippedPotion.getName() : "None"));
-        System.out.println("Basic Potions: " + basicPotions);
-        System.out.println("Bag: " + basicbag + " items to store");
-
+    public int getPotion() {
+        if (!basicbag.getItems().isEmpty()) {
+            usePotion(0);
+        }
+        return getLife();
     }
 
-    public void runAway(){
+    public void heal(int amount) {
+        int oldLife = this.life;
+        this.life = Math.min(this.life + amount, this.maxLife);
+        int actualHealing = this.life - oldLife;
+        if (actualHealing > 0) {
+            System.out.println(name + " healed for " + actualHealing + " points! (" + life + "/" + maxLife + ")");
+        }
+    }
+
+    public int getMaxLife() {
+        return maxLife;
+    }
+
+    public void runAway() {
         int runAway = (int)(Math.random() * 6) + 1;
         int currentPosition = Board.getPlayerPosition();
         int newPosition = currentPosition - runAway;
         if (newPosition < 0) {
             newPosition = 0;
         }
-        System.out.println("You run away from" + currentPosition + " to" + newPosition);
+        System.out.println("You run away from " + currentPosition + " to " + newPosition + ". Fight is over.");
+    }
 
+
+    @Override
+    public void displayStats() {
+        System.out.println("=== Player Stats ===");
+        System.out.println(name + " | Life: " + life + "/" + maxLife + " | Damage: " + damage);
+        System.out.println("Weapon: " + (weapon != null ? weapon.getName() : "None"));
+        System.out.println("Spell: " + (spell != null ? spell.getName() : "None"));
+        System.out.println("Equipped Potion: " + (equippedPotion != null ? equippedPotion.getName() : "None"));
+        System.out.println("Bag capacity: " + basicbag.getCapacity() + " items");
+        System.out.println("====================");
     }
 
     @Override
     public String toString() {
         return "Player{" +
-                "weapon=" + weapon +
-                ", spell=" + spell +
-                ", equippedPotion=" + equippedPotion +
-                ", basicPotions=" + basicPotions +
+                "name='" + name + '\'' +
+                ", life=" + life +
+                ", damage=" + damage +
+                ", weapon=" + (weapon != null ? weapon.getName() : "None") +
+                ", spell=" + (spell != null ? spell.getName() : "None") +
+                ", shield=" + (shield != null ? shield.getName() : "None") +
                 '}';
     }
-
 }
