@@ -1,5 +1,7 @@
 package game;
 
+import game.cell.Cell;
+import game.cell.CellPosition;
 import game.exception.PlayerOutOfBoardException;
 import java.util.*;
 
@@ -302,49 +304,7 @@ public class Board extends Cell {
         emptycell.add(new CellPosition(position));
     }
 
-    public void displayBoard() {
-        System.out.println("=== PLATEAU DE JEU (64 cases) ===");
-        System.out.println("Légende: X=Joueur, C=Coffre, E=Ennemi, P=Potion, .=Vide, F=Arrivée");
-        System.out.println();
 
-        for (int i = 0; i < length; i++) {
-            if (i % 8 == 0) {
-                System.out.printf("%2d: ", i);
-            }
-
-            String display = boardDisplay.get(i);
-            if (i == playerPosition && !display.equals("C") && !display.equals("E") && !display.equals("P")) {
-                display = "X";
-            }
-
-            System.out.print(display + " ");
-
-            if ((i + 1) % 8 == 0) {
-                System.out.println();
-            }
-        }
-        System.out.println();
-        System.out.println("Position joueur: " + playerPosition);
-        System.out.println("Type de case: " + cellTypes.get(playerPosition));
-        System.out.println();
-    }
-
-    public void displayStats() {
-        System.out.println("=== STATISTIQUES DU PLATEAU ===");
-        System.out.println("Dragons: " + dragoncell.size());
-        System.out.println("Goblins: " + goblincell.size());
-        System.out.println("Sorcerer: " + sorcerercell.size());
-        System.out.println("Sword: " + swordcell.size());
-        System.out.println("Mace: " + macecell.size());
-        System.out.println("FireBall spell: " + fireballcell.size());
-        System.out.println("LightninBolt spell: " + lightninboltcell.size());
-        System.out.println("Major Life Potion: " + majorpotioncell.size());
-        System.out.println("Minor Life Potion: " + minorpotioncell.size());
-        System.out.println("Cases vides: " + emptycell.size());
-        System.out.println("Position joueur: " + playerPosition);
-        System.out.println("Victoire: " + (hasPlayerWon() ? "OUI" : "NON"));
-        System.out.println();
-    }
 
     public int getLength() {
         return length;
@@ -358,28 +318,4 @@ public class Board extends Cell {
         return playerPosition == length - 1;
     }
 
-    private static class CellPosition extends Cell {
-        private int position;
-
-        public CellPosition(int position) {
-            this.position = position;
-        }
-
-        public int getPosition() {
-            return position;
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            if (this == obj) return true;
-            if (obj == null || getClass() != obj.getClass()) return false;
-            CellPosition that = (CellPosition) obj;
-            return position == that.position;
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(position);
-        }
-    }
 }

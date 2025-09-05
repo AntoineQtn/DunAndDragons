@@ -1,6 +1,6 @@
 package game;
 
-import java.util.*;
+import                                     java.util.*;
 
 import characters.*;
 import characters.enemy.Dragon;
@@ -138,6 +138,9 @@ public class Game {
 
         menu.displayMessage("\nCharacter created successfully !");
         character.displayStats();
+
+        CharacterTable.createCharacter(character);
+
         return character;
     }
 

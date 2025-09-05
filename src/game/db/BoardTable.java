@@ -80,11 +80,11 @@ public class BoardTable {
             if (rowsAffected > 0) {
                 System.out.println("Cell '" + type + "' created successfully!");
             } else {
-                System.out.println("Failed to create cell.");
+                System.out.println("Failed to create game.cell.");
             }
 
         } catch (SQLException e) {
-            System.err.println("Error creating cell: " + e.getMessage());
+            System.err.println("Error creating game.cell: " + e.getMessage());
         }
     }
 
@@ -140,11 +140,11 @@ public class BoardTable {
                     }
                 }
             } else {
-                System.out.println("No cell found with ID: " + cell_id);
+                System.out.println("No game.cell found with ID: " + cell_id);
             }
 
         } catch (SQLException e) {
-            System.err.println("Error updating cell type : " + e.getMessage());
+            System.err.println("Error updating game.cell type : " + e.getMessage());
         }
     }
 
@@ -168,11 +168,11 @@ public class BoardTable {
             if (rowsAffected > 0) {
                 System.out.println("Cell deleted successfully!");
             } else {
-                System.out.println("No cell found with ID: " + cell_id);
+                System.out.println("No game.cell found with ID: " + cell_id);
             }
 
         } catch (SQLException e) {
-            System.err.println("Error deleting cell: " + e.getMessage());
+            System.err.println("Error deleting game.cell: " + e.getMessage());
         }
     }
 
@@ -183,9 +183,9 @@ public class BoardTable {
         do {
             System.out.println("\n=== D&D Character Manager ===");
             System.out.println("1. Display all cells");
-            System.out.println("2. Create new cell");
-            System.out.println("3. Update cell's type");
-            System.out.println("4. Delete cell");
+            System.out.println("2. Create new game.cell");
+            System.out.println("3. Update game.cell's type");
+            System.out.println("4. Delete game.cell");
             System.out.println("5. Exit");
             System.out.print("Enter your choice (1-5): ");
 

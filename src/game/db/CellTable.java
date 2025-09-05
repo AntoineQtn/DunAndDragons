@@ -41,13 +41,13 @@ public class CellTable {
     public static void createCells(){
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Enter cell type : ");
+        System.out.print("Enter game.cell type : ");
         String type = scanner.nextLine();
 
         System.out.print("Enter board_id : ");
         int board_id = scanner.nextInt();
 
-        System.out.print("Enter cell position : ");
+        System.out.print("Enter game.cell position : ");
         int position = scanner.nextInt();
 
         System.out.print("Enter display character : ");
@@ -56,10 +56,10 @@ public class CellTable {
         System.out.print("Enter if active : ");
         int is_active = scanner.nextInt();
 
-        System.out.print("Enter cell's name : ");
+        System.out.print("Enter game.cell's name : ");
         String cell_name = scanner.nextLine();
 
-        System.out.print("Enter cell id: ");
+        System.out.print("Enter game.cell id: ");
         int cell_id = scanner.nextInt();
 
         String sql = "INSERT INTO `cell` (cell_id, board_id, position, cell_type, display_char, is_active, cell_name ) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -80,11 +80,11 @@ public class CellTable {
             if (rowsAffected > 0) {
                 System.out.println("Cell '" + type + "' created successfully!");
             } else {
-                System.out.println("Failed to create cell.");
+                System.out.println("Failed to create game.cell.");
             }
 
         } catch (SQLException e) {
-            System.err.println("Error creating cell: " + e.getMessage());
+            System.err.println("Error creating game.cell: " + e.getMessage());
         }
     }
 
@@ -113,7 +113,7 @@ public class CellTable {
         System.out.print("Enter the ID of the cells to update: ");
         int cell_id = scanner.nextInt();
 
-        System.out.print("Enter new cell type: ");
+        System.out.print("Enter new game.cell type: ");
         int newCellType = scanner.nextInt();
 
         String sql = "UPDATE `character` SET current_health = ? WHERE character_id = ?";
@@ -140,11 +140,11 @@ public class CellTable {
                     }
                 }
             } else {
-                System.out.println("No cell found with ID: " + cell_id);
+                System.out.println("No game.cell found with ID: " + cell_id);
             }
 
         } catch (SQLException e) {
-            System.err.println("Error updating cell type : " + e.getMessage());
+            System.err.println("Error updating game.cell type : " + e.getMessage());
         }
     }
 
@@ -168,11 +168,11 @@ public class CellTable {
             if (rowsAffected > 0) {
                 System.out.println("Cell deleted successfully!");
             } else {
-                System.out.println("No cell found with ID: " + cell_id);
+                System.out.println("No game.cell found with ID: " + cell_id);
             }
 
         } catch (SQLException e) {
-            System.err.println("Error deleting cell: " + e.getMessage());
+            System.err.println("Error deleting game.cell: " + e.getMessage());
         }
     }
     public static void showMenu(){
@@ -182,9 +182,9 @@ public class CellTable {
         do {
             System.out.println("\n=== D&D Character Manager ===");
             System.out.println("1. Display all cells");
-            System.out.println("2. Create new cell");
-            System.out.println("3. Update cell's type");
-            System.out.println("4. Delete cell");
+            System.out.println("2. Create new game.cell");
+            System.out.println("3. Update game.cell's type");
+            System.out.println("4. Delete game.cell");
             System.out.println("5. Exit");
             System.out.print("Enter your choice (1-5): ");
 

@@ -16,9 +16,11 @@ public class Menu {
     public void displayMessage(String message){
         System.out.println(message);
     }
+
     public void displayWelcome(){
         System.out.println("Get ready for a new adventure !");
     }
+
     public String askForString(String prompt) {
         System.out.print(prompt + " : ");
         return scanner.nextLine().trim();

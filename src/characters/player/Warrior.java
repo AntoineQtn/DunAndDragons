@@ -35,6 +35,7 @@ public abstract class Warrior extends Player {
             System.out.println(name + " equips " + shield.getName() +
                     " (+" + shield.getLife() + " life)!");
         }
+
         public int getShield(Shield shield){
             equipShield(shield);
             return life;
