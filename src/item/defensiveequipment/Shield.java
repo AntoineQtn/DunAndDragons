@@ -1,8 +1,8 @@
 package item.defensiveequipment;
 
-import item.Collectible;
+import item.ICollectible;
 
-public abstract class Shield extends DefensiveEquipment implements Collectible {
+public abstract class Shield extends DefensiveEquipment implements ICollectible {
     private String name;
     private int life;
     private int weight;

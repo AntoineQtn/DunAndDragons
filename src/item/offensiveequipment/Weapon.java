@@ -1,8 +1,8 @@
 package item.offensiveequipment;
 
-import item.Collectible;
+import item.ICollectible;
 
-public abstract class Weapon extends OffensiveEquipment implements Collectible {
+public abstract class Weapon extends OffensiveEquipment implements ICollectible {
     private String name;
     private int damage;
     private int weight;

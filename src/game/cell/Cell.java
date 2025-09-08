@@ -2,17 +2,39 @@ package game.cell;
 
 import java.util.*;
 
-abstract public class Cell {
+public abstract class Cell {
 
-    protected Set<Cell> emptycell;
-    protected Set<Cell> lightninboltcell;
-    protected Set<Cell> fireballcell;
-    protected Set<Cell> goblincell;
-    protected Set<Cell> dragoncell;
-    protected Set<Cell> sorcerercell;
-    protected Set<Cell> swordcell;
-    protected Set<Cell> macecell;
-    protected Set<Cell> minorpotioncell;
-    protected Set<Cell> majorpotioncell;
+    protected int position;
+
+    public Cell(int position) {
+        this.position = position;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    /**
+     * Retourne le symbole d'affichage de la cellule
+     */
+    public abstract String getDisplaySymbol();
+
+    /**
+     * Retourne le type de la cellule pour identification
+     */
+    public abstract String getCellType();
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Cell cell = (Cell) obj;
+        return position == cell.position;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(position, getClass());
+    }
 
 }

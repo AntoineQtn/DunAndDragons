@@ -26,7 +26,6 @@ public class CharacterTable {
              Statement stmt = conn.createStatement()) {
 
             stmt.executeUpdate(query);
-//            System.out.println("Table 'character' created successfully");
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -78,7 +77,7 @@ public class CharacterTable {
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, player.getName());
-            pstmt.setString(2, player.getClass().getSimpleName()); // HeavyWarrior, FireWizard, etc.
+            pstmt.setString(2, player.getClass().getSimpleName());
             pstmt.setInt(3, player.getLife());
             pstmt.setInt(4, player.getAttack());
 
@@ -192,68 +191,4 @@ public class CharacterTable {
             System.err.println("Error deleting character: " + e.getMessage());
         }
     }
-
-    /**
-     * Display menu and handle user choices
-     */
-//    public static void showMenu() {
-//        Scanner scanner = new Scanner(System.in);
-//        int choice;
-//
-//        do {
-//            System.out.println("\n=== D&D Character Manager ===");
-//            System.out.println("1. Display all characters");
-//            System.out.println("2. Create new character");
-//            System.out.println("3. Update character health points");
-//            System.out.println("4. Delete character");
-//            System.out.println("5. Exit");
-//            System.out.print("Enter your choice (1-5): ");
-//
-//            choice = scanner.nextInt();
-//
-//            switch (choice) {
-//                case 1:
-//                    displayCharacters();
-//                    break;
-//                case 2:
-//                    createCharacter();
-//                    break;
-//                case 3:
-//                    updateLifePoints();
-//                    break;
-//                case 4:
-//                    deleteCharacter();
-//                    break;
-//                case 5:
-//                    System.out.println("Goodbye!");
-//                    break;
-//                default:
-//                    System.out.println("Invalid choice. Please enter 1-5.");
-//            }
-//        } while (choice != 5);
-//
-//        scanner.close();
-//    }
-
-//    public static void main(String[] args) {
-//        try {
-//            Class.forName("com.mysql.cj.jdbc.Driver");
-//            System.out.println("Database driver loaded successfully.");
-//
-//            try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS)) {
-//                System.out.println("Database connection successful!");
-//            }
-//
-//            createTableCharacter();
-//
-//            showMenu();
-//
-//        } catch (ClassNotFoundException e) {
-//            System.err.println("MySQL JDBC driver not found: " + e.getMessage());
-//            System.err.println("Make sure to add MySQL Connector/J to your classpath.");
-//        } catch (SQLException e) {
-//            System.err.println("Database connection failed: " + e.getMessage());
-//            System.err.println("Check your database URL, username, and password.");
-//        }
-//    }
 }

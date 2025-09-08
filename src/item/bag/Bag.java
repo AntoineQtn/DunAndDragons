@@ -1,6 +1,6 @@
 package item.bag;
 
-import item.Collectible;
+import item.ICollectible;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Abstract base class for all types of bags
  */
-public abstract class Bag implements Collectible {
+public abstract class Bag implements ICollectible {
     protected String name;
     protected String description;
     protected int capacity;

@@ -2,7 +2,7 @@ package game.dice;
 
 import characters.Player;
 
-public interface Dice {
+public interface IDice {
     String getName();
     String getDescription();
 

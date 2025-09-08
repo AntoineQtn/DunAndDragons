@@ -6,7 +6,7 @@ package item;
  * providing methods to retrieve its name and weight.
  */
 
-public interface Collectible {
+public interface ICollectible {
     String getName();
     String getDescription();
     void onCollect();

@@ -8,9 +8,9 @@ import characters.enemy.Goblin;
 import characters.enemy.Sorcerer;
 import characters.player.Warrior;
 import characters.player.Wizard;
-import game.dice.SixSidedDice;
+import game.dice.SixSidedIDice;
 import game.db.CharacterTable;
-import game.dice.TwentySidedDice;
+import game.dice.TwentySidedIDice;
 import game.exception.PlayerOutOfBoardException;
 import item.SurpriseChest;
 import characters.player.warrior.HeavyWarrior;
@@ -37,7 +37,7 @@ public class Game {
 
     private Board board;
     private Player player;
-    private final SixSidedDice dice;
+    private final SixSidedIDice dice;
     private final Menu menu;
     private final SurpriseChest surprisechest;
     private final List<Enemy> enemies;
@@ -57,7 +57,7 @@ public class Game {
      * states to false, indicating that the game has not yet begun.
      */
     public Game() {
-        this.dice = new SixSidedDice();
+        this.dice = new SixSidedIDice();
         this.menu = new Menu();
         this.surprisechest = new SurpriseChest();
         this.enemies = new ArrayList<>();
@@ -261,7 +261,7 @@ public class Game {
      *
      * This method ensures proper error handling and updates the game state after the characters.player's movement.
      */
-    private void playerMove(SixSidedDice dice) {
+    private void playerMove(SixSidedIDice dice) {
         menu.displayMessage("\n The game.dice is thrown...");
         int diceRoll = dice.roll(player);
         menu.displayMessage("Result : " + diceRoll);
@@ -480,7 +480,7 @@ public class Game {
             int choice = menu.askForInt("Your choice", 1, 3);
 
             if (choice == 1) {
-                TwentySidedDice twentySidedDice = new TwentySidedDice();
+                TwentySidedIDice twentySidedDice = new TwentySidedIDice();
                 menu.displayMessage("\n" + player.getName() + " attacks!");
                 int damageDealt = twentySidedDice.roll(player);   // ⚡ récupérer le vrai résultat du dé
                 enemy.takeDamage(damageDealt);               // ⚡ appliquer au bon moment

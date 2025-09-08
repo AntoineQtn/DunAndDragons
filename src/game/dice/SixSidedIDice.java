@@ -2,10 +2,10 @@ package game.dice;
 
 import characters.Player;
 
-public class SixSidedDice implements Dice {
+public class SixSidedIDice implements IDice {
     private int diceValue;
 
-    public SixSidedDice(){
+    public SixSidedIDice(){
         this.diceValue = 1;
     }
 

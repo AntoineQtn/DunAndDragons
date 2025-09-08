@@ -1,9 +1,5 @@
 package item.bag;
 
-import item.Collectible;
-import java.util.ArrayList;
-import java.util.List;
-
 public class BasicBag extends Bag {
 
     public BasicBag() {

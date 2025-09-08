@@ -2,7 +2,7 @@ package game.dice;
 
 import characters.Player;
 
-public class  TwentySidedDice implements Dice {
+public class TwentySidedIDice implements IDice {
 
     private int diceValue;
 

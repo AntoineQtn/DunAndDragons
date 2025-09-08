@@ -1,8 +1,8 @@
 package item.defensiveequipment;
 
-import item.Collectible;
+import item.ICollectible;
 
-abstract public class Potion extends DefensiveEquipment implements Collectible {
+abstract public class Potion extends DefensiveEquipment implements ICollectible {
     protected String name;
     protected int life;
     protected int weight;
