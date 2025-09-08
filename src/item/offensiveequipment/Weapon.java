@@ -1,6 +1,7 @@
 package item.offensiveequipment;
 
 import item.ICollectible;
+import item.bag.Bag;
 
 public abstract class Weapon extends OffensiveEquipment implements ICollectible {
     private String name;
@@ -20,6 +21,11 @@ public abstract class Weapon extends OffensiveEquipment implements ICollectible 
         System.out.println("Damage : +" + damage);
         System.out.println("Weight : +" + weight);
 
+    }
+
+    @Override
+    public void onCollect(Bag bag){
+        bag.addItem(this);
     }
 
     public String getName() { return name; }

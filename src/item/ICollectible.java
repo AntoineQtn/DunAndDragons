@@ -1,5 +1,7 @@
 package item;
 
+import item.bag.Bag;
+
 /**
  * Represents an item that can be collected within the game.
  * This interface defines the minimum requirements for any collectible object,
@@ -7,6 +9,8 @@ package item;
  */
 
 public interface ICollectible {
+    void onCollect(Bag bag);
+
     String getName();
     String getDescription();
     void onCollect();

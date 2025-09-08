@@ -4,8 +4,8 @@ import item.ICollectible;
 
 abstract class DefensiveEquipment implements ICollectible {
 
-    protected String name;
-    protected int life;
+    private String name;
+    private int life;
 
     protected abstract int getWeight();
     public abstract String getName();

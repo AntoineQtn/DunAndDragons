@@ -16,6 +16,7 @@ public class Player extends Character {
     protected Spell spell;
     protected Shield shield;
     private Potion equippedPotion;
+    private boolean equipped = false;
     private Bag basicbag;
     protected int maxLife;
 
@@ -24,6 +25,7 @@ public class Player extends Character {
         this.weapon = null;
         this.spell = null;
         this.shield = null;
+        this.equipped = false;
         this.equippedPotion = null;
         this.basicbag = new BasicBag();
         this.maxLife = life;
@@ -31,6 +33,16 @@ public class Player extends Character {
         this.basicbag.addItem(startingPotion);
     }
 
+//    public void isWeaponEquipped() {
+//     if(equipped) {
+//         damage = getAttack();
+//         life = getLife();
+//     }else{
+//         damage = weapon.getDamage();
+//         life = equippedPotion.getLife();
+//     }
+//        return equipped;
+//    }
 
     public void upgradeBag(Bag newBag) {
         if (newBag.getCapacity() > basicbag.getCapacity()) {

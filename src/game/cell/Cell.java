@@ -4,7 +4,7 @@ import java.util.*;
 
 public abstract class Cell {
 
-    protected int position;
+    private int position;
 
     public Cell(int position) {
         this.position = position;

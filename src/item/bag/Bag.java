@@ -9,10 +9,10 @@ import java.util.List;
  * Abstract base class for all types of bags
  */
 public abstract class Bag implements ICollectible {
-    protected String name;
-    protected String description;
-    protected int capacity;
-    protected List<Object> items;
+    private String name;
+    private String description;
+    private int capacity;
+    private List<Object> items;
 
     public Bag(String name, String description, int capacity) {
         this.name = name;
