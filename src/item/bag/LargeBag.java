@@ -16,7 +16,7 @@ public class LargeBag extends Bag {
     @Override
     public void onCollect() {
         super.onCollect();
-        System.out.println("Your carrying capacity has significantly increased to " + capacity + " items!");
+        System.out.println("Your carrying capacity has significantly increased to " + getCapacity() + " items!");
         System.out.println("This is a rare find - treasure it well!");
     }
 }

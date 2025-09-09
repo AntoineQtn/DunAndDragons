@@ -1,6 +1,6 @@
 package game.exception;
 
-public class InvalidChestContentException extends RuntimeException {
+public class  InvalidChestContentException extends RuntimeException {
 
     private final int attemptedPosition;
     private final String playerName;

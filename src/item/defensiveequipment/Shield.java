@@ -22,6 +22,9 @@ public abstract class Shield extends DefensiveEquipment implements ICollectible 
     public String getName() { return name; }
     public int getLife() { return life; }
     public int getWeight() { return weight; }
+    public void setName(String name) { this.name = name; }
+    public void setLife(int life) { this.life = life; }
+    public void setWeight(int weight) { this.weight = weight; }
 
 
 }

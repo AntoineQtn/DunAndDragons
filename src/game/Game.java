@@ -1,6 +1,6 @@
 package game;
 
-import                                     java.util.*;
+import                                    java.util.*;
 
 import characters.*;
 import characters.enemy.Dragon;
@@ -12,7 +12,7 @@ import game.dice.SixSidedIDice;
 import game.db.CharacterTable;
 import game.dice.TwentySidedIDice;
 import game.exception.PlayerOutOfBoardException;
-import item.SurpriseChest;
+//import item.SurpriseChest;
 import characters.player.warrior.HeavyWarrior;
 import characters.player.warrior.LightWarrior;
 import characters.player.wizard.FireWizard;
@@ -39,7 +39,7 @@ public class Game {
     private Player player;
     private final SixSidedIDice dice;
     private final Menu menu;
-    private final SurpriseChest surprisechest;
+//    private final SurpriseChest surprisechest;
     private final List<Enemy> enemies;
     private boolean isGameRunning;
     private boolean isGameWon;
@@ -59,7 +59,7 @@ public class Game {
     public Game() {
         this.dice = new SixSidedIDice();
         this.menu = new Menu();
-        this.surprisechest = new SurpriseChest();
+//        this.surprisechest = new SurpriseChest();
         this.enemies = new ArrayList<>();
         this.isGameRunning = false;
         this.isGameWon = false;
@@ -482,8 +482,8 @@ public class Game {
             if (choice == 1) {
                 TwentySidedIDice twentySidedDice = new TwentySidedIDice();
                 menu.displayMessage("\n" + player.getName() + " attacks!");
-                int damageDealt = twentySidedDice.roll(player);   // ⚡ récupérer le vrai résultat du dé
-                enemy.takeDamage(damageDealt);               // ⚡ appliquer au bon moment
+                int damageDealt = twentySidedDice.roll(player);
+                enemy.takeDamage(damageDealt);
             }
             else if (choice == 2) {
                 menu.displayMessage("\n" + player.getName() + " uses a potion!");
@@ -505,7 +505,7 @@ public class Game {
             menu.displayMessage("\n--- Current Status ---");
             menu.displayMessage(player.getName() + ": " + player.getLife() + " HP");
             menu.displayMessage(enemy.getName() + ": " + enemy.getLife() + " HP");
-
+            CharacterTable.updateLifePoints(player);
             menu.askForEnter("Press enter to continue...");
         }
 

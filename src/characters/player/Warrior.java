@@ -6,39 +6,44 @@ import item.offensiveequipment.Weapon;
 
 public abstract class Warrior extends Player {
 
-    public Warrior( String name, int life, int damage ) {
-        super( name, life, damage );
-
+    public Warrior(String name, int life, int damage) {
+        super(name, life, damage);
     }
 
     public void equipWeapon(Weapon weapon) {
-        if (this.weapon != null) {
-            this.damage -= this.weapon.getDamage();
+        Weapon currentWeapon = getEquippedWeapon();
+        if (currentWeapon != null) {
+            setAttack(getAttack() - currentWeapon.getDamage());
         }
-        this.weapon = weapon;
-        this.damage += weapon.getDamage();
-        System.out.println(name + " equips " + weapon.getName() +
-                " (+" + weapon.getDamage() + " damage)!");
+        setWeapon(weapon);
+        if (weapon != null) {
+            setAttack(getAttack() + weapon.getDamage());
+            System.out.println(getName() + " equips " + weapon.getName() +
+                    " (+" + weapon.getDamage() + " damage)!");
+        }
     }
 
     public int getWeapon(Weapon weapon) {
         equipWeapon(weapon);
-        return damage;
+        return getAttack();
     }
 
-    public void equipShield(Shield shield){
-        if (this.shield != null) {
-            this.life -= shield.getLife();
+    public void equipShield(Shield shield) {
+        Shield currentShield = getEquippedShield();
+        if (currentShield != null) {
+            setLife(getLife() - currentShield.getLife());
         }
-        this.shield = shield;
-        this.life += shield.getLife();
-            System.out.println(name + " equips " + shield.getName() +
+        setShield(shield);
+        if (shield != null) {
+            setLife(getLife() + shield.getLife());
+            System.out.println(getName() + " equips " + shield.getName() +
                     " (+" + shield.getLife() + " life)!");
         }
-
-        public int getShield(Shield shield){
-            equipShield(shield);
-            return life;
-        }
     }
+
+    public int getShield(Shield shield) {
+        equipShield(shield);
+        return getLife();
+    }
+}
 

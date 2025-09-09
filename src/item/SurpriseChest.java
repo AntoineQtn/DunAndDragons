@@ -1,28 +1,28 @@
-package item;
-
-import characters.Player;
-import characters.player.Warrior;
-import characters.player.Wizard;
-import item.bag.LargeBag;
-import item.bag.MinorBag;
-import item.defensiveequipment.potion.*;
-import item.defensiveequipment.shield.IronShield;
-import item.offensiveequipment.spells.*;
-import item.offensiveequipment.weapons.*;
-import game.exception.*;
-
-import java.util.Random;
-
-/**
- * Represents a chest in the game that provides random rewards
- * upon being opened, including item.offensiveequipment.weapons, potions, or item.offensiveequipment.spells.
- */
-public class SurpriseChest {
-
-    private static Random random = new Random();
-
-    public SurpriseChest() {
-    }
+//package item;
+//
+//import characters.Player;
+//import characters.player.Warrior;
+//import characters.player.Wizard;
+//import item.bag.LargeBag;
+//import item.bag.MinorBag;
+//import item.defensiveequipment.potion.*;
+//import item.defensiveequipment.shield.IronShield;
+//import item.offensiveequipment.spells.*;
+//import item.offensiveequipment.weapons.*;
+//import game.exception.*;
+//
+//import java.util.Random;
+//
+///**
+// * Represents a chest in the game that provides random rewards
+// * upon being opened, including item.offensiveequipment.weapons, potions, or item.offensiveequipment.spells.
+// */
+//public class SurpriseChest {
+//
+//    private static Random random = new Random();
+//
+//    public SurpriseChest() {
+//    }
 
     /**
      * Ouvre le coffre et donne une récompense au joueur
@@ -31,93 +31,93 @@ public class SurpriseChest {
      * @return l'objet trouvé (arme, item.defensiveequipment.potion ou sort)
      * @throws InvalidChestContentException si le loot est incompatible
      */
-    public static Object openChest(Player player) throws InvalidChestContentException {
-        int surprise = random.nextInt(10);
+//    public static Object openChest(Player player) throws InvalidChestContentException {
+//        int surprise = random.nextInt(10);
+//
+//        switch (surprise) {
+//            case 0:
+//                if (player instanceof Wizard) {
+////                    throw new InvalidChestContentException("You can't equip a sword with a wizard !");
+//                }
+//                Sword sword = new Sword("Sword", 5);
+//                ((Warrior) player).getWeapon(sword);
+//                System.out.println("You find a " + sword.getName() +
+//                        ", now you can inflict " + sword.getDamage() + " damages!");
+//                return sword;
+//
+//            case 1:
+//                if (player instanceof Wizard) {
+////                    throw new InvalidChestContentException("You can't equip a mace with a wizard !");
+//                }
+//                Mace mace = new Mace("Mace", 3);
+//                ((Warrior) player).getWeapon(mace);
+//                System.out.println("You find a " + mace.getName() +
+//                        ", now you can inflict " + mace.getDamage() + " damages!");
+//                return mace;
+//
+//            case 2:
+//                MajorLifePotion majorPotion = new MajorLifePotion("Major life item.defensiveequipment.potion", 5);
+//                player.getPotion();
+//                System.out.println("You find a " + majorPotion.getName() +
+//                        ", now you can retrieve " + majorPotion.getLife() + " life points!");
+//                return majorPotion;
+//
+//            case 3:
+//                MinorLifePotion minorPotion = new MinorLifePotion("Minor life item.defensiveequipment.potion", 2);
+//                player.getPotion();
+//                System.out.println("You find a " + minorPotion.getName() +
+//                        ", now you can retrieve " + minorPotion.getLife() + " life points!");
+//                return minorPotion;
+//
+//            case 4:
+//                if (player instanceof Warrior) {
+////                    throw new InvalidChestContentException("You can't equip a spell with a characters.player.warrior !");
+//                }
+//                FireBall fireball = new FireBall("Fire Ball", 7);
+//                ((Wizard) player).getSpell(fireball);
+//                System.out.println("You find a spell: " + fireball.getName() +
+//                        ", now you can inflict " + fireball.getDamage() + " damages!");
+//                return fireball;
+//
+//            case 5:
+//                if (player instanceof Warrior) {
+////                    throw new InvalidChestContentException("You can't equip a spell with a characters.player.warrior !");
+//                }
+//                LightninBolt lightning = new LightninBolt("Lightning Bolt", 2);
+//                ((Wizard) player).getSpell(lightning);
+//                System.out.println("You find a spell: " + lightning.getName() +
+//                        ", now you can inflict " + lightning.getDamage() + " damages!");
+//                return lightning;
+//
+//            case 6:
+//                if (player instanceof Wizard) {
+////                    throw new InvalidChestContentException("You can't equip a shield with a wizard !");
+//                }
+//                IronShield ironShield = new IronShield("Iron Shield", 5);
+//                ((Warrior) player).getShield(ironShield);
+//                System.out.println("You find a shield: " + ironShield.getName() +
+//                        ", now you gain " + ironShield.getLife() + " LP !");
+//                return ironShield;
+//
+//            case 8:
+//                MinorBag minorBag = new MinorBag();
+//                player.upgradeBag(minorBag);
+//                System.out.println("You find a " + minorBag.getName() + "! " + minorBag.getDescription());
+//                return minorBag;
+//
+//            case 9:
+//                LargeBag largeBag = new LargeBag();
+//                player.upgradeBag(largeBag);
+//                System.out.println("Wow! You find a rare " + largeBag.getName() + "! " + largeBag.getDescription());
+//                return largeBag;
+//
+//
+//            default:
+//                return null;
+//        }
+//    }
 
-        switch (surprise) {
-            case 0:
-                if (player instanceof Wizard) {
-//                    throw new InvalidChestContentException("You can't equip a sword with a wizard !");
-                }
-                Sword sword = new Sword("Sword", 5);
-                ((Warrior) player).getWeapon(sword);
-                System.out.println("You find a " + sword.getName() +
-                        ", now you can inflict " + sword.getDamage() + " damages!");
-                return sword;
-
-            case 1:
-                if (player instanceof Wizard) {
-//                    throw new InvalidChestContentException("You can't equip a mace with a wizard !");
-                }
-                Mace mace = new Mace("Mace", 3);
-                ((Warrior) player).getWeapon(mace);
-                System.out.println("You find a " + mace.getName() +
-                        ", now you can inflict " + mace.getDamage() + " damages!");
-                return mace;
-
-            case 2:
-                MajorLifePotion majorPotion = new MajorLifePotion("Major life item.defensiveequipment.potion", 5);
-                player.getPotion();
-                System.out.println("You find a " + majorPotion.getName() +
-                        ", now you can retrieve " + majorPotion.getLife() + " life points!");
-                return majorPotion;
-
-            case 3:
-                MinorLifePotion minorPotion = new MinorLifePotion("Minor life item.defensiveequipment.potion", 2);
-                player.getPotion();
-                System.out.println("You find a " + minorPotion.getName() +
-                        ", now you can retrieve " + minorPotion.getLife() + " life points!");
-                return minorPotion;
-
-            case 4:
-                if (player instanceof Warrior) {
-//                    throw new InvalidChestContentException("You can't equip a spell with a characters.player.warrior !");
-                }
-                FireBall fireball = new FireBall("Fire Ball", 7);
-                ((Wizard) player).getSpell(fireball);
-                System.out.println("You find a spell: " + fireball.getName() +
-                        ", now you can inflict " + fireball.getDamage() + " damages!");
-                return fireball;
-
-            case 5:
-                if (player instanceof Warrior) {
-//                    throw new InvalidChestContentException("You can't equip a spell with a characters.player.warrior !");
-                }
-                LightninBolt lightning = new LightninBolt("Lightning Bolt", 2);
-                ((Wizard) player).getSpell(lightning);
-                System.out.println("You find a spell: " + lightning.getName() +
-                        ", now you can inflict " + lightning.getDamage() + " damages!");
-                return lightning;
-
-            case 6:
-                if (player instanceof Wizard) {
-//                    throw new InvalidChestContentException("You can't equip a shield with a wizard !");
-                }
-                IronShield ironShield = new IronShield("Iron Shield", 5);
-                ((Warrior) player).getShield(ironShield);
-                System.out.println("You find a shield: " + ironShield.getName() +
-                        ", now you gain " + ironShield.getLife() + " LP !");
-                return ironShield;
-
-            case 8:
-                MinorBag minorBag = new MinorBag();
-                player.upgradeBag(minorBag);
-                System.out.println("You find a " + minorBag.getName() + "! " + minorBag.getDescription());
-                return minorBag;
-
-            case 9:
-                LargeBag largeBag = new LargeBag();
-                player.upgradeBag(largeBag);
-                System.out.println("Wow! You find a rare " + largeBag.getName() + "! " + largeBag.getDescription());
-                return largeBag;
-
-
-            default:
-                return null;
-        }
-    }
-
-    public static void main(String[] args) throws InvalidChestContentException {
-
-    }
-}
+//    public static void main(String[] args) throws InvalidChestContentException {
+//
+//    }
+//}

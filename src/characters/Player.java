@@ -18,7 +18,7 @@ public class Player extends Character {
     private Potion equippedPotion;
     private boolean equipped = false;
     private Bag basicbag;
-    protected int maxLife;
+    private int maxLife;
 
     public Player(String name, int life, int damage) {
         super(name, life, damage);
@@ -85,14 +85,36 @@ public class Player extends Character {
         }
         return getLife();
     }
+public Weapon getEquippedWeapon(){
+        return weapon;
+}
+public Spell getEquippedSpell(){
+        return spell;
+}
+
+public Weapon setWeapon(Weapon weapon){return this.weapon = weapon;}
+
+    public Shield getEquippedShield (){
+        return shield;
+    }
+
+    public Shield setShield(Shield shield) {return this.shield = shield;}
 
     public void heal(int amount) {
-        int oldLife = this.life;
-        this.life = Math.min(this.life + amount, this.maxLife);
-        int actualHealing = this.life - oldLife;
+        int oldLife = this.getLife();
+        this.setLife(Math.min(this.getLife() + amount, this.maxLife));
+        int actualHealing = this.getLife() - oldLife;
         if (actualHealing > 0) {
-            System.out.println(name + " healed for " + actualHealing + " points! (" + life + "/" + maxLife + ")");
+            System.out.println(getName() + " healed for " + actualHealing + " points! (" + getLife() + "/" + maxLife + ")");
         }
+    }
+
+    public Weapon getWeapon() {
+        return weapon;
+    }
+
+    public Shield getShield() {
+        return shield;
     }
 
     public int getMaxLife() {
@@ -113,7 +135,7 @@ public class Player extends Character {
     @Override
     public void displayStats() {
         System.out.println("=== Player Stats ===");
-        System.out.println(name + " | Life: " + life + "/" + maxLife + " | Damage: " + damage);
+        System.out.println(getName() + " | Life: " + getLife() + "/" + maxLife + " | Damage: " + getAttack());
         System.out.println("Weapon: " + (weapon != null ? weapon.getName() : "None"));
         System.out.println("Spell: " + (spell != null ? spell.getName() : "None"));
         System.out.println("Equipped Potion: " + (equippedPotion != null ? equippedPotion.getName() : "None"));
@@ -124,9 +146,9 @@ public class Player extends Character {
     @Override
     public String toString() {
         return "Player{" +
-                "name='" + name + '\'' +
-                ", life=" + life +
-                ", damage=" + damage +
+                "name='" + getName() + '\'' +
+                ", life=" + getLife() +
+                ", damage=" + getAttack() +
                 ", weapon=" + (weapon != null ? weapon.getName() : "None") +
                 ", spell=" + (spell != null ? spell.getName() : "None") +
                 ", shield=" + (shield != null ? shield.getName() : "None") +

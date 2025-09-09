@@ -7,8 +7,13 @@ public class MinorBag extends Bag {
     }
 
     @Override
+    public void onCollect(Bag bag) {
+
+    }
+
+    @Override
     public void onCollect() {
         super.onCollect();
-        System.out.println("Your carrying capacity has increased to " + capacity + " items!");
+        System.out.println("Your carrying capacity has increased to " + getCapacity() + " items!");
     }
 }

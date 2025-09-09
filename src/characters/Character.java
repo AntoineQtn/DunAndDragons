@@ -1,9 +1,9 @@
 package characters;
 
 public abstract class Character {
-    protected String name;
-    protected int life;
-    protected int damage;
+    private String name;
+    private int life;
+    private int damage;
 
     public Character(String name, int life, int damage) {
         this.name = name;
@@ -25,6 +25,10 @@ public abstract class Character {
 
     public int getAttack() {
         return damage;
+    }
+
+    public void setAttack(int damage) { // Renommé pour plus de cohérence
+        this.damage = Math.max(0, damage);
     }
 
     public void setDamage(int damage) {

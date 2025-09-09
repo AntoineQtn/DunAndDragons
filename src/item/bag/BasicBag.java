@@ -7,7 +7,12 @@ public class BasicBag extends Bag {
     }
 
     @Override
+    public void onCollect(Bag bag) {
+
+    }
+
+    @Override
     public void onCollect() {
-        System.out.println("You start your adventure with a " + name + "!");
+        System.out.println("You start your adventure with a " + getName() + "!");
     }
 }

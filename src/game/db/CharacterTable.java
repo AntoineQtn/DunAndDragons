@@ -118,33 +118,23 @@ public class CharacterTable {
     /**
      * Method to modify a character's life points
      */
-    public static void updateLifePoints() {
-        Scanner scanner = new Scanner(System.in);
-
-        listCharacterNames();
-
-        System.out.print("Enter the ID of the character to update: ");
-        int characterId = scanner.nextInt();
-
-        System.out.print("Enter new health points: ");
-        int newHealthPoints = scanner.nextInt();
-
-        String sql = "UPDATE `character` SET current_health = ? WHERE character_id = ?";
+    public static void updateLifePoints(Player player) {
+        String sql = "UPDATE `character` SET current_health = ? WHERE character_name = ?";
 
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setInt(1, newHealthPoints);
-            pstmt.setInt(2, characterId);
+            pstmt.setInt(1, player.getLife());
+            pstmt.setString(2, player.getName());
 
             int rowsAffected = pstmt.executeUpdate();
 
             if (rowsAffected > 0) {
                 System.out.println("Health points updated successfully!");
 
-                String selectSql = "SELECT character_name, current_health FROM `character` WHERE character_id = ?";
+                String selectSql = "SELECT character_name, current_health FROM `character` WHERE character_name = ?";
                 try (PreparedStatement selectStmt = conn.prepareStatement(selectSql)) {
-                    selectStmt.setInt(1, characterId);
+                    selectStmt.setString(1, player.getName());
                     ResultSet rs = selectStmt.executeQuery();
 
                     if (rs.next()) {
@@ -153,7 +143,7 @@ public class CharacterTable {
                     }
                 }
             } else {
-                System.out.println("No character found with ID: " + characterId);
+                System.out.println("No character found with the name: " + player.getName());
             }
 
         } catch (SQLException e) {

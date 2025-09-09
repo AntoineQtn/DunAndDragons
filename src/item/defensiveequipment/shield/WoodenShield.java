@@ -1,5 +1,6 @@
 package item.defensiveequipment.shield;
 
+import item.bag.Bag;
 import item.defensiveequipment.Shield;
 
 public class WoodenShield extends Shield {
@@ -12,6 +13,11 @@ public class WoodenShield extends Shield {
     }
 
     @Override
+    public void onCollect(Bag bag) {
+
+    }
+
+    @Override
     public String getDescription() {
         return "";
     }
@@ -20,4 +26,5 @@ public class WoodenShield extends Shield {
     public void onCollect() {
 
     }
+
 }

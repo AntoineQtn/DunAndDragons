@@ -2,7 +2,6 @@ package game;
 
 public class Main {
 
-
     public static void main(String[] args) {
         System.out.println("=== WELCOME TO DUNGEONS AND DRAGONS ===");
         System.out.println("Game initialization...\n");

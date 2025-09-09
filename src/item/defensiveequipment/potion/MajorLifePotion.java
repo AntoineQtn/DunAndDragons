@@ -1,5 +1,6 @@
 package item.defensiveequipment.potion;
 
+import item.bag.Bag;
 import item.defensiveequipment.Potion;
 
 /**
@@ -9,6 +10,11 @@ public class MajorLifePotion extends Potion {
 
     public MajorLifePotion(String customName, int customLife) {
         super(customName, customLife, 2, "A powerful healing potion that restores " + customLife + " life points");
+    }
+
+    @Override
+    public void onCollect(Bag bag) {
+
     }
 
     @Override

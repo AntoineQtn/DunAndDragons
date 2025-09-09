@@ -1,5 +1,6 @@
 package item.defensiveequipment.potion;
 
+import item.bag.Bag;
 import item.defensiveequipment.Potion;
 
 /**
@@ -19,5 +20,10 @@ public class MinorLifePotion extends Potion {
         } else {
             System.out.println(player.getName() + " is already at full health!");
         }
+    }
+
+    @Override
+    public void onCollect(Bag bag) {
+
     }
 }
