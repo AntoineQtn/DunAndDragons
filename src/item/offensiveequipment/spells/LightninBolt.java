@@ -10,7 +10,7 @@ public class LightninBolt extends Spell {
     }
 
     @Override
-    public int getWeight() {
+    public double getWeight() {
         return 0;
     }
 

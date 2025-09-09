@@ -1,5 +1,6 @@
 package item.offensiveequipment.weapons;
 
+import item.bag.Bag;
 import item.offensiveequipment.Weapon;
 
 public class Sword extends Weapon {
@@ -11,7 +12,17 @@ public class Sword extends Weapon {
 
 
     @Override
-    public int getWeight() {
+    public double getWeight() {
+        return 0;
+    }
+
+    @Override
+    public boolean isStackable() {
+        return false;
+    }
+
+    @Override
+    public int getMaxStackSize() {
         return 0;
     }
 
@@ -23,5 +34,10 @@ public class Sword extends Weapon {
     @Override
     public void onCollect() {
 
+    }
+
+    @Override
+    public void onCollect(Bag bag) {
+        System.out.println("You grip the " + getName() + " firmly. It feels well-balanced in your hands.");
     }
 }

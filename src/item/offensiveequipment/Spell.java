@@ -19,7 +19,7 @@ public abstract class Spell extends OffensiveEquipment implements ICollectible {
     }
 
     @Override
-    public int getWeight() {
+    public double getWeight() {
         return weight;
     }
 

@@ -9,10 +9,12 @@ import item.bag.Bag;
  */
 
 public interface ICollectible {
+    double getWeight();
+    boolean isStackable();
+    int getMaxStackSize();
     void onCollect(Bag bag);
-
     String getName();
     String getDescription();
-    void onCollect();
+//    void onCollect();
 }
 

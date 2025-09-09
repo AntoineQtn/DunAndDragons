@@ -33,16 +33,7 @@ public class Player extends Character {
         this.basicbag.addItem(startingPotion);
     }
 
-//    public void isWeaponEquipped() {
-//     if(equipped) {
-//         damage = getAttack();
-//         life = getLife();
-//     }else{
-//         damage = weapon.getDamage();
-//         life = equippedPotion.getLife();
-//     }
-//        return equipped;
-//    }
+
 
     public void upgradeBag(Bag newBag) {
         if (newBag.getCapacity() > basicbag.getCapacity()) {

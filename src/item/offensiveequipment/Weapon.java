@@ -9,6 +9,7 @@ public abstract class Weapon extends OffensiveEquipment implements ICollectible 
     private int weight;
 
     public Weapon ( String name, int damage ) {
+        super();
         this.name = name;
         this.damage = damage;
         this.weight = weight;
@@ -30,6 +31,6 @@ public abstract class Weapon extends OffensiveEquipment implements ICollectible 
 
     public String getName() { return name; }
     public int getDamage() { return damage; }
-    public int getWeight() { return weight; }
+    public double getWeight() { return weight; }
 
 }

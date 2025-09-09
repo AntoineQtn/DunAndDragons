@@ -10,7 +10,7 @@ public class Mace extends Weapon {
     }
 
     @Override
-    public int getWeight() {
+    public double getWeight() {
         return 0;
     }
 
